@@ -41,4 +41,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function stand(){
+        return $this->hasOne(Stand::class, 'user_id', 'id');    
+    }
+
+    public function passports(){
+        return $this->hasMany(Passport::class, 'user_id', 'id');
+    }
+
+    public function stands(){
+        return $this->hasMany(Stand::class, 'user_id', 'id');
+    }
 }

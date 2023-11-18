@@ -4,11 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     "content-hash": "cf14086919a839fe740e00554e4baff6",
 =======
     "content-hash": "8e03f29b3b7077fe2e72af10dde06049",
 >>>>>>> Stashed changes
+=======
+    "content-hash": "f3bd87f34264289550d755f5a6d5e22e",
+>>>>>>> 8a5445cf3c4c2606d67b3324f4d8ca353859695c
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2673,6 +2677,7 @@
             "time": "2021-09-25T23:10:38+00:00"
         },
         {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
             "name": "spatie/laravel-permission",
@@ -2699,12 +2704,43 @@
                 "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0",
                 "phpunit/phpunit": "^9.4",
                 "predis/predis": "^1.1"
+=======
+            "name": "spatie/laravel-permission",
+            "version": "6.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-permission.git",
+                "reference": "8e584d3ac09856e106f989741a2d82b094278e58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/8e584d3ac09856e106f989741a2d82b094278e58",
+                "reference": "8e584d3ac09856e106f989741a2d82b094278e58",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^8.12|^9.0|^10.0",
+                "illuminate/container": "^8.12|^9.0|^10.0",
+                "illuminate/contracts": "^8.12|^9.0|^10.0",
+                "illuminate/database": "^8.12|^9.0|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "laravel/passport": "^11.0",
+                "orchestra/testbench": "^6.23|^7.0|^8.0",
+                "phpunit/phpunit": "^9.4"
+>>>>>>> 8a5445cf3c4c2606d67b3324f4d8ca353859695c
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-main": "5.x-dev",
                     "dev-master": "5.x-dev"
+=======
+                    "dev-main": "6.x-dev",
+                    "dev-master": "6.x-dev"
+>>>>>>> 8a5445cf3c4c2606d67b3324f4d8ca353859695c
                 },
                 "laravel": {
                     "providers": [
@@ -2732,7 +2768,11 @@
                     "role": "Developer"
                 }
             ],
+<<<<<<< HEAD
             "description": "Permission handling for Laravel 6.0 and up",
+=======
+            "description": "Permission handling for Laravel 8.0 and up",
+>>>>>>> 8a5445cf3c4c2606d67b3324f4d8ca353859695c
             "homepage": "https://github.com/spatie/laravel-permission",
             "keywords": [
                 "acl",
@@ -2746,7 +2786,11 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-permission/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/spatie/laravel-permission/tree/5.11.1"
+=======
+                "source": "https://github.com/spatie/laravel-permission/tree/6.1.0"
+>>>>>>> 8a5445cf3c4c2606d67b3324f4d8ca353859695c
             },
             "funding": [
                 {
@@ -2754,10 +2798,16 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2023-10-25T05:12:01+00:00"
         },
         {
 >>>>>>> Stashed changes
+=======
+            "time": "2023-11-09T22:03:17+00:00"
+        },
+        {
+>>>>>>> 8a5445cf3c4c2606d67b3324f4d8ca353859695c
             "name": "swiftmailer/swiftmailer",
             "version": "v6.3.0",
             "source": {

@@ -11,12 +11,17 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         "laravel/ui": "^3.4"
 =======
         "laravel/ui": "^3.4",
         "spatie/laravel-permission": "^5.11"
 >>>>>>> Stashed changes
+=======
+        "laravel/ui": "^3.4",
+        "spatie/laravel-permission": "^6.1"
+>>>>>>> 8a5445cf3c4c2606d67b3324f4d8ca353859695c
     },
     "require-dev": {
         "facade/ignition": "^2.5",

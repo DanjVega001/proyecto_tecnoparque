@@ -4,7 +4,11 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EvaluationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StandController;
+
 use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +31,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-//Route::resource('passports_app',AdminController::class)->middleware('auth');
 
+//Route::resource('passports_app',AdminController::class)->middleware('auth');
 
 
 
@@ -54,3 +58,14 @@ Route::middleware(['auth', 'role:Administrador'])->group(function () {
 Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::resource('stand', StandController::class);
 });
+
+Auth::routes();
+
+
+Route::resource('user',UserController::class);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

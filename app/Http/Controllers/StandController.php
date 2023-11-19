@@ -24,7 +24,7 @@ class StandController extends Controller
 
     private function userInauthenticated()
     {
-        if (!$this->user || $this->user->rol->nombre != 'Empresa') {
+        if (!$this->user || $this->user->rol->nombre != 'Stands') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
         }
     }

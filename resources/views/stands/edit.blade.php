@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-<form action="{{ route('stand.update', ['stand' => $stand->id] ) }}" method="POST">
+<form action="{{ route('stand.update', ['stand' => $stand->id] ) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <!-- Campos para los datos del formulario -->

@@ -6,20 +6,17 @@
     <title>Evaluacion</title>
 </head>
 <body>
-    <form action="{{ route('evaluation.store') }}" method="POST">
+    <form action="{{ route('evaluation.store', ['qr_code' => $qr_code]) }}" method="POST">
         @csrf
-        <label for="emprendimiento_favorito">1. Pregunta 1</label>
-        <input type="text" name="pregunta_1" required>
+        
+        @foreach($criterios as $criterio)
+        <label>Pregunta: {{ $criterio->name }}</label>
+        <input type="hidden" name="criterio_id" value="{{$criterio->id}}">
+        <input type="number" name="criterios" required>
         <br>
-
-        <label for="interesante_feria">2. Pregunta 2</label>
-        <textarea name="pregunta_2" rows="4" required></textarea>
-        <br>
-
-        <label for="mejoras">3. Pregunta 3</label>
-        <textarea name="pregunta_3" rows="4" required></textarea>
-        <br>
-
+        @endforeach
+        <label for="feedback">Feedback</label>
+        <textarea name="feedback" id="feedback" cols="30" rows="10"></textarea>
         <!-- Botón de envío -->
         <button type="submit">Enviar</button>
     </form>

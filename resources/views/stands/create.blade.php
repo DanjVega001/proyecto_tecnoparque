@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-<form action="{{ route('stand.store') }}" method="POST">
+<form action="{{ route('stand.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <!-- Campo para el nombre -->
         <label for="name">Nombre:</label>
@@ -14,13 +14,13 @@
         <br>
 
         <!-- Campo para el logo -->
-        <label for="logo">Logo URL:</label>
-        <input type="text" name="logo" required>
+        <label for="logo">Selecciona una imagen:</label>
+        <input type="file" name="logo" accept="image/*">
         <br>
 
         <!-- Campo para el banner -->
-        <label for="banner">Banner URL:</label>
-        <input type="text" name="banner" required>
+        <label for="banner">Selecciona una imagen:</label>
+        <input type="file" name="banner" accept="image/*">
         <br>
 
         <!-- Campo para la descripción -->
@@ -46,11 +46,12 @@
         <input type="text" name="web">
         <br>
 
-        <!-- Campo para la calificación -->
-        <label for="calification">Calificación:</label>
-        <input type="number" name="calification" step="0.1" required>
-        <br>
-
+        <select id="classifications" name="classifications[]" multiple>  
+            @foreach($classifications as $class)
+                <option value="{{ $class->id }}">{{ $class->name }}</option>
+            @endforeach
+        </select>
+        
         <!-- Botón de envío -->
         <button type="submit">Enviar</button>
     </form>

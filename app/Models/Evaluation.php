@@ -14,12 +14,12 @@ class Evaluation extends Model
     protected $fillable = [
         'rank',
         'feedback',
-        'criterio_id',
+        'user_id',
         'stand_id'
     ];
 
-    public function criterio(){
-        return $this->belongsTo(Criterio::class, 'criterios_id', 'id');
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function stand(){

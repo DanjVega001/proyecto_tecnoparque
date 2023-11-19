@@ -5,10 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Stand;
 use App\Models\Classification;
-
+use App\Models\Stand_has_classification;
+use App\Service\AuthService;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class StandController extends Controller
 {
+    private $service;
+    private $user;
+
+    public function __construct(AuthService $service)
+    {
+        $this->service=$service;
+        $this->user = $this->service->getUserAuthenticated();
+    }
+
+
+    private function userInauthenticated()
+    {
+        if (!$this->user || $this->user->rol->nombre != 'Empresa') {
+            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +35,9 @@ class StandController extends Controller
      */
     public function index()
     {
+        $this->userInauthenticated();
         $stands = Stand::all();
-        return view('stands.index', compact('stands'));
+        return view('stands/index', compact('stands'));
     }
 
     /**
@@ -27,8 +47,9 @@ class StandController extends Controller
      */
     public function create()
     {
+        $this->userInauthenticated();
         $classifications = Classification::all();
-        return view('stands.create', compact('classifications'));
+        return view('stands/create', compact('classifications'));
     }
 
     /**
@@ -39,9 +60,48 @@ class StandController extends Controller
      */
     public function store(Request $request)
     {
-        Stand::create($request->all());
-        return redirect()->route('stands.index');
+        $this->userInauthenticated();
+        $logo = $request->file('logo');
+        $nombreImagen = time() . '.' . $logo->extension();
+        $logo->storeAs('public', $nombreImagen);
+        $banner = $request->file('banner');
+        $nombreBanner = time() . '.' . $banner->extension();
+        $banner->storeAs('public', $nombreBanner);
+
+        // Crear codigo unico alfanumerico de 6 caracteres
+        $codigo_qr = null; 
+        $unico = false;
+        while (!$unico) {
+            $codigo_qr = Str::random(6);
+            $existeCodigo = Stand::where('qr_code',
+                $codigo_qr)->exists();
+            if (!$existeCodigo) {
+                $unico = true;
+            }
+        }
+        $stand = Stand::create([
+            'name' => $request->name,
+            'logo' => "storage/{$nombreImagen}",
+            'banner' => "storage/{$nombreBanner}",
+            'description' => $request->description,
+            'facebook' => $request->facebook,
+            'instagram' => $request->instagram,
+            'tiktok' => $request->tiktok,
+            'web' => $request->web,
+            'calification' => 0.0,
+            'qr_code' => $codigo_qr
+        ]);
+        $classifications_id = $request->classifications;
+        foreach ($classifications_id as $class) {
+            Stand_has_classification::create([
+                'stand_id' => $stand->id,
+                'classification_id' => $class
+            ]);
+        }
+        return $this->index();
     }
+
+    
 
     /**
      * Display the specified resource.
@@ -62,8 +122,9 @@ class StandController extends Controller
      */
     public function edit($id)
     {
+        $this->userInauthenticated();
         $stand = Stand::find($id);
-        return view('stands.edit', compact('stand'));
+        return view('stands/edit', compact('stand'));
     }
 
     /**
@@ -75,8 +136,44 @@ class StandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Stand::find($id)->update($request->all());
-        return redirect()->route('stands.index');
+        $this->userInauthenticated();
+        Stand::find($id)->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'facebook' => $request->facebook,
+            'instagram' => $request->instagram,
+            'tiktok' => $request->tiktok,
+            'web' => $request->web  
+        ]);
+        return $this->index();
+    }
+
+    public function updateLogo(Request $request, $id)
+    {
+        $this->userInauthenticated();
+        $stand = Stand::find($id);
+        Storage::delete("public/{$stand->logo}");
+        $logo = $request->file('logo');
+        $nombreLogo = time() . '.' . $logo->extension();
+        $logo->storeAs('public', $nombreLogo);
+        $stand->update([
+            'logo' => 'storage/{$nombreLogo}'
+        ]);
+        return $this->index();
+    }
+
+    public function updateBanner(Request $request, $id)
+    {
+        $this->userInauthenticated();
+        $stand = Stand::find($id);
+        Storage::delete("public/{$stand->banner}");
+        $banner = $request->file('banner');
+        $nombreBanner = time() . '.' . $banner->extension();
+        $banner->storeAs('public', $nombreBanner);
+        $stand->update([
+            'banner' => 'storage/{$nombreBanner}'
+        ]);
+        return $this->index();
     }
 
     /**
@@ -87,7 +184,14 @@ class StandController extends Controller
      */
     public function destroy($id)
     {
-        Stand::find($id)->delete();
-        return redirect()->route('stands.index');
+        $stands_class = Stand_has_classification::where('stand_id', $id)->get();
+        foreach ($stands_class as $val) {
+            $val->delete();
+        }
+        $stand = Stand::find($id);
+        $stand->delete();
+        Storage::delete("public/{$stand->logo}");
+        Storage::delete("public/{$stand->banner}");
+        return $this->index();
     }
 }

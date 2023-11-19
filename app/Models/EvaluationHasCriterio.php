@@ -16,7 +16,7 @@ class EvaluationHasCriterio extends Model
         'criterio_id',
     ];
 
-    public function evaluatiion(){
+    public function evaluation(){
         return $this->belongsTo(Evaluation::class, 'evaluation_id', 'id');
     }
 

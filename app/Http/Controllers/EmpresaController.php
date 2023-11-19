@@ -16,11 +16,12 @@ class EmpresaController extends Controller
     public function __construct(AuthService $service)
     {
         $this->service=$service;
-        $this->user = $this->service->getUserAuthenticated();
+        
     }
 
     private function userInauthenticated()
     {
+        $this->user = $this->service->getUserAuthenticated();
         if (!$this->user || $this->user->rol->nombre != 'Administrador') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
         }
@@ -67,7 +68,7 @@ class EmpresaController extends Controller
         $data['password'] = Hash::make($data['password']);
         $data['rol_id'] = 3;
         $user = User::create($data);
-        $user->assignRole('Empresa');
+        $user->assignRole('Stands');
         return $this->index();
     }
 

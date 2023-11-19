@@ -11,8 +11,8 @@
         
         @foreach($criterios as $criterio)
         <label>Pregunta: {{ $criterio->name }}</label>
-        <input type="hidden" name="criterio_id" value="{{$criterio->id}}">
-        <input type="number" name="criterios" required>
+        <input type="hidden" name="criterio_id[]" value="{{$criterio->id}}">
+        <input type="number" name="criterios[]" required>
         <br>
         @endforeach
         <label for="feedback">Feedback</label>

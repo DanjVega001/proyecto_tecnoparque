@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
-class CreateAdminsTable extends Migration
+class CreatePassportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +14,12 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->id('id_admin');
-            $table->biginteger("document");
-            $table->string("name");
-            $table->string("phone_number");
-            $table->foreignId('user_id')->nullable();
+        Schema::create('passports', function (Blueprint $table) {
+            $table->id();
+            $table->double('date');
+            $table->unsignedBigInteger('stand_id');
+            $table->foreign('stand_id')->references('id')->on('stands');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
@@ -30,6 +31,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('passports');
     }
 }

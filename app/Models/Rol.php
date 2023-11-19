@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class admin extends Model
+class Rol extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'document',
-        'name',
-        'phone_number',
-        'user_id',
+        'nombre'
     ];
 
+    public $timestamps = false;
 
-    public function user(){
-        return $this->hasOne(User::class,'id'); 
+    public function users(){
+        return $this->hasMany(User::class,'rol_id');
     }
 }

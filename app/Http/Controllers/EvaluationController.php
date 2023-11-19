@@ -72,7 +72,7 @@ class EvaluationController extends Controller
             $valorCriterios = $request->input('criterios');
             $rank =  array_sum($valorCriterios) / count($valorCriterios);
 
-            $stand = Stand::where('qr_code', $qr_code)->first();
+            $stand = Stand::where('qr_code', $qr_code)->lockForUpdate()->first();
             $evalCompletada = $this->evalCompletada($stand);
             if ($evalCompletada) {
                 return view('home', ['message' => 'Evaluacion ya completada']);

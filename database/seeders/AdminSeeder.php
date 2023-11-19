@@ -21,7 +21,8 @@ class AdminSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'phone_number'=>'3215678991',
             'rol_id'=> 1
-            ]);
+        ]);
+        $user->assignRole('Administrador');
     }
     
 }

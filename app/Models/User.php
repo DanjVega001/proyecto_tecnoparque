@@ -14,8 +14,6 @@ use App\Models\visitante;
 use App\Models\Passport;
 
 
-
-
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;

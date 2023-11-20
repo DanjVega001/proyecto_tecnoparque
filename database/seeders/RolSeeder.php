@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Rol;
-
+use Spatie\Permission\Models\Role;
 
 class RolSeeder extends Seeder
 {
@@ -15,18 +15,26 @@ class RolSeeder extends Seeder
      */
     public function run()
     {
+        // Roles de nuestro modelo
         Rol::create([
             'id' => 1,
             'name'=> "Administrador"
         ]);
         Rol::create([
             'id' => 2,
-            'name'=> "Visitante"
-            ]);
-            
+
+            'nombre'=> "Visitante"
+        ]);
+
         Rol::create([
             'id' => 3,
-            'name'=> "Empresa"
-            ]);
+            'nombre'=> "Empresa"
+        ]);
+
+        // Roles de spatie
+        Role::create(['name' => 'Administrador']);
+        Role::create(['name' => 'Visitante']);
+        Role::create(['name' => 'Empresa']);
+
     }
 }

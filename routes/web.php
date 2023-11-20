@@ -1,6 +1,14 @@
      <?php
 
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\EvaluationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StandController;
+
+
+
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EvaluationController;
@@ -26,6 +34,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,7 +63,15 @@ Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::resource('stand', StandController::class);
 });
 
+    // Guarda el resultado de la evaluacion
+    Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
+    'store'])->name('evaluation.store');
+    
+});
+
+//CRUD de visitante
 Route::resource('user',UserController::class);
+
 
 Route::resource('places',PlacesController::class);
 
@@ -62,3 +79,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

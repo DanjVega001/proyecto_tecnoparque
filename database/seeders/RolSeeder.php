@@ -18,10 +18,11 @@ class RolSeeder extends Seeder
         // Roles de nuestro modelo
         Rol::create([
             'id' => 1,
-            'nombre'=> "Administrador"
+            'name'=> "Administrador"
         ]);
         Rol::create([
             'id' => 2,
+
             'nombre'=> "Visitante"
         ]);
 

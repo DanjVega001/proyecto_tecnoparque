@@ -24,7 +24,9 @@ class CreateStandsTable extends Migration
             $table->string('tiktok')->nullable();
             $table->string('web')->nullable();
             $table->double('calification');
+
             $table->text('qr_code');
+
             //$table->timestamps();
         });
     }

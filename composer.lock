@@ -2668,6 +2668,7 @@
             ],
             "time": "2021-09-25T23:10:38+00:00"
         },
+      
         {
             "name": "spatie/laravel-permission",
             "version": "5.11.1",

@@ -1,35 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!-- empresas/edit.blade.php -->
+@extends('layouts.app')
 
-<form action="{{ route('empresa.update', $empresa->id) }}" method="POST">
-    @csrf
-    @method('PUT') 
+@section('content')
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Editar Usuario - Empresa</h1>
+        </div>
+        <div class="card-body">
+        <form action="{{ route('empresa.update', $empresa->id) }}" method="POST">
+            @csrf
+            @method('PUT') 
+            <div class="input-group mb-3">
+                <span class="input-group-text">Nombre</span>
+                <input type="text" class="form-control" name="name" value="{{$empresa->name}}">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Correo Electrónico</span>
+                <input type="email" class="form-control" name="email" value="{{$empresa->email}}">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Documento</span>
+                <input type="text" class="form-control" name="document" value="{{$empresa->document}}">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Número de Teléfono</span>
+                <input type="text" class="form-control" name="phone_number" value="{{$empresa->phone_number}}">
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
+            <a href="{{route('empresa.index')}}" class="btn btn-primary">Volver</a>
+        </form>
+        </div>
+    </div>
+</div>
 
-    <label for="name">Nombre:</label>
-    <input type="text" name="name" value="{{ $empresa->name }}" required>
-    <br>
 
-    <label for="email">Correo Electrónico:</label>
-    <input type="email" name="email" value="{{ $empresa->email }}" required>
-    <br>
-
-    <label for="document">Documento:</label>
-    <input type="text" name="document" value="{{ $empresa->document }}" required>
-    <br>
-
-    <label for="phone_number">Número de Teléfono:</label>
-    <input type="text" name="phone_number" value="{{ $empresa->phone_number }}" required>
-    <br>
-
-    <button type="submit">Actualizar Usuario</button>
-</form>
-
-</body>
-</html>
+@endsection
+            

@@ -6,6 +6,8 @@ use App\Models\Criterio;
 use App\Models\Evaluation;
 use App\Models\EvaluationHasCriterio;
 use App\Models\Stand;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Service\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +26,7 @@ class EvaluationController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
+
         if (!$this->user || $this->user->rol->nombre != 'Visitante') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
         }       
@@ -52,69 +55,37 @@ class EvaluationController extends Controller
         if (!$existeCodigo) {
             return redirect()->route('home')->with('error', 'Codigo QR Invalido');
         }
+        
         $criterios = Criterio::all();
-        return view('evaluations/index', compact('criterios', 'qr_code'));
+        //$this->middleware('role:Visitante');
+        $user = Auth::user();
+        return view('evaluations/index', compact('criterios', 'qr_code','user'));
     }
 
     public function store(Request $request, $qr_code)
-    {        
-        try {
-            DB::beginTransaction();
-            
-            $userInauthenticated = $this->userInauthenticated();
-            if ($userInauthenticated !== null) return $userInauthenticated;
-
-            $existeCodigo = $this->existeCodigo($qr_code);
-            if (!$existeCodigo) {
-                return redirect()->route('home')->with('error', 'Codigo QR Invalido');
-            }
-               
-            $valorCriterios = $request->input('criterios');
-            $rank =  array_sum($valorCriterios) / count($valorCriterios);
-
-            $stand = Stand::where('qr_code', $qr_code)->lockForUpdate()->first();
-            $evalCompletada = $this->evalCompletada($stand);
-            if ($evalCompletada) {
-                return view('home', ['message' => 'Evaluacion ya completada']);
-            }
-            
-            $eval = Evaluation::create([
-                'rank' => $rank,
-                'feedback' => $request->get('feedback'),
-                'stand_id' => $stand->id,
-                'user_id' => $this->user->id
-            ]);
-         
-            foreach ($request->criterio_id as $id) {
-                EvaluationHasCriterio::create([
-                    'criterio_id' => $id,
-                    'evaluation_id' => $eval->id
-                ]);
-            }
-
-            $this->addRankToClalificationStand($rank, $stand);
-
-            DB::commit();
-            // DEBE RETORNAR KA VISTA DE LOS STANDS SELLADOS
-            return $eval;
-        } catch (\Throwable $th) {
-
-            DB::rollback();
-            return redirect()->back()->with('error', 'Error al procesar la evaluación');
-        }
-    }
-
-    private function addRankToClalificationStand($rank, $stand)
     {
-        $calification = $stand->calification;
-        if ($calification == 0) {
-            $stand->update([
-                'calification' => $rank
-            ]);
-        } else {
-            $stand->update([
-                'calification' => ($calification + $rank) / 2
-            ]);
+        $user = Auth::user();
+        $this->userInauthenticated();
+        $valorCriterios = $request->puntuacion;
+        $rank = 0;
+        foreach ($valorCriterios as $val) {
+            $rank += intval($val);
         }
+        $rank /= count($valorCriterios);
+        $stand = Stand::where('qr_code', $qr_code)->first();
+        $eval = Evaluation::create([
+            'rank' => $rank,
+            'feedback' => $request->feedback,
+            'stand_id' => $stand->id,
+            'user_id' => $user->id
+        ]);
+        /*foreach ($request->criterio_id as $id ) {
+            EvaluationHasCriterio::create([
+                'criterio_id' => $id,
+                'evaluation_id' => $eval->id
+            ]);
+        }*/
+        //return $eval;
+        return view('home');
     }
 }

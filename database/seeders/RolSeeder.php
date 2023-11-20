@@ -18,22 +18,23 @@ class RolSeeder extends Seeder
         // Roles de nuestro modelo
         Rol::create([
             'id' => 1,
-            'nombre'=> "Administrador"
+            'name'=> "Administrador"
         ]);
         Rol::create([
             'id' => 2,
+
             'nombre'=> "Visitante"
         ]);
 
         Rol::create([
             'id' => 3,
-            'nombre'=> "Stands"
+            'nombre'=> "Empresa"
         ]);
 
         // Roles de spatie
         Role::create(['name' => 'Administrador']);
         Role::create(['name' => 'Visitante']);
-        Role::create(['name' => 'Stands']);
+        Role::create(['name' => 'Empresa']);
 
     }
 }

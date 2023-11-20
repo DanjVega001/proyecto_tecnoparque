@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ScheduleSeeder::class);
         $this->call(PlaceSeeder::class);
+        $this->call(VisitorSeeder::class);
 
 
     }

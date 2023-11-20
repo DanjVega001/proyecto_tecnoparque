@@ -1,19 +1,15 @@
      <?php
 
-use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\EvaluationController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StandController;
-
-
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\StandController;
 use App\Http\Controllers\PlacesController;
+use App\Http\Controllers\PassportController;
 
 
 /*
@@ -67,13 +63,14 @@ Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
     'store'])->name('evaluation.store');
     
-});
+
 
 //CRUD de visitante
 Route::resource('user',UserController::class);
 
 
 Route::resource('places',PlacesController::class);
+Route::resource('passport',PassportController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

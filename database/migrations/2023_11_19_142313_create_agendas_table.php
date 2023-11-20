@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\User;
 
-class CreatePassportsTable extends Migration
+class CreateAgendasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,15 +13,17 @@ class CreatePassportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('passports', function (Blueprint $table) {
+        Schema::create('agendas', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->date('date_start');
+            $table->date('date_end');
+
+            $table->unsignedBigInteger('place_id');
+            $table->foreign('place_id')->references('id')->on('places');
 
             $table->unsignedBigInteger('stand_id');
             $table->foreign('stand_id')->references('id')->on('stands');
             
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -33,6 +34,6 @@ class CreatePassportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('passports');
+        Schema::dropIfExists('agendas');
     }
 }

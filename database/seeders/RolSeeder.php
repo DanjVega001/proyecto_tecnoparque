@@ -17,16 +17,16 @@ class RolSeeder extends Seeder
     {
         Rol::create([
             'id' => 1,
-            'nombre'=> "Administrador"
+            'name'=> "Administrador"
         ]);
         Rol::create([
             'id' => 2,
-            'nombre'=> "Visitante"
+            'name'=> "Visitante"
             ]);
             
         Rol::create([
             'id' => 3,
-            'nombre'=> "Stands"
+            'name'=> "Empresa"
             ]);
     }
 }

@@ -10,6 +10,8 @@ class Schedule extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'hour_start',
         'hour_end',

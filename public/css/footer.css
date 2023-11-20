@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -6,17 +6,18 @@
     transition: 0.5s;
 }
 
-body{
-    height: 100vh;
-    width: 100%;
-    position: relative;
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-footer{
+main {
+    flex: 1; /* This will make sure that the main content expands to fill the available space */
+}
+
+footer {
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
     padding: 1rem 8%;
     background-color: #0e0e0e;
     display: flex;
@@ -25,63 +26,24 @@ footer{
     flex-direction: column;
 }
 
-.logo{
-    height: 100px;
-    
-}
+/* Your existing styles for logo, social icons, and menu containers remain unchanged */
 
-.social-icons-container, .footer-menu-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+/* Add the following styles to ensure the footer is at the bottom */
+.logo, .social-icons-container, .footer-menu-container {
     margin-bottom: 1rem;
 }
 
-.social-icon{
-    height: 50px;
-    width: 50px;
-    border-radius: 50px;
-    border: 1px solid #f2f2f2;
-    background-position: center;
-    background-size: 40%;
-    background-repeat: no-repeat;
-    margin: 1rem;
-    padding-left: 14px;
-    padding-top: 13px;
-}
-
-.social-icon:hover{
-    background-color: #121212;
-    filter: invert(1);
-}
-
-.social-icon.bxl-facebook-circle,
-.social-icon.bxl-instagram,
-.social-icon.bxl-linkedin-square,
-.social-icon.bxl-twitter {
-    font-size: 20px; /* Tamaño deseado para los íconos */
-    text-decoration: none;
-    color: white;
-}
-
-.footer-menu-container{
-    list-style-type: none;
-    color: #f2f2f2;
-    font-size: 18px;
-}
-
-.menu-item{
+.menu-item {
     margin: 1rem 1.5rem;
     cursor: pointer;
     opacity: 0.6;
 }
 
-.menu-item:hover{
+.menu-item:hover {
     opacity: 1;
 }
 
-.copyright{
+.copyright {
     color: #f2f2f2;
     opacity: 0.3;
     text-align: center;

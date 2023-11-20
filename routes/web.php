@@ -1,15 +1,15 @@
      <?php
 
-use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\EvaluationController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StandController;
-
-
-
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StandController;
+use App\Http\Controllers\PlacesController;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\PassportController;
+use App\Http\Controllers\EvaluationController;
 
 
 /*
@@ -60,4 +60,11 @@ Route::middleware(['auth', 'role:Empresa'])->group(function () {
 //CRUD de visitante
 Route::resource('user',UserController::class);
 
+Route::resource('places',PlacesController::class);
+Route::resource('passport',PassportController::class);
 
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

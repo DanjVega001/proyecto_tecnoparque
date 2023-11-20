@@ -2,14 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Service\AuthService;
 use Illuminate\Http\Request;
 
+use App\Models\User;
+use App\Models\Stand;
+use App\Models\Passport;
 use App\Models\Places;
-use App\Models\Schedule;
 
 
-class PlacesController extends Controller
+class PassportController extends Controller
 {
+
+    private $service;
+    private $user;
+
+    public function __construct(AuthService $service)
+    {
+        $this->service=$service;
+        
+    }
+
+    private function userInauthenticated()
+    {
+        $this->user = $this->service->getUserAuthenticated();
+        if (!$this->user || $this->user->rol->nombre != 'Visitante') {
+            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +38,10 @@ class PlacesController extends Controller
      */
     public function index()
     {
-        $places= Places::with('schedule')->get();
-        //dd($places);
-        return view('places.index', compact('places'));
+        $this->userInauthenticated();
+        $passports= Passport::where('user_id',  $this->user->id)->with('stand')->get();
+        //dd($passport);
+        return view('passport.index', compact('passports'));
 
     }
 

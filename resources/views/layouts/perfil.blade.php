@@ -38,9 +38,6 @@
 <body>
 
     <div id="app">
-        <!-- Barra de navegación --> 
-        @include('components.landingPage.Header')
-
         <!-- Contenido principal -->
         <main class="py-4">
             @yield('content')

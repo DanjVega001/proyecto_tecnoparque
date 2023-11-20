@@ -1,25 +1,19 @@
 <!-- resources/views/components/Footer.blade.php -->
 
 <footer>
-    <div class="footer-content">
-        <div class="contact-info">
-            <p>Contacto:</p>
-            <p>Email: info@tuferia.com</p>
-            <p>Teléfono: +123 456 7890</p>
-        </div>
-        
-        <div class="social-media">
-            <p>Síguenos en:</p>
-            <ul>
-                <li><a href="#">Facebook</a></li>
-                <li><a href="#">Twitter</a></li>
-                <li><a href="#">Instagram</a></li>
-                <!-- Agrega más enlaces a tus redes sociales -->
-            </ul>
-        </div>
+    <img src="logo.png" alt="logo" class="logo">
+    <div class="social-icons-container">
+        <a href="" class="social-icon bx bxl-facebook-circle"></a>
+        <a href="" class="social-icon bx bxl-instagram"></a>
+        <a href="" class="social-icon bx bxl-linkedin-square"></a>
+        <a href="" class="social-icon bx bxl-twitter"></a>
     </div>
-    
-    <div class="copyright">
-        <p>&copy; {{ date('Y') }} Tu Feria. Todos los derechos reservados.</p>
-    </div>
+    <ul class="footer-menu-container">
+        <li class="menu-item">Legal</li>
+        <li class="menu-item">Cookies</li>
+        <li class="menu-item">Privacy</li>
+        <li class="menu-item">Shipping</li>
+        <li class="menu-item">Refounds</li>
+    </ul>
+    <span class="copyright">&copy;2023, Tecno Parque. All rights reserved.</span>
 </footer>

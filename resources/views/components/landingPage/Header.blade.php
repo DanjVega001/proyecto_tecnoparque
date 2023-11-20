@@ -15,7 +15,7 @@
 
         /* Estilos para el logo */
         .logo {
-            max-width: 100%; /* Ajusta el ancho máximo del logo */
+            max-width: 1000%; /* Ajusta el ancho máximo del logo */
         }
 
         /* Estilo del nuevo botón */
@@ -23,7 +23,7 @@
             background: #008000; /* Ajusté a un verde un poco más claro */
             border: none;
             color: #fff;
-            font-size: 18px; /* Reduje el tamaño del texto */
+            font-size: 15px; /* Reduje el tamaño del texto */
             letter-spacing: 2px; /* Ajusté el espaciado de letras */
             font-family: 'Lato';
             font-weight: 600;
@@ -78,33 +78,32 @@
 
 
     <!-- Línea verde de navegación -->
-    <div class="navbar-line container">
+    <div class="navbar-line container-fluid">
         <!-- Contenedor izquierdo con el logo -->
         <div class="row">
             <div class="col-sm-12 col-md-4">
                 <!-- Logo -->
-                <img src="tu_logo.png" alt="Logo" class="img-fluid logo">
+                <img src="{{ asset('img/logo.png') }}" alt="logo" class="logo">
             </div>
         </div>
 
-        <!-- Contenedor derecho con los botones -->
-        <div class="row">
-            <div class="col-sm-12 col-md-8 text-md-right">
-                <!-- Botón de Iniciar Sesión -->
-                <button type="button" class="btn-custom">Iniciar Sesión
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <!-- Botón de Registrarse -->
-                <button type="button" class="btn-custom">Registrarse
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
+      <!-- Contenedor derecho con los botones -->
+<div class="col-sm-12 col-md-8 text-md-right">
+    <!-- Botón de Iniciar Sesión -->
+    <button type="button" class="btn-custom">Iniciar Sesión
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <!-- Botón de Registrarse -->
+    <button type="button" class="btn-custom">Registrarse
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</div>
         </div>
     </div>
 

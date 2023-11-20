@@ -2,89 +2,76 @@
 @extends('layouts.perfil')
 
 @section('content')
-   
     <!-- Carousel wrapper -->
-    <div id="carouselBasicExample" class="carousel slide carousel-fade container" data-bs-ride="carousel">
-        <!-- Indicators -->
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-
-        <!-- Inner -->
-        <div class="carousel-inner">
-            <!-- Single item -->
-            <div class="carousel-item active">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="d-block w-100"
-                    alt="Sunset Over the City" />
-                <div class="carousel-caption d-none d-md-block">
-                  <button class="btn btn-primary btn-lg position-absolute  translate-middle">Iniciar Sesión</button>
-                    <h5>First slide label</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </div>
-            </div>
-
-            <!-- Single item -->
-            <div class="carousel-item">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(22).webp" class="d-block w-100"
-                    alt="Canyon at Nigh" />
-                    <div class="carousel-caption d-none d-md-block">
-                      <button class="btn btn-primary btn-lg position-absolute  translate-middle">Iniciar Sesión</button>
-                        <h5>First slide label</h5>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </div>
-            </div>
-
-            <!-- Single item -->
-            <div class="carousel-item">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(23).webp" class="d-block w-100"
-                    alt="Cliff Above a Stormy Sea" />
-                    <div class="carousel-caption d-none d-md-block">
-                      <button class="btn btn-primary btn-lg position-absolute  translate-middle">Iniciar Sesión</button>
-                        <h5>First slide label</h5>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </div>
-            </div>
-        </div>
-        <!-- Inner -->
-
-        <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselBasicExample"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselBasicExample"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-    <!-- Carousel wrapper -->
-
-        <!-- Tarjetas de los Stands -->
-        <div class="container mt-5">
-            <div class="row">
-                @foreach($stands as $stand)
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="{{ $stand->photo_url }}" class="card-img-top" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $stand->company_name }}</h5>
-                                <p class="card-text">{{ $stand->description }}</p>
-                            </div>
+    
+    <!-- Tarjetas de los Stands -->
+    <div class="container mt-5">
+        <div class="row">
+            @foreach($stands as $stand)
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ $stand->photo_url }}" class="card-img-top" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $stand->company_name }}</h5>
+                            <p class="card-text">{{ $stand->description }}</p>
+                            <!-- Botón para abrir la cámara y escanear QR -->
+                            <button class="btn btn-primary" onclick="scanQR('{{ $stand->company_name }}')">Calificar Este Stand</button>
                         </div>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
+    </div>
 
+   <!-- Contenedor para superponer la cámara -->
+<!-- Contenedor para superponer la cámara -->
+<div id="cameraContainer" style="position: fixed; top: 50px; left: 50px; width: 30%; height: auto; max-height: 70%; z-index: 1000;"></div>
 
+   <!-- Script para manejar la apertura de la cámara y escaneo QR -->
+   <script>
+       function scanQR(companyName) {
+           // Solicitar acceso a la cámara
+           navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+               .then(function (stream) {
+                   // Crear el elemento de video y agregarlo al contenedor de la cámara
+                   var video = document.createElement('video');
+                   video.srcObject = stream;
+                   document.getElementById('cameraContainer').appendChild(video);
+
+                   // Utilizar una librería de escaneo QR (puedes usar ZXing o QuaggaJS, por ejemplo)
+                   // Aquí, se utiliza ZXing mediante el CDN
+                   import('https://cdn.rawgit.com/zxing-js/instascan/1.0.0/instascan.min.js')
+                       .then((instascan) => {
+                           var scanner = new instascan.Scanner({ video: video });
+                           scanner.addListener('scan', function (content) {
+                               // Aquí puedes manejar el contenido del código QR escaneado
+                               alert('Código QR escaneado para ' + companyName + ': ' + content);
+
+                               // Detener el escáner y cerrar la cámara
+                               scanner.stop();
+                               video.pause();
+                               video.srcObject.getTracks().forEach(track => track.stop());
+                               video.remove();
+                           });
+
+                           // Iniciar el escáner
+                           instascan.Camera.getCameras().then(function (cameras) {
+                               if (cameras.length > 0) {
+                                   scanner.start(cameras[0]);
+                               } else {
+                                   console.error('No se encontraron cámaras disponibles.');
+                                   video.remove(); // Eliminar el elemento de video en caso de error
+                               }
+                           });
+                       })
+                       .catch(function (error) {
+                           console.error('Error al cargar la librería instascan: ', error);
+                           video.remove(); // Eliminar el elemento de video en caso de error
+                       });
+               })
+               .catch(function (error) {
+                   console.error('Error al acceder a la cámara: ', error);
+               });
+       }
+   </script>
 @endsection
-
-
-
-
-

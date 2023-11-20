@@ -31,6 +31,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/stands/home', [App\Http\Controllers\StandController::class, 'getAllStands'])->name('stands.home');
 
 // RUTAS PROTEGIDAS PARA EL VISITANTE
 Route::middleware(['auth', 'role:Visitante'])->group(function () {
@@ -52,7 +53,7 @@ Route::middleware(['auth', 'role:Administrador'])->group(function () {
 
 
 // RUTAS PROTEGIDAS PARA LA EMPRESA
-Route::middleware(['auth', 'role:Stands'])->group(function () {
+Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::resource('stand', StandController::class);
 });
 

@@ -12,7 +12,7 @@ class Rol extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'nombre'
+        'name'
     ];
 
 

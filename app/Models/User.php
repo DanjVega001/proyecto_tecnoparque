@@ -54,8 +54,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function passports(){
         return $this->hasMany(Passport::class, 'id', 'id');
+
     }
 
     public function rol(){

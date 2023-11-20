@@ -4,24 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use App\Models\Places;
 use App\Models\Stand;
 
-class Passport extends Model
+class Agenda extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
 
     protected $fillable = [
-        'date',
-        'user_id',
+        'date_start',
+        'date_end',
+        'place_id',
         'stand_id'
     ];
 
 
-    public function user(){
-        return $this->belongsTo(User::class, 'user_id');
+    public function place(){
+        return $this->belongsTo(Places::class, 'place_id');
     }
 
     public function stand(){

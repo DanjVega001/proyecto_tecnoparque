@@ -1,4 +1,4 @@
-<?php
+     <?php
 
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EvaluationController;
@@ -31,6 +31,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 // RUTAS PROTEGIDAS PARA EL VISITANTE
 Route::middleware(['auth', 'role:Visitante'])->group(function () {
 
@@ -57,4 +58,5 @@ Route::middleware(['auth', 'role:Stands'])->group(function () {
 
 //CRUD de visitante
 Route::resource('user',UserController::class);
+
 

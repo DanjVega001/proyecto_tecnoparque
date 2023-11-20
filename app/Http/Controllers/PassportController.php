@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Service\AuthService;
 use Illuminate\Http\Request;
+
 use App\Models\User;
 use App\Models\Stand;
 use App\Models\Passport;
+use App\Models\Places;
 
 
 class PassportController extends Controller
@@ -36,9 +39,9 @@ class PassportController extends Controller
     public function index()
     {
         $this->userInauthenticated();
-        $passport= Passport::where('user_id',  $this->user->id)->with('user','stand')->get();
-        dd($passport);
-        return view('passport.index', compact('passport'));
+        $passports= Passport::where('user_id',  $this->user->id)->with('stand')->get();
+        //dd($passport);
+        return view('passport.index', compact('passports'));
 
     }
 

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Places;
 use Illuminate\Http\Request;
+
+use App\Models\Places;
+use App\Models\Schedule;
+
 
 class PlacesController extends Controller
 {
@@ -17,6 +20,7 @@ class PlacesController extends Controller
         $places= Places::with('schedule')->get();
         //dd($places);
         return view('places.index', compact('places'));
+
     }
 
     /**
@@ -25,7 +29,7 @@ class PlacesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
         $schedules= Schedule::all();
         return view('places.create', compact('schedules'));
     }
@@ -58,7 +62,6 @@ class PlacesController extends Controller
         return redirect()->route('places.index');
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -67,7 +70,7 @@ class PlacesController extends Controller
      */
     public function show(Places $places)
     {
-        //
+        
     }
 
     /**
@@ -82,6 +85,7 @@ class PlacesController extends Controller
         $schedules= Schedule::all();
         return view('places.edit', compact('place','schedules'));
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -110,6 +114,7 @@ class PlacesController extends Controller
   
         return redirect()->route('places.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.

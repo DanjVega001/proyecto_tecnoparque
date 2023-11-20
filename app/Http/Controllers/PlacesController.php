@@ -14,7 +14,9 @@ class PlacesController extends Controller
      */
     public function index()
     {
-        //
+        $places= Places::with('schedule')->get();
+        //dd($places);
+        return view('places.index', compact('places'));
     }
 
     /**
@@ -24,7 +26,8 @@ class PlacesController extends Controller
      */
     public function create()
     {
-        //
+        $schedules= Schedule::all();
+        return view('places.create', compact('schedules'));
     }
 
     /**
@@ -35,8 +38,26 @@ class PlacesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'address'=>'required',
+            'latitude'=>'required',
+            'length'=>'required',
+            'schedule_id'=>'required',
+        ]);
+
+        $place= new Places();
+        $place->name = $request->name;
+        $place->email = $request->email;
+        $place->address = $request->address;
+        $place->latitude = $request->latitude;
+        $place->length = $request->length;
+        $place->schedule_id = $request->schedule_id;
+        $place->save();
+        return redirect()->route('places.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -55,11 +76,12 @@ class PlacesController extends Controller
      * @param  \App\Models\Places  $places
      * @return \Illuminate\Http\Response
      */
-    public function edit(Places $places)
+    public function edit($id)
     {
-        //
+        $place = Places::find($id);
+        $schedules= Schedule::all();
+        return view('places.edit', compact('place','schedules'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -67,9 +89,26 @@ class PlacesController extends Controller
      * @param  \App\Models\Places  $places
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Places $places)
+    public function update(Request $request, $id)
     {
-        //
+        $validar = $request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'address'=>'required',
+            'latitude'=>'required',
+            'length'=>'required',
+            'schedule_id'=>'required',
+        ]);
+        $place = Places::find($id);
+        $place->name = $request->name;
+        $place->email = $request->email;
+        $place->address = $request->address;
+        $place->latitude = $request->latitude;
+        $place->length = $request->length;
+        $place->schedule_id = $request->schedule_id;
+        $place->update();
+  
+        return redirect()->route('places.index');
     }
 
     /**
@@ -78,8 +117,14 @@ class PlacesController extends Controller
      * @param  \App\Models\Places  $places
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Places $places)
-    {
-        //
+    public function destroy($id)
+    {   
+        $place = Places::find($id);   
+        if ($place) {
+            $place->delete();
+            return redirect()->route('places.index')->with('success', 'Lugar eliminado exitosamente');
+        } else {
+            return redirect()->route('places.index')->with('error', 'No se encontró el lugar para eliminar');
+        }
     }
 }

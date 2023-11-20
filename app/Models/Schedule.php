@@ -10,6 +10,8 @@ class Schedule extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'hour_start',
         'hour_end',
@@ -18,6 +20,6 @@ class Schedule extends Model
 
 
     public function place(){
-        return $this->hasOne(Places::class,'schedule_id'); 
+        return $this->hasMany(Places::class,'schedule_id'); 
     }
 }

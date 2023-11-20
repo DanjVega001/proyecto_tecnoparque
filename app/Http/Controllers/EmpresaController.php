@@ -68,8 +68,8 @@ class EmpresaController extends Controller
         $data['password'] = Hash::make($data['password']);
         $data['rol_id'] = 3;
         $user = User::create($data);
-        $user->assignRole('Stands');
-        return $this->index();
+        $user->assignRole('Empresa');
+        return redirect()->route('empresa.index');
     }
 
     /**

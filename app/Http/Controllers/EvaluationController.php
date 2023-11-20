@@ -26,9 +26,9 @@ class EvaluationController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
-        if (!$this->user || $this->user->rol->nombre != 'Visitante') {
-            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
-        }       
+        if ($this->user === null || $this->user->rol->name != 'Visitante') {
+            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);   
+        }  
         return null;
     }
 
@@ -62,7 +62,7 @@ class EvaluationController extends Controller
 
     public function store(Request $request, $qr_code)
     {
-            
+        
         try {
             DB::beginTransaction();
             
@@ -74,7 +74,8 @@ class EvaluationController extends Controller
                 return redirect()->route('home')->with('error', 'Codigo QR Invalido');
             }
                
-            $valorCriterios = $request->input('criterios');
+            
+            $valorCriterios = $request->input('puntuacion');
             $rank =  array_sum($valorCriterios) / count($valorCriterios);
 
             $stand = Stand::where('qr_code', $qr_code)->lockForUpdate()->first();

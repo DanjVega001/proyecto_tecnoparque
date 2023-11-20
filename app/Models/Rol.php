@@ -10,7 +10,7 @@ class Rol extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre'
+        'name'
     ];
 
     public $timestamps = false;

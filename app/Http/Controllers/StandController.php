@@ -19,7 +19,6 @@ class StandController extends Controller
     public function __construct(AuthService $service)
     {
         $this->service=$service;
-        
     }
 
 
@@ -38,7 +37,7 @@ class StandController extends Controller
     public function index()
     {
         $this->userInauthenticated();
-        $stands = Stand::all();
+        $stands = Stand::where('user_id', $this->user->id)->get();
         return view('stands/index', compact('stands'));
     }
 
@@ -70,7 +69,7 @@ class StandController extends Controller
         $nombreBanner = time() . '.' . $banner->extension();
         $banner->storeAs('public', $nombreBanner);
 
-        // Crear codigo unico alfanumerico de 6 caracteres
+
         $codigo_qr = Hash::make($request->name);
         $stand = Stand::create([
             'name' => $request->name,
@@ -82,7 +81,8 @@ class StandController extends Controller
             'tiktok' => $request->tiktok,
             'web' => $request->web,
             'calification' => 0.0,
-            'qr_code' => $codigo_qr
+            'qr_code' => $codigo_qr,
+            'user_id' => $this->user->id
         ]);
         $classifications_id = $request->classifications;
         foreach ($classifications_id as $class) {
@@ -104,7 +104,9 @@ class StandController extends Controller
      */
     public function show($id)
     {
-        //
+        $stand = Stand::find($id);
+        // DEBE RETORNAR A LA INTERFAZ EL STAND CON SUS DATOS
+        return view('stands', compact('stand'));
     }
 
     /**
@@ -186,5 +188,12 @@ class StandController extends Controller
         Storage::delete("public/{$stand->logo}");
         Storage::delete("public/{$stand->banner}");
         return $this->index();
+    }
+
+    public function getAllStands()
+    {
+        $stands = Stand::all();
+        // DEBE RETORNAR LA VISTA DE LOS STANDS
+        return view('stands/home', compact('stands'));
     }
 }

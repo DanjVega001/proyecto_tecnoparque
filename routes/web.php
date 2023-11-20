@@ -51,7 +51,7 @@ Route::middleware(['auth', 'role:Administrador'])->group(function () {
 
 
 // RUTAS PROTEGIDAS PARA LA EMPRESA
-Route::middleware(['auth', 'role:Stands'])->group(function () {
+Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::resource('stand', StandController::class);
 });
 

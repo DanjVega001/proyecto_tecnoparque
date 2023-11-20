@@ -55,10 +55,11 @@ class EvaluationController extends Controller
         if (!$existeCodigo) {
             return redirect()->route('home')->with('error', 'Codigo QR Invalido');
         }
-        $user = Auth::user();
+        
         $criterios = Criterio::all();
-        $this->middleware('role:Visitante');
-        return view('evaluations/index', compact('criterios','user', 'qr_code'));
+        //$this->middleware('role:Visitante');
+        $user = Auth::user();
+        return view('evaluations/index', compact('criterios', 'qr_code','user'));
     }
 
     public function store(Request $request, $qr_code)
@@ -84,6 +85,7 @@ class EvaluationController extends Controller
                 'evaluation_id' => $eval->id
             ]);
         }*/
-        return $eval;
+        //return $eval;
+        return view('home');
     }
 }

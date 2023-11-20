@@ -25,7 +25,7 @@ class StandController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
-        if (!$this->user || $this->user->rol->nombre != 'Stands') {
+        if (!$this->user || $this->user->rol->nombre != 'Empresa') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
         }
     }
@@ -38,6 +38,7 @@ class StandController extends Controller
     {
         $this->userInauthenticated();
         $stands = Stand::all();
+        $this->middleware('role:Empresa');
         return view('stands/index', compact('stands'));
     }
 
@@ -70,16 +71,8 @@ class StandController extends Controller
         $banner->storeAs('public', $nombreBanner);
 
         // Crear codigo unico alfanumerico de 6 caracteres
-        $codigo_qr = null; 
-        $unico = false;
-        while (!$unico) {
-            $codigo_qr = Str::random(6);
-            $existeCodigo = Stand::where('qr_code',
-                $codigo_qr)->exists();
-            if (!$existeCodigo) {
-                $unico = true;
-            }
-        }
+        $codigo_qr = Hash::make($request->name); 
+        
         $stand = Stand::create([
             'name' => $request->name,
             'logo' => "storage/{$nombreImagen}",

@@ -1,54 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<form action="{{ route('stand.update', ['stand' => $stand->id] ) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-        <!-- Campos para los datos del formulario -->
-        <label for="name">Nombre:</label>
-        <input type="text" name="name" value="{{ $stand->name }}" required>
-        <br>
+@extends('layouts.app')
 
-        <label for="logo">Logo URL:</label>
-        <input type="text" name="logo" value="{{ $stand->logo }}" required>
-        <br>
+@section('content')
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Editar Stand</h1>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('stand.update', ['stand' => $stand->id] ) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="input-group mb-3">
+                <span class="input-group-text">Nombre</span>
+                <input type="text" class="form-control" name="name" value="{{$stand->name}}">
+            </div>
 
-        <label for="banner">Banner URL:</label>
-        <input type="text" name="banner" value="{{ $stand->banner }}" required>
-        <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Logo URL</span>
+                <input type="text" class="form-control" name="logo" value="{{$stand->logo}}">
+            </div>
+            
+            <div class="input-group mb-3">
+                <span class="input-group-text">Logo URL</span>
+                <input type="text" class="form-control" name="banner" value="{{$stand->banner}}">
+            </div>
 
-        <label for="description">Descripción:</label>
-        <textarea name="description" rows="4" required>{{ $stand->description }}</textarea>
-        <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Descripción</span>
+                <input type="text" class="form-control" name="description" value="{{$stand->description}}">
+            </div>
 
-        <label for="facebook">Facebook:</label>
-        <input type="text" name="facebook" value="{{ $stand->facebook }}">
-        <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Descripción</span>
+                <input type="text" class="form-control" name="facebook" value="{{$stand->facebook}}">
+            </div>
 
-        <label for="instagram">Instagram:</label>
-        <input type="text" name="instagram" value="{{ $stand->instagram }}">
-        <br>
+                <label for="description">Descripción:</label>
+                <textarea name="description" rows="4" required>{{ $stand->description }}</textarea>
+                <br>
 
-        <label for="tiktok">TikTok:</label>
-        <input type="text" name="tiktok" value="{{ $stand->tiktok }}">
-        <br>
+                <label for="facebook">Facebook:</label>
+                <input type="text" name="facebook" value="{{ $stand->facebook }}">
+                <br>
 
-        <label for="web">Sitio web:</label>
-        <input type="text" name="web" value="{{ $stand->web }}">
-        <br>
+                <label for="instagram">Instagram:</label>
+                <input type="text" name="instagram" value="{{ $stand->instagram }}">
+                <br>
 
-        <label for="calification">Calificación:</label>
-        <input type="number" name="calification" step="0.1" value="{{ $stand->calification }}" required>
-        <br>
+                <label for="tiktok">TikTok:</label>
+                <input type="text" name="tiktok" value="{{ $stand->tiktok }}">
+                <br>
 
-        <!-- Botón de envío -->
-        <button type="submit">Actualizar</button>
-    </form>
-    </form>
-</body>
-</html>
+                <label for="web">Sitio web:</label>
+                <input type="text" name="web" value="{{ $stand->web }}">
+                <br>
+
+                <label for="calification">Calificación:</label>
+                <input type="number" name="calification" step="0.1" value="{{ $stand->calification }}" required>
+                <br>
+
+                <!-- Botón de envío -->
+                <button type="submit">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@endsection

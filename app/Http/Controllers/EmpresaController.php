@@ -68,7 +68,7 @@ class EmpresaController extends Controller
         $data['password'] = Hash::make($data['password']);
         $data['rol_id'] = 3;
         $user = User::create($data);
-        $user->assignRole('Stands');
+        $user->assignRole('Empresa');
         return $this->index();
     }
 

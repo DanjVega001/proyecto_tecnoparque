@@ -63,23 +63,78 @@
         </button>
     </div>
     <!-- Carousel wrapper -->
-
-        <!-- Tarjetas de los Stands -->
-        <div class="container mt-5">
-            <div class="row">
-                @foreach($stands as $stand)
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="{{ $stand->photo_url }}" class="card-img-top" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $stand->company_name }}</h5>
-                                <p class="card-text">{{ $stand->description }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+{{-- Aliados --}}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Aliados</h2>
+    <div class="row row-cols-1 row-cols-sm-2"> {{-- Cambiado a row-cols-sm-2 para que haya 2 columnas en pantallas pequeñas --}}
+        {{-- Aliado 1 --}}
+        <div class="col mb-4">
+            <div class="card">
+                <img src="{{ asset('img/afiliados/Senalogo.png') }}" class="card-img-top" alt="Aliado 1">
+                <div class="card-body"> {{-- Agregado contenedor de cuerpo de la tarjeta --}}
+                    {{-- Puedes agregar más contenido aquí si es necesario --}}
+                </div>
             </div>
         </div>
+
+        {{-- Aliado 2 --}}
+        <div class="col mb-4">
+            <div class="card">
+                <img src="{{ asset('img/afiliados/Logo_de_las_Unidades_Tecnológicas_de_Santander.svg.png') }}" class="card-img-top" alt="Aliado 2">
+                <div class="card-body"> {{-- Agregado contenedor de cuerpo de la tarjeta --}}
+                    {{-- Puedes agregar más contenido aquí si es necesario --}}
+                </div>
+            </div>
+        </div>
+
+        {{-- Aliado 3 --}}
+        <div class="col mb-4">
+            <div class="card">
+                <img src="{{ asset('img/afiliados/LOGO_PLAN_DE_DESARROLLO_COLOMBIA_POTENCIA_DE_LA_VIDA_2022-2026.png') }}" class="card-img-top" alt="Aliado 3">
+                <div class="card-body"> {{-- Agregado contenedor de cuerpo de la tarjeta --}}
+                    {{-- Puedes agregar más contenido aquí si es necesario --}}
+                </div>
+            </div>
+        </div>
+
+        {{-- Aliado 4 --}}
+        <div class="col mb-4">
+            <div class="card">
+                <img src="{{ asset('img/afiliados/Logo_Ministerio_de_Comercio_Industria_y_Turismo_2022-2026.png') }}" class="card-img-top" alt="Aliado 4">
+                <div class="card-body"> {{-- Agregado contenedor de cuerpo de la tarjeta --}}
+                    {{-- Puedes agregar más contenido aquí si es necesario --}}
+                </div>
+            </div>
+        </div>
+
+        {{-- Aliado 5 --}}
+        <div class="col mb-4">
+            <div class="card">
+                <img src="{{ asset('img/afiliados/Empodera.png') }}" class="card-img-top" alt="Aliado 5">
+                <div class="card-body"> {{-- Agregado contenedor de cuerpo de la tarjeta --}}
+                    {{-- Puedes agregar más contenido aquí si es necesario --}}
+                </div>
+            </div>
+        </div>
+
+        {{-- Aliado 6 --}}
+        <div class="col mb-4">
+            <div class="card">
+                <img src="{{ asset('img/afiliados/logo version color 1.png') }}" class="card-img-top" alt="Aliado 6">
+                <div class="card-body"> {{-- Agregado contenedor de cuerpo de la tarjeta --}}
+                    {{-- Puedes agregar más contenido aquí si es necesario --}}
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+
+
+
+
+   
 
 
 @endsection

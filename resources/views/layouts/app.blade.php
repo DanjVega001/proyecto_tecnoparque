@@ -34,6 +34,7 @@
 
     <!-- Estilos -->
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/index_css/landing_page.css') }}" rel="stylesheet">
 
 
     {{-- Iconos de FontaSome --}}

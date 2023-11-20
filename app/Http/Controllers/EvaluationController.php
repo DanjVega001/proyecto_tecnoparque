@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Criterio;
-use App\Models\Evaluation;
-use App\Models\EvaluationHasCriterio;
-use App\Models\Stand;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use App\Service\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Stand;
+use App\Models\Criterio;
+use App\Models\Evaluation;
+use App\Models\EvaluationHasCriterio;
+use App\Models\Passport;
 
 class EvaluationController extends Controller
 {
@@ -78,6 +79,7 @@ class EvaluationController extends Controller
             'stand_id' => $stand->id,
             'user_id' => $user->id
         ]);
+        
         /*foreach ($request->criterio_id as $id ) {
             EvaluationHasCriterio::create([
                 'criterio_id' => $id,

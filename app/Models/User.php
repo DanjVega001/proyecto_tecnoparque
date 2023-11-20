@@ -18,6 +18,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -54,8 +56,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function passports(){
-        return $this->hasMany(Passport::class, 'id', 'id');
+      public function passports(){
+        return $this->hasMany(Passport::class, 'user_id');
     }
 
     public function rol(){

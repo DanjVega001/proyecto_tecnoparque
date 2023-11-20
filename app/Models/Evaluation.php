@@ -22,6 +22,10 @@ class Evaluation extends Model
         return $this->belongsTo(Criterio::class, 'criterios_id', 'id');
     }
 
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
     public function stand(){
         return $this->belongsTo(Stand::class, 'stands_id', 'id');
     }

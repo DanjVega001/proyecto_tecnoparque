@@ -1,6 +1,14 @@
 <?php
 
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\EvaluationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StandController;
+
+use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +28,44 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+//Route::resource('passports_app',AdminController::class)->middleware('auth');
+
+
+
+// RUTAS PROTEGIDAS PARA EL VISITANTE
+Route::middleware(['auth', 'role:Visitante'])->group(function () {
+    
+    // Muestra la evaluacion 
+    Route::get('/evaluation/index/{qr_code}', [EvaluationController::class, 
+    'index'])->name('evaluation.index');
+
+    // Guarda el resultado de la evaluacion
+    Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
+    'store'])->name('evaluation.store');
+    
+});
+
+// RUTAS PROTEGIDAS PARA EL ADMIN
+Route::middleware(['auth', 'role:Administrador'])->group(function () {
+    Route::resource('empresa', EmpresaController::class);
+});
+
+// RUTAS PROTEGIDAS PARA LA EMPRESA
+Route::middleware(['auth', 'role:Stands'])->group(function () {
+    Route::resource('stand', StandController::class);
+});
+
+Auth::routes();
+
+
+Route::resource('user',UserController::class);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

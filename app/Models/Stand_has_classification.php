@@ -15,4 +15,12 @@ class Stand_has_classification extends Model
         'stand_id',
         'classification_id'
     ];
+
+    public function stand(){
+        return $this->belongsTo(Stand::class, 'stand_id', 'id');
+    }
+
+    public function classification(){
+        return $this->belongsTo(Classification::class, 'classification_id', 'id');
+    }
 }

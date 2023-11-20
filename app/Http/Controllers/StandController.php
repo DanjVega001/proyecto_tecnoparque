@@ -9,6 +9,7 @@ use App\Models\Stand_has_classification;
 use App\Service\AuthService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class StandController extends Controller
 {
@@ -70,16 +71,7 @@ class StandController extends Controller
         $banner->storeAs('public', $nombreBanner);
 
         // Crear codigo unico alfanumerico de 6 caracteres
-        $codigo_qr = null; 
-        $unico = false;
-        while (!$unico) {
-            $codigo_qr = Str::random(6);
-            $existeCodigo = Stand::where('qr_code',
-                $codigo_qr)->exists();
-            if (!$existeCodigo) {
-                $unico = true;
-            }
-        }
+        $codigo_qr = Hash::make($request->name);
         $stand = Stand::create([
             'name' => $request->name,
             'logo' => "storage/{$nombreImagen}",

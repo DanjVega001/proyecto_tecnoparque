@@ -1,7 +1,8 @@
 <!-- resources/views/components/Footer.blade.php -->
 
 <footer>
-    <img src="logo.png" alt="logo" class="logo">
+<img src="{{ asset('img/logo.png') }}" alt="logo" class="logo">
+
     <div class="social-icons-container">
         <a href="" class="social-icon bx bxl-facebook-circle"></a>
         <a href="" class="social-icon bx bxl-instagram"></a>

@@ -17,6 +17,8 @@ class CreateEvaluationsTable extends Migration
             $table->id();
             $table->double('rank');
             $table->text('feedback');
+            $table->unsignedBigInteger('criterio_id');
+            $table->foreign('criterio_id')->references('id')->on('criterios');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('stand_id');

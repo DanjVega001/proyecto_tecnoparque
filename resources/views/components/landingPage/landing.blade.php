@@ -4,7 +4,7 @@
 @section('content')
    
     <!-- Carousel wrapper -->
-    <div id="carouselBasicExample" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div id="carouselBasicExample" class="carousel slide carousel-fade container" data-bs-ride="carousel">
         <!-- Indicators -->
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="0" class="active"
@@ -64,46 +64,22 @@
     </div>
     <!-- Carousel wrapper -->
 
-    <!-- Tarjetas de los Stands -->
-    <div class="container mt-5">
-        <div class="row">
-            <!-- Tarjeta 1 -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://placekitten.com/300/200" class="card-img-top" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card Title 1</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
+        <!-- Tarjetas de los Stands -->
+        <div class="container mt-5">
+            <div class="row">
+                @foreach($stands as $stand)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="{{ $stand->photo_url }}" class="card-img-top" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $stand->company_name }}</h5>
+                                <p class="card-text">{{ $stand->description }}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 2 -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://placekitten.com/301/200" class="card-img-top" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card Title 2</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 3 -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://placekitten.com/302/200" class="card-img-top" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card Title 3</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-    </div>
 
 
 @endsection

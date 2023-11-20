@@ -1,21 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="{{ route('empresa.create')}}">Agregar</a>
-@foreach ($empresas as $empresa)
-    <p>{{ $empresa->name }} - {{ $empresa->email }} - {{ $empresa->document }} - {{ $empresa->phone_number }}</p>
-    <a href="{{ route('empresa.edit', ['empresa' => $empresa->id ])  }}">Editar</a>
-    <form action="{{ route('empresa.destroy', ['empresa' => $empresa->id]) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta empresa?');">
-    @csrf
-    @method('DELETE') 
+@extends('layouts.app')
 
-    <button type="submit">Eliminar</button>
-</form>
-@endforeach
-</body>
-</html>
+@section('content')
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Usuarios - Empresas</h1>
+        <a href="{{ route('empresa.create')}}" class="btn btn-primary">Crear empresa</a>
+        </div>
+        <div class="card-body">
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre Empresa</th>
+                    <th>Email</th>
+                    <th>Nit</th>
+                    <th>Número Teléfonico</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach ($empresas as $empresa)
+                <tr>
+                    <td>{{ $empresa->name }}</td>
+                    <td>{{ $empresa->email }}</td>
+                    <td>{{ $empresa->document }}</td>
+                    <td>{{ $empresa->phone_number }}</td>
+                    <td><a href="{{ route('empresa.edit', ['empresa' => $empresa->id ])}}" class="btn btn-primary">Editar</a>
+                    <form action="{{ route('empresa.destroy', ['empresa' => $empresa->id]) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta empresa?');">
+                        @csrf
+                        @method('DELETE') 
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+            </table>  
+        </div>
+    </div>
+</div>
+    
+@endsection

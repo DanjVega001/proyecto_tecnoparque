@@ -1,37 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!-- users/create.blade.php -->
+@extends('layouts.app')
 
-<form action="{{ route('empresa.store') }}" method="POST">
-    @csrf
+@section('content')
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Crear Usario - Empresa</h1>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('empresa.store') }}" method="POST">
+            @csrf
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Nombre</span>
+                    <input type="text" class="form-control" name="name" required >
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Correo Electrónico</span>
+                    <input type="email" class="form-control" name="email" required >
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Contraseña</span>
+                    <input type="password" class="form-control" name="password" required >
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Documento</span>
+                    <input type="number" class="form-control" name="document" required >
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Número de Teléfono</span>
+                    <input type="number" class="form-control" name="phone_number" required >
+                </div>
+                <button type="submit" class="btn btn-primary">Crear Usuario</button>
+                <a href="{{route('empresa.index')}}" class="btn btn-primary">Volver</a>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <label for="name">Nombre:</label>
-    <input type="text" name="name" required>
-    <br>
-
-    <label for="email">Correo Electrónico:</label>
-    <input type="email" name="email" required>
-    <br>
-
-    <label for="password">Contraseña:</label>
-    <input type="password" name="password" required>
-    <br>
-
-    <label for="document">Documento:</label>
-    <input type="number" name="document" required>
-    <br>
-
-    <label for="phone_number">Número de Teléfono:</label>
-    <input type="number" name="phone_number" required>
-    <br>
-
-    <button type="submit">Crear Usuario</button>
-</form>
-</body>
-</html>
+@endsection

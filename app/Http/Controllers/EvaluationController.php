@@ -6,6 +6,8 @@ use App\Models\Criterio;
 use App\Models\Evaluation;
 use App\Models\EvaluationHasCriterio;
 use App\Models\Stand;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Service\AuthService;
 use Illuminate\Http\Request;
 
@@ -23,7 +25,7 @@ class EvaluationController extends Controller
 
     private function userInauthenticated()
     {
-        if (!$this->user || $this->user->rol->nombre != 'Vistante') {
+        if (!$this->user || $this->user->rol->nombre != 'Visitante') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
         }
     }
@@ -34,32 +36,35 @@ class EvaluationController extends Controller
         if (!$qr_code) {
             return redirect()->route('home')->with('error', 'Codigo QR Invalido');
         }
+        $user = Auth::user();
         $criterios = Criterio::all();
-        return view('evaluations/index', compact('criterios', 'qr_code'));
+        $this->middleware('role:Visitante');
+        return view('evaluations/index', compact('criterios','user', 'qr_code'));
     }
 
     public function store(Request $request, $qr_code)
     {
+        $user = Auth::user();
         $this->userInauthenticated();
-        $valorCriterios = $request->criterios;
+        $valorCriterios = $request->puntuacion;
         $rank = 0;
         foreach ($valorCriterios as $val) {
             $rank += intval($val);
         }
         $rank /= count($valorCriterios);
-        $stand = Stand::where('qr_code', $qr_code)->get();
+        $stand = Stand::where('qr_code', $qr_code)->first();
         $eval = Evaluation::create([
             'rank' => $rank,
-            'feedback' => $request->get('feedback'),
+            'feedback' => $request->feedback,
             'stand_id' => $stand->id,
-            'user_id' => $this->user->id
+            'user_id' => $user->id
         ]);
-        foreach ($request->criterio_id as $id ) {
+        /*foreach ($request->criterio_id as $id ) {
             EvaluationHasCriterio::create([
                 'criterio_id' => $id,
                 'evaluation_id' => $eval->id
             ]);
-        }
+        }*/
         return $eval;
     }
 }

@@ -38,6 +38,10 @@
 <body>
 
     <div id="app">
+        
+    {{-- Header de Perfil de Usuario --}}
+        @include('components.HeaderPerfil')
+
         <!-- Contenido principal -->
         <main class="py-4">
             @yield('content')

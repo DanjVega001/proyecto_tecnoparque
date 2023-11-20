@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('rol')->get();
+        $users = User::where('rol_id',2)->get();
         //dd($users)
         return view('users.index', compact('users'));
     }
@@ -47,7 +47,6 @@ class UserController extends Controller
             'birthday'=>'required',
             'genere'=>'required',
             'password'=>'required|min:8|confirmed',
-           
         ]);
 
         $users = new User();
@@ -60,6 +59,7 @@ class UserController extends Controller
         $users->genere = $request->genere;
         $users->password = bcrypt($request->password);
         $users->rol_id = '2';
+        $users->assignRole('Visitante');
         $users->save();
         return redirect()->route('user.index');
     }

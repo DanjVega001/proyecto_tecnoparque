@@ -28,6 +28,8 @@ class CreateUsersTable extends Migration
             $table->foreign('rol_id')->references('id')->on('rols');
             $table->rememberToken();
 
+            $table->timestamps();
+
         });
     }
 

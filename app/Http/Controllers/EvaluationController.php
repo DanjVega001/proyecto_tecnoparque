@@ -25,10 +25,8 @@ class EvaluationController extends Controller
 
     private function userInauthenticated()
     {
-<<<<<<< HEAD
-=======
         $this->user = $this->service->getUserAuthenticated();
->>>>>>> f2aafc32c3ba54d5b0f5b5a1080e14d21e556fed
+
         if (!$this->user || $this->user->rol->nombre != 'Visitante') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
         }       
@@ -87,64 +85,5 @@ class EvaluationController extends Controller
             ]);
         }*/
         return $eval;
-    {        
-        try {
-            DB::beginTransaction();
-            
-            $userInauthenticated = $this->userInauthenticated();
-            if ($userInauthenticated !== null) return $userInauthenticated;
-
-            $existeCodigo = $this->existeCodigo($qr_code);
-            if (!$existeCodigo) {
-                return redirect()->route('home')->with('error', 'Codigo QR Invalido');
-            }
-               
-            $valorCriterios = $request->input('criterios');
-            $rank =  array_sum($valorCriterios) / count($valorCriterios);
-
-            $stand = Stand::where('qr_code', $qr_code)->lockForUpdate()->first();
-            $evalCompletada = $this->evalCompletada($stand);
-            if ($evalCompletada) {
-                return view('home', ['message' => 'Evaluacion ya completada']);
-            }
-            
-            $eval = Evaluation::create([
-                'rank' => $rank,
-                'feedback' => $request->get('feedback'),
-                'stand_id' => $stand->id,
-                'user_id' => $this->user->id
-            ]);
-         
-            foreach ($request->criterio_id as $id) {
-                EvaluationHasCriterio::create([
-                    'criterio_id' => $id,
-                    'evaluation_id' => $eval->id
-                ]);
-            }
-
-            $this->addRankToClalificationStand($rank, $stand);
-
-            DB::commit();
-            // DEBE RETORNAR KA VISTA DE LOS STANDS SELLADOS
-            return $eval;
-        } catch (\Throwable $th) {
-
-            DB::rollback();
-            return redirect()->back()->with('error', 'Error al procesar la evaluación');
-        }
-    }
-
-    private function addRankToClalificationStand($rank, $stand)
-    {
-        $calification = $stand->calification;
-        if ($calification == 0) {
-            $stand->update([
-                'calification' => $rank
-            ]);
-        } else {
-            $stand->update([
-                'calification' => ($calification + $rank) / 2
-            ]);
-        }
     }
 }

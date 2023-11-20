@@ -59,6 +59,9 @@ Route::middleware(['auth', 'role:Stands'])->group(function () {
 //CRUD de visitante
 Route::resource('user',UserController::class);
 
+Route::resource('places',PlacesController::class);
+Route::resource('passport',PassportController::class);
+
 
 
 Auth::routes();

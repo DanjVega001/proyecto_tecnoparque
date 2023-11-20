@@ -47,7 +47,6 @@ class UserController extends Controller
             'birthday'=>'required',
             'genere'=>'required',
             'password'=>'required|min:8|confirmed',
-           
         ]);
 
         $users = new User();

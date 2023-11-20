@@ -18,12 +18,13 @@ class StandController extends Controller
     public function __construct(AuthService $service)
     {
         $this->service=$service;
-        $this->user = $this->service->getUserAuthenticated();
+        
     }
 
 
     private function userInauthenticated()
     {
+        $this->user = $this->service->getUserAuthenticated();
         if (!$this->user || $this->user->rol->nombre != 'Stands') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
         }

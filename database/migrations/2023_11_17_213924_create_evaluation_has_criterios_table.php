@@ -15,7 +15,11 @@ class CreateEvaluationHasCriteriosTable extends Migration
     {
         Schema::create('evaluation_has_criterios', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('evaluation_id');
+            $table->foreign('evaluation_id')->references('id')->on('evaluations');
+            $table->unsignedBigInteger('criterio_id');
+            $table->foreign('criterio_id')->references('id')->on('criterios');
+            //$table->timestamps();
         });
     }
 

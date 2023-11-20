@@ -25,10 +25,7 @@ class EvaluationController extends Controller
 
     private function userInauthenticated()
     {
-<<<<<<< HEAD
-=======
         $this->user = $this->service->getUserAuthenticated();
->>>>>>> f2aafc32c3ba54d5b0f5b5a1080e14d21e556fed
         if (!$this->user || $this->user->rol->nombre != 'Visitante') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
         }       
@@ -65,29 +62,7 @@ class EvaluationController extends Controller
 
     public function store(Request $request, $qr_code)
     {
-        $user = Auth::user();
-        $this->userInauthenticated();
-        $valorCriterios = $request->puntuacion;
-        $rank = 0;
-        foreach ($valorCriterios as $val) {
-            $rank += intval($val);
-        }
-        $rank /= count($valorCriterios);
-        $stand = Stand::where('qr_code', $qr_code)->first();
-        $eval = Evaluation::create([
-            'rank' => $rank,
-            'feedback' => $request->feedback,
-            'stand_id' => $stand->id,
-            'user_id' => $user->id
-        ]);
-        /*foreach ($request->criterio_id as $id ) {
-            EvaluationHasCriterio::create([
-                'criterio_id' => $id,
-                'evaluation_id' => $eval->id
-            ]);
-        }*/
-        return $eval;
-    {        
+            
         try {
             DB::beginTransaction();
             

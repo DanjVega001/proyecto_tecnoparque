@@ -102,7 +102,7 @@ class EvaluationController extends Controller
 
             DB::commit();
             // DEBE RETORNAR KA VISTA DE LOS STANDS SELLADOS
-            return $eval;
+            return view('paginas-sello/index');
         } catch (\Throwable $th) {
 
             DB::rollback();

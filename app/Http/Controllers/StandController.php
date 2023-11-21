@@ -73,8 +73,8 @@ class StandController extends Controller
         $codigo_qr = Hash::make($request->name);
         $stand = Stand::create([
             'name' => $request->name,
-            'logo' => "storage/{$nombreImagen}",
-            'banner' => "storage/{$nombreBanner}",
+            'logo' => "storage/images/{$nombreImagen}",
+            'banner' => "storage/images/{$nombreBanner}",
             'description' => $request->description,
             'facebook' => $request->facebook,
             'instagram' => $request->instagram,
@@ -152,7 +152,7 @@ class StandController extends Controller
         $nombreLogo = time() . '.' . $logo->extension();
         $logo->storeAs('public', $nombreLogo);
         $stand->update([
-            'logo' => 'storage/{$nombreLogo}'
+            'logo' => 'storage/images/{$nombreLogo}'
         ]);
         return $this->index();
     }
@@ -166,7 +166,7 @@ class StandController extends Controller
         $nombreBanner = time() . '.' . $banner->extension();
         $banner->storeAs('public', $nombreBanner);
         $stand->update([
-            'banner' => 'storage/{$nombreBanner}'
+            'banner' => 'storage/images/{$nombreBanner}'
         ]);
         return $this->index();
     }

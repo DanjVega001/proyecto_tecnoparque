@@ -25,7 +25,7 @@ class StandController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
-        if (!$this->user || $this->user->rol->nombre != 'Stands') {
+        if (!$this->user || $this->user->rol->nombre != 'Empresa') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
         }
     }
@@ -68,8 +68,6 @@ class StandController extends Controller
         $banner = $request->file('banner');
         $nombreBanner = time() . '.' . $banner->extension();
         $banner->storeAs('public', $nombreBanner);
-
-
         $codigo_qr = Hash::make($request->name);
         $stand = Stand::create([
             'name' => $request->name,

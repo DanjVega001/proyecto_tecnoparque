@@ -16,8 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
+
         $users = User::where('rol_id',2)->get();
         //dd($users)
+
         return view('users.index', compact('users'));
     }
 

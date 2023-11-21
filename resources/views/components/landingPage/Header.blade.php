@@ -43,7 +43,6 @@
         .navbar-line {
             background-color: #942339;
             padding: 10px;
-            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;

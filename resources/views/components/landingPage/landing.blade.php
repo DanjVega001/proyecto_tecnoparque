@@ -4,7 +4,7 @@
 @section('content')
    
 <!-- Carousel wrapper -->
-<div id="carouselBasicExample" class="carousel slide carousel-fade" data-bs-ride="carousel">
+<div id="carouselBasicExample" class="carousel slide carousel-fade " data-bs-ride="carousel">
     <!-- Indicators -->
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="0" class="active"

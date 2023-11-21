@@ -44,7 +44,7 @@
                 </div>
             </div>
             
-            <div class="row">
+            <div class="row row_1">
                 <div class="container-fluid">
                     <div class="row contenidoForm">
                         @if(isset($stands[0]))

@@ -14,8 +14,8 @@ class CriterioSeeder extends Seeder
      */
     public function run()
     {
-        Criterio::create(['name' => 'Innovacion']);
-        Criterio::create(['name' => 'Criterio 2']);
-        Criterio::create(['name' => 'Criterio 3']);
+        Criterio::create(['name' => 'Impacto Visual']);
+        Criterio::create(['name' => 'Ecología']);
+        Criterio::create(['name' => 'Innovación']);
     }
 }

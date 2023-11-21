@@ -20,6 +20,6 @@ class Schedule extends Model
 
 
     public function place(){
-        return $this->hasOne(Places::class,'schedule_id'); 
+        return $this->hasMany(Places::class,'schedule_id'); 
     }
 }

@@ -69,7 +69,7 @@ class EmpresaController extends Controller
         $data['rol_id'] = 3;
         $user = User::create($data);
         $user->assignRole('Empresa');
-        return $this->index();
+        return redirect()->route('empresa.index');
     }
 
     /**

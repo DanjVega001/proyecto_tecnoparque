@@ -1,19 +1,15 @@
      <?php
-
-use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\EvaluationController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StandController;
-
-
-
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\StandController;
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\PlacesController;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\PassportController;
+use App\Http\Controllers\EvaluationController;
+
 
 
 /*
@@ -36,9 +32,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/stands/home', [App\Http\Controllers\StandController::class, 'getAllStands'])->name('stands.home');
+
 
 // RUTAS PROTEGIDAS PARA EL VISITANTE
 Route::middleware(['auth', 'role:Visitante'])->group(function () {
@@ -50,17 +45,25 @@ Route::middleware(['auth', 'role:Visitante'])->group(function () {
     // Guarda el resultado de la evaluacion
     Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
     'store'])->name('evaluation.store');
+
+    Route::resource('passport',PassportController::class);
+    Route::resource('user',UserController::class);  
     
 });
 
 // RUTAS PROTEGIDAS PARA EL ADMIN
 Route::middleware(['auth', 'role:Administrador'])->group(function () {
+
     Route::resource('empresa', EmpresaController::class);
+    Route::resource('places',PlacesController::class);
+    Route::resource('schedule',ScheduleController::class);
+
 });
 
 // RUTAS PROTEGIDAS PARA LA EMPRESA
 Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::resource('stand', StandController::class);
+    Route::resource('agenda', AgendaController::class);
 });
 
     // Guarda el resultado de la evaluacion
@@ -72,11 +75,7 @@ Route::middleware(['auth', 'role:Empresa'])->group(function () {
 //CRUD de visitante
 Route::resource('user',UserController::class);
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('places',PlacesController::class);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

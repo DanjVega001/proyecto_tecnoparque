@@ -1,11 +1,10 @@
-
 @extends('layouts.app')
 
 @section('content')
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h1>Editar Lugares</h1>
+                <h1>Editar Visitantes</h1>
             </div>
             <div class="card-body">
                 <form method="post" action="{{route('places.update',$place->id)}}">
@@ -24,21 +23,18 @@
                     <input type="text" class="form-control" name="address" value="{{$place->address}}" >
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text">Latitud</span>
+                    <span class="input-group-text">Fecha de nacimiento</span>
                     <input type="text" class="form-control" name="latitude" value="{{$place->latitude}}">
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text">Longitud</span>
+                    <span class="input-group-text">Genero</span>
                     <input type="text" class="form-control" name="length" value="{{$place->length}}">
                 </div>
                 <select class="form-select"  name="schedule_id" required placeholder="Seleccione un Horario">
                     @foreach($schedules as $schedule)
-                    <option value='{{$schedule -> id}}' @if($schedule->id == $place->schedule->id) selected @endif>
-                        {{$schedule->day}}, {{$schedule->hour_start}}  -  {{$schedule->hour_end}}
-                    </option>
+                    <option value='{{$schedule -> id}}'>{{$schedule->hour_start}} - {{$schedule->hour_end}}</option>
                     @endforeach    
                 </select>
-                <br>
                 <button type="submit" class="btn btn-primary">Guardar</button>
                     <a href="{{route('places.index')}}" class="btn btn-danger">Volver</a>
                 </form>

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
-class AdminSeeder extends Seeder
+class VisitorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,14 +15,13 @@ class AdminSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'name' => "Marly",
-            'email' => "admin@gmail.com",
+            'name' => "Andres Q",
+            'email' => "andres@gmail.com",
             'document'=>'1234',
             'password' => bcrypt('12345678'),
             'phone_number'=>'3215678991',
-            'rol_id'=> 1
+            'rol_id'=> 2
         ]);
-        $user->assignRole('Administrador');
+        $user->assignRole('Visitante');
     }
-    
 }

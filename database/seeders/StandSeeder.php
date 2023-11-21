@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Stand;
+use Illuminate\Support\Facades\Hash;
 
 
 class StandSeeder extends Seeder
@@ -15,6 +16,8 @@ class StandSeeder extends Seeder
      */
     public function run()
     {   
+        $hashQrCode = Hash::make('Bavaria');
+        $base64QrCode = base64_encode($hashQrCode);
         Stand::create([
             'id' => 1,
             'name'=> "Bavaria",
@@ -25,8 +28,9 @@ class StandSeeder extends Seeder
             'instagram'=> "N/A",
             'tiktok'=> "N/A",
             'web'=> "https://www.bavaria.co/",
-            'calificacion'=> 0.0,
-            'qr'=> "Bavaria",
+            'calification'=> 0.0,
+            'qr_code'=> $base64QrCode,
+            'user_id'=> 1,
         ]);
         //INSERT INTO `passports`(`id`, `date`, `stand_id`, `user_id`) VALUES ('1','2023-11-20 10:13:00','1','2') Para Crear un passport
 

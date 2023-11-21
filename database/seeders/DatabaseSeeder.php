@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ScheduleSeeder::class);
         $this->call(EmpresaSeeder::class);
         $this->call(VideoSeeder::class);
-        //$this->call(StandSeeder::class);
+        $this->call(StandSeeder::class);
+        $this->call(CriterioSeeder::class);
 
     }
 }

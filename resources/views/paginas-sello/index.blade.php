@@ -6,6 +6,6 @@
     <title>Sello</title>
 </head>
 <body>
-    <img src="{{ asset('storage/videos/Animación sello_gif.gif') }}" alt="GIF PASAPORTE">
+    <img src="{{ asset('storage/videos/Animación_sello_gif.gif') }}" alt="GIF PASAPORTE">
 </body>
 </html>

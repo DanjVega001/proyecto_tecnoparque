@@ -1,4 +1,4 @@
-     <?php
+<?php
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +43,12 @@ Route::middleware(['auth', 'role:Visitante'])->group(function () {
     // Guarda el resultado de la evaluacion
     Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
     'store'])->name('evaluation.store');
+
+    // Stand individual
+    Route::get('/stands/{idStand}', [StandController::class, 'show'])->name('stand.show');
+
+    // Stands visitados
+    Route::get('/stands-visitados', [StandController::class, 'standsVisitados'])->name('stand.visitados');
     
 });
 

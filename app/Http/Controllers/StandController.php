@@ -7,6 +7,7 @@ use App\Models\Stand;
 use App\Models\Classification;
 use App\Models\Stand_has_classification;
 use App\Service\AuthService;
+use App\Models\Evaluation;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -63,14 +64,16 @@ class StandController extends Controller
     {
         $this->userInauthenticated();
         $logo = $request->file('logo');
-        $nombreImagen = time() . '.' . $logo->extension();
-        $logo->storeAs('public', $nombreImagen);
+        $nombreImagen = $request->name . '-logo.' . $logo->extension();
+        $logo->storeAs('public/images', $nombreImagen);
         $banner = $request->file('banner');
-        $nombreBanner = time() . '.' . $banner->extension();
-        $banner->storeAs('public', $nombreBanner);
+        $nombreBanner = $request->name . '-banner.' . $banner->extension();
+        $banner->storeAs('public/images', $nombreBanner);
 
 
-        $codigo_qr = Hash::make($request->name);
+        $hashQrCode = Hash::make($request->name);
+        $base64QrCode = base64_encode($hashQrCode);
+
         $stand = Stand::create([
             'name' => $request->name,
             'logo' => "storage/images/{$nombreImagen}",
@@ -81,7 +84,7 @@ class StandController extends Controller
             'tiktok' => $request->tiktok,
             'web' => $request->web,
             'calification' => 0.0,
-            'qr_code' => $codigo_qr,
+            'qr_code' => $base64QrCode,
             'user_id' => $this->user->id
         ]);
         $classifications_id = $request->classifications;
@@ -106,7 +109,7 @@ class StandController extends Controller
     {
         $stand = Stand::find($id);
         // DEBE RETORNAR A LA INTERFAZ EL STAND CON SUS DATOS
-        return view('stands', compact('stand'));
+        //return view('stands/index', compact('stand'));
     }
 
     /**
@@ -195,5 +198,17 @@ class StandController extends Controller
         $stands = Stand::all();
         // DEBE RETORNAR LA VISTA DE LOS STANDS
         return view('stands/home', compact('stands'));
+    }
+
+    public function standsVisitados()
+    {
+        $this->userInauthenticated();
+        $stands = array();
+        $evals = Evaluation::where('user_id', $this->user->id)->get();
+        foreach ($evals as $eval) {
+            array_push($stands, $eval->stand);
+        }
+        return $stands;
+        return view('stands/index', compact('stands'));
     }
 }

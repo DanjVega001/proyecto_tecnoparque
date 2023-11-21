@@ -20,7 +20,7 @@
             <form action="{{ route('evaluation.store', ['qr_code' => $qr_code]) }}" method="POST">
                 @csrf
                 @foreach($criterios as $criterio)
-                <label>Pregunta: {{ $criterio->name }}</label>
+                <label>Pregunta {{ $criterio->description }}</label>
                 <input type="hidden" name="criterio_id[]" value="{{$criterio->id}}">
                 <input type="number" name="puntuacion[]" required>
                 <br>

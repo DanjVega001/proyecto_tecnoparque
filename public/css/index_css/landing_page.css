@@ -26,4 +26,10 @@
         flex: 0 0 100%;
         max-width: 100%;
     }
+
+    /* Centrar el carrusel en vista móvil */
+    #carouselBasicExample {
+        margin: 0 auto;
+    }
 }
+

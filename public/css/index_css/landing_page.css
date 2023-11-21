@@ -12,23 +12,18 @@
     max-width: 50%;
     padding-right: 15px;
     padding-left: 15px;
-}
-
-.custom-card {
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.custom-card:hover {
-    transform: scale(1.05);
+    margin-bottom: 30px;
+    text-align: center; /* Centrar la imagen dentro de la columna */
 }
 
 .custom-card-img {
-    width: 100%;
+    max-width: 100%; /* Establecer un tamaño máximo para la imagen */
     height: auto;
 }
 
-.custom-card-body {
-    padding: 1.25rem;
+@media (max-width: 767px) {
+    .custom-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }

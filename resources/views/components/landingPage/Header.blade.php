@@ -123,13 +123,13 @@
         <!-- Contenedor para los botones -->
         <div class="btn-container">
             <!-- Botones de Iniciar Sesión y Registrarse -->
-            <button type="button" class="btn-custom">Registrarse
+            <button type="button" class="btn-custom" onclick="window.location.href='/registro-visitante'">Registrarse
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <button type="button" class="btn-custom">Iniciar Sesión
+            <button type="button" class="btn-custom" onclick="window.location.href='/login'">Iniciar Sesión
                 <span></span>
                 <span></span>
                 <span></span>

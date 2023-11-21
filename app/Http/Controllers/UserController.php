@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Rol;
+use App\Service\AuthService;
+
 
 
 class UserController extends Controller
@@ -14,12 +16,29 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $service;
+    private $user;
+
+    public function __construct(AuthService $service)
+    {
+        $this->service = $service;
+    }
+
+    private function userInauthenticated()
+    {
+        $this->user = $this->service->getUserAuthenticated();
+
+        if (!$this->user || $this->user->rol->nombre != 'Administrador') {
+            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
+        }       
+        return null;
+    }
+
     public function index()
     {
-
+        $this->userInauthenticated();
         $users = User::where('rol_id',2)->get();
         //dd($users)
-
         return view('users.index', compact('users'));
     }
 
@@ -30,7 +49,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('users.create');//mandar al boton de registro
     }
 
     /**
@@ -63,7 +82,7 @@ class UserController extends Controller
         $users->rol_id = '2';
         $users->assignRole('Visitante');
         $users->save();
-        return redirect()->route('user.index');
+        return redirect()->route('home');
     }
 
     /**
@@ -119,7 +138,7 @@ class UserController extends Controller
         $users->password = bcrypt($request->password);
         $users->rol_id = '2';
         $users->update();
-        return redirect()->route('user.index');
+        return redirect()->route('/');
     }
 
     /**

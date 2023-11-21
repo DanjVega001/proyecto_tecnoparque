@@ -57,7 +57,6 @@ class EvaluationController extends Controller
         }
         
         $criterios = Criterio::all();
-        //$this->middleware('role:Visitante');
         $user = Auth::user();
         return view('evaluations/index', compact('criterios', 'qr_code','user'));
     }

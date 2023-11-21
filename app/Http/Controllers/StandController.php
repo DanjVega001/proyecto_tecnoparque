@@ -9,6 +9,8 @@ use App\Models\Stand_has_classification;
 use App\Service\AuthService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
 
 class StandController extends Controller
 {
@@ -82,7 +84,7 @@ class StandController extends Controller
             'instagram' => $request->instagram,
             'tiktok' => $request->tiktok,
             'web' => $request->web,
-            'calification' => 0.0,
+            'calification' => 0,
             'qr_code' => $codigo_qr
         ]);
         $classifications_id = $request->classifications;
@@ -137,7 +139,8 @@ class StandController extends Controller
             'facebook' => $request->facebook,
             'instagram' => $request->instagram,
             'tiktok' => $request->tiktok,
-            'web' => $request->web  
+            'web' => $request->web,
+            'calification'=> $request->calification
         ]);
         return $this->index();
     }

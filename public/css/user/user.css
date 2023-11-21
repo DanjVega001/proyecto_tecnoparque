@@ -7,12 +7,15 @@
     padding: 20px 0; /* Agregar espacio interno superior e inferior */
 }
 
+
 .lineaOsucra {
     background-color: #5e1325;
     height: 10px;
     margin-bottom: 20px; /* Añadir margen inferior para separar de la sección siguiente */
 }
-
+.row_1{
+    margin-top: 80px;
+}
 .card {
     background-color: #acc0d0;
     border-radius: 50px;
@@ -26,7 +29,7 @@
 .logoStand {
     display: block;
     margin: 0 auto; /* Centrar horizontalmente */
-    margin-top: 20px;
+    margin-top: -70px;
     border-radius: 50%;
     overflow: hidden;
     width: 300px;
@@ -58,11 +61,11 @@
     .card{
         margin-top: 10px;
         overflow-y: scroll; /* Agrega barra de desplazamiento vertical */
-        max-height: 700px; /* Altura máxima de la sección */
+        max-height: 550px; /* Altura máxima de la sección */
     }
 
     .logoStand {
-        margin-top: -30px; /* Ajustar la posición de la imagen en dispositivos móviles */
+        margin-top: -60px; /* Ajustar la posición de la imagen en dispositivos móviles */
         width: 120px;
         height: 120px;
         border: 5px solid transparent;

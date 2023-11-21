@@ -7,16 +7,6 @@
                 <h1>Editar Agenda</h1>
             </div>
 
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-
             <div class="card-body">
                 <table class="table">
                     <thead>
@@ -34,19 +24,21 @@
                         </tr>
                     </tbody>
                 </table>
-                <form method="post" action="{{route('agenda.store')}}">
+                <form method="post" action="{{route('agenda.update', $agenda->id)}}">
+                    @method('PUT')
                     @csrf
+
                     <span class="input-group-text">Seleccione el Lugar de Presentacion</span>
-                    <select class="form-select"  name="place_id" required>
+                    <select class="form-select"  name="place" required>
                         @foreach($places as $place)
-                            <option value='{{$place-> id}}'>{{$place->name}}, {{$place->schedule->hour_start}}  -  {{$place->schedule->hour_end}}</option>
+                            <option value='{{$place}}'>{{$place->name}}, {{$place->schedule->hour_start}}  -  {{$place->schedule->hour_end}}</option>
                         @endforeach    
                     </select>
                     <br>
                     <span class="input-group-text">Seleccione el Stand</span>
                     <select class="form-select"  name="stand_id" required>
                         @foreach($stands as $stand)
-                            <option value='{{$stand-> id}}' @if($stand->id == $agenda->stand->id) selected @endif>
+                            <option value='{{$stand->id}}' @if($stand->id == $agenda->stand->id) selected @endif>
                                 {{$stand->name}}
                             </option>
                         @endforeach    

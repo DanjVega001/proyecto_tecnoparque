@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Service\AuthService;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Stand;
 use App\Models\Classification;
 use App\Models\Stand_has_classification;
-use App\Service\AuthService;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
 
 class StandController extends Controller
 {

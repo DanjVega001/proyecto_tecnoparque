@@ -68,8 +68,9 @@ class ScheduleController extends Controller
             'hour_end'=>'required',
         ]);
 
+        //dd($request);
         $schedule= new Schedule();
-        $schedule->day = $request;
+        $schedule->day = $request->day;
         $schedule->hour_start = $request->hour_start;
         $schedule->hour_end = $request->hour_end;
         $schedule->save();
@@ -117,9 +118,9 @@ class ScheduleController extends Controller
             'hour_start'=>'required',
             'hour_end'=>'required',
         ]);
-        $horaSeleccionada = $_POST['hour_start'];
-        dd($horaSeleccionada);
-        $schedule = Schedules::find($id);
+
+        //dd($request);
+        $schedule = Schedule::find($id);
         $schedule->day = $request->day;
         $schedule->hour_start = $request->hour_start;
         $schedule->hour_end = $request->hour_end;

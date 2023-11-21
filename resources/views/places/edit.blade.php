@@ -33,7 +33,7 @@
                 <select class="form-select"  name="schedule_id" required placeholder="Seleccione un Horario">
                     @foreach($schedules as $schedule)
                     <option value='{{$schedule -> id}}' @if($schedule->id == $place->schedule->id) selected @endif>
-                        {{$schedule->weekday}}, {{$schedule->hour_start}}  -  {{$schedule->hour_end}}
+                        {{$schedule->day}}, {{$schedule->hour_start}}  -  {{$schedule->hour_end}}
                     </option>
                     @endforeach    
                 </select>

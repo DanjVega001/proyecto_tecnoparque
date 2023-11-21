@@ -23,7 +23,7 @@
                     <span class="input-group-text">Seleccione el Lugar de Presentacion</span>
                     <select class="form-select"  name="place_id" required>
                         @foreach($places as $place)
-                            <option value='{{$place-> id}}'>{{$place->name}}, {{$place->schedule->hour_start}}  -  {{$place->schedule->hour_end}}</option>
+                            <option value='{{$place-> id}}'>{{$place->name}}, {{$place->schedule->day}} {{$place->schedule->hour_start}}  -  {{$place->schedule->hour_end}}</option>
                         @endforeach    
                     </select>
                     <br>
@@ -34,6 +34,14 @@
                         @endforeach    
                     </select>
                     <br>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Fecha de Inicio</span>
+                        <input type="date" class="form-control" name="date_start" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Fecha de Finalización</span>
+                        <input type="date" class="form-control" name="date_end" required>
+                    </div>
                     <button type="submit" class="btn btn-primary">Registrar</button>
                     <a href="{{route('agenda.index')}}" class="btn btn-danger">Volver</a>
                 </form>

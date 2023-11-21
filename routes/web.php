@@ -45,7 +45,8 @@ Route::middleware(['auth', 'role:Visitante'])->group(function () {
     Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
     'store'])->name('evaluation.store');
 
-    Route::resource('passport',PassportController::class);  
+    Route::resource('passport',PassportController::class);
+    Route::resource('user',UserController::class);  
     
 });
 
@@ -66,9 +67,6 @@ Route::middleware(['auth', 'role:Empresa'])->group(function () {
 });
 
 //CRUD de visitante
-Route::resource('user',UserController::class);
-
-
-Auth::routes();
+//Route::resource('user',UserController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

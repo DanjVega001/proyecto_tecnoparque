@@ -1,54 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h1>Registro de Lugares</h1>
+                <h1>Editar Horarios</h1>
             </div>
-
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
 
             <div class="card-body">
-                <form method="post" action="{{route('places.store')}}">
-                    @csrf
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Nombre</span>
-                        <input type="text" class="form-control" name="name" required >
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Email</span>
-                        <input type="text" class="form-control" name="email" required>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Dirección</span>
-                        <input type="text" class="form-control" name="address" required>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Latitud</span>
-                        <input type="text" class="form-control" name="latitude" required>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Longitud</span>
-                        <input type="text" class="form-control" name="length" required>
-                    </div>
-                    <span class="input-group-text">Seleccione un Horario</span>
-                    <select class="form-select"  name="schedule_id" required placeholder="Seleccione un Horario">
-                        @foreach($schedules as $schedule)
-                            <option value='{{$schedule -> id}}'>{{$schedule->weekday}}, {{$schedule->hour_start}}  -  {{$schedule->hour_end}}</option>
-                        @endforeach    
-                    </select>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                    <a href="{{route('places.index')}}" class="btn btn-danger">Volver</a>
+                <form method="post" action="{{route('schedule.store')}}">
+                @csrf
+                <span class="input-group-text">Horario</span>
+                <select class="form-select"  name="day" required>
+                    <option value='Horario Regular'>
+                        Horario Regular    
+                    </option>
+                    <option value='Fin de Semana'>
+                        Horario Extendido
+                    </option>  
+                </select>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Hora de Inicio</span>
+                    <input type="time" class="form-control" name="hour_start"  value="08:00:00" required>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Hora de Cierre</span>
+                    <input type="time" class="form-control" name="hour_end" value="20:00:00" required>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a href="{{route('schedule.index')}}" class="btn btn-danger">Volver</a>
                 </form>
             </div>
         </div>

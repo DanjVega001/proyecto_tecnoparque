@@ -33,7 +33,7 @@
                             <td>{{$place->address}}</td>
                             <td>{{$place->latitude}}</td>
                             <td>{{$place->length}}</td>
-                            <td>{{$place->schedule->weekday}}, {{$place->schedule->hour_start}} a {{$place->schedule->hour_end}}
+                            <td>{{$place->schedule->day}}, {{$place->schedule->hour_start}} a {{$place->schedule->hour_end}}
                             </td>
                             <td><a href="{{route('places.edit',$place->id)}}" class="btn btn-primary">Editar</a></td>
                             <form method="post" action="{{route('places.destroy',$place->id)}}">

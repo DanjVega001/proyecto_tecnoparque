@@ -43,7 +43,7 @@
                     <span class="input-group-text">Seleccione un Horario</span>
                     <select class="form-select"  name="schedule_id" required placeholder="Seleccione un Horario">
                         @foreach($schedules as $schedule)
-                            <option value='{{$schedule -> id}}'>{{$schedule->weekday}}, {{$schedule->hour_start}}  -  {{$schedule->hour_end}}</option>
+                            <option value='{{$schedule -> id}}'>{{$schedule->day}}, {{$schedule->hour_start}}  -  {{$schedule->hour_end}}</option>
                         @endforeach    
                     </select>
                     <br>

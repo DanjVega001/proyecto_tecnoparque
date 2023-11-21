@@ -26,10 +26,11 @@
                         <div class="col-4 text-center">
                             <i class='bx bx-chevron-left'></i>
                         </div>
-                        <div class="col-4 text-center d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn btn-link">INICIO</button>
-                            <button type="button" class="btn btn-link">VISITADOS</i></button>
+                        <div class="col-4 text-center d-flex justify-content-between align-items-center ">
+                            <button type="button" class="btn btn-link text-white">INICIO</button>
+                            <button type="button" class="btn btn-link text-white">VISITADOS</button>
                         </div>
+                        
                         <div class="col-4 text-center">
                             <i class='bx bx-user'></i>
                         </div>
@@ -49,7 +50,7 @@
                         @if(isset($stands[0]))
                             <?php $firstStand = $stands[0]; ?>
                             <div class="col-md-4 mb-4">
-                                <div class="card">
+                                <div class="card ">
                                     <img class="card-img-top logoStand" src="{{ $firstStand->photo_url }}" alt="{{ $firstStand->company_name }}">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $firstStand->company_name }}</h5>
@@ -59,6 +60,15 @@
                                             <p class="card-text"><i class="bx bx-info-circle"></i> {{ $firstStand->description }}</p>
                                             <li class="list-group-item"><i class="bx bx-link-external"></i> <strong>Sitio web:</strong> <a href="{{ $firstStand->website_url }}" target="_blank">{{ $firstStand->website_url }}</a></li>
                                         </ul>
+                                        <div class="redes">
+                                            <p>Redes Sociales</p>
+                                        </div>
+                                        <div class="social-icons mt-4 ">
+                                            
+                                            <a href="#" target="_blank" class="social-icon"><i class="bx bxl-facebook-circle bx-lg"></i></a>
+                                            <a href="#" target="_blank" class="social-icon"><i class="bx bxl-instagram-alt bx-lg"></i></a>
+                                            <a href="#" target="_blank" class="social-icon"><i class="bx bxl-tiktok bx-lg"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

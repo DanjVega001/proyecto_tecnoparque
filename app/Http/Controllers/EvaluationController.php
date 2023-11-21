@@ -50,6 +50,13 @@ class EvaluationController extends Controller
         $userInauthenticated = $this->userInauthenticated();
         if ($userInauthenticated !== null) return $userInauthenticated;
         
+        $stand = Stand::where('qr_code', $qr_code)->first();
+
+        $evalCompletada = $this->evalCompletada($stand);
+        if ($evalCompletada) {
+            return view('home', ['message' => 'Evaluacion ya completada']);
+        }
+
         $existeCodigo = $this->existeCodigo($qr_code);
         if (!$existeCodigo) {
             return redirect()->route('home')->with('error', 'Codigo QR Invalido');

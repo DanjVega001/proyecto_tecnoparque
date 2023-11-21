@@ -6,8 +6,6 @@
     <title>Sello</title>
 </head>
 <body>
-    <video width="640" height="360" controls>
-        <source src="{{ asset('storage/videos/sello-animacion.mp4') }}" type="video/mp4">
-    </video>
+    <img src="{{ asset('storage/videos/Animación sello_gif.gif') }}" alt="GIF PASAPORTE">
 </body>
 </html>

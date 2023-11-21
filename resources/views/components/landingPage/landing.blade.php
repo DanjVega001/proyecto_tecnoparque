@@ -4,7 +4,7 @@
 @section('content')
    
 <!-- Carousel wrapper -->
-<div id="carouselBasicExample" class="carousel slide carousel-fade " data-bs-ride="carousel">
+<div id="carouselBasicExample" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <!-- Indicators -->
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="0" class="active"
@@ -19,19 +19,21 @@
         <div class="carousel-item active">
             <img src="{{ asset('img/carrusel/stands_de_tecnologia.jpg') }}" class="d-block w-100"
                 alt="Sunset Over the City" />
-            <div class="carousel-caption">
-                <h2>Stands</h2>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <div class="carousel-caption text-center" style="position: absolute; top: 50%; transform: translateY(-50%);">
+                <h1 style="font-size: 3em;">Stands</h1>
+                <p style="font-size: 1.5em;">Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
         </div>
+
+        <!-- Agrega los otros elementos del carrusel aquí -->
 
         <!-- Single item -->
         <div class="carousel-item">
             <img src="{{ asset('img/carrusel/stands_de_tecnologia.jpg') }}" class="d-block w-100"
                 alt="Canyon at Nigh" />
-            <div class="carousel-caption">
-                <h2>Stands</h2>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <div class="carousel-caption text-center" style="position: absolute; top: 50%; transform: translateY(-50%);">
+                <h2 style="font-size: 3em;">Stands</h2>
+                <p style="font-size: 1.5em;">Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
         </div>
 
@@ -39,9 +41,9 @@
         <div class="carousel-item">
             <img src="{{ asset('img/carrusel/stands_de_tecnologia.jpg') }}" class="d-block w-100"
                 alt="Cliff Above a Stormy Sea" />
-            <div class="carousel-caption">
-                <h2>Stands</h2>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <div class="carousel-caption text-center" style="position: absolute; top: 50%; transform: translateY(-50%);">
+                <h2 style="font-size: 3em;">Stands</h2>
+                <p style="font-size: 1.5em;">Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
         </div>
     </div>
@@ -60,6 +62,7 @@
     </button>
 </div>
 <!-- Carousel wrapper -->
+
 
     <div class="container mt-5">
         <h2 class="text-center mb-4">Aliados</h2>

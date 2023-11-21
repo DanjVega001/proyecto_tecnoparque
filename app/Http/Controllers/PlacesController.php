@@ -3,20 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Service\AuthService;
 
 use App\Models\Places;
 use App\Models\Schedule;
 
 
 class PlacesController extends Controller
-{
+{   
+    private $service;
+    private $user;
+
+    public function __construct(AuthService $service)
+    {
+        $this->service=$service;
+        
+    }
+
+    private function userInauthenticated()
+    {
+        $this->user = $this->service->getUserAuthenticated();
+        if (!$this->user || $this->user->rol->nombre != 'Administrador') {
+            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
+        }
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $this->userInauthenticated();
+        
         $places= Places::with('schedule')->get();
         //dd($places);
         return view('places.index', compact('places'));
@@ -28,8 +47,10 @@ class PlacesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create()    
     {   
+        $this->userInauthenticated();
+
         $schedules= Schedule::all();
         return view('places.create', compact('schedules'));
     }
@@ -41,7 +62,9 @@ class PlacesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $this->userInauthenticated();
+
         $validate = $request->validate([
             'name'=>'required',
             'email'=>'required',
@@ -80,7 +103,9 @@ class PlacesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   
+        $this->userInauthenticated();
+
         $place = Places::find($id);
         $schedules= Schedule::all();
         return view('places.edit', compact('place','schedules'));
@@ -94,8 +119,9 @@ class PlacesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $validar = $request->validate([
+    {   
+        $this->userInauthenticated();
+        $validate = $request->validate([
             'name'=>'required',
             'email'=>'required',
             'address'=>'required',
@@ -124,6 +150,7 @@ class PlacesController extends Controller
      */
     public function destroy($id)
     {   
+        $this->userInauthenticated();
         $place = Places::find($id);   
         if ($place) {
             $place->delete();

@@ -46,7 +46,7 @@ class EvaluationController extends Controller
     }
 
     public function index($qr_code)
-    {
+    {   
         $userInauthenticated = $this->userInauthenticated();
         if ($userInauthenticated !== null) return $userInauthenticated;
         
@@ -58,9 +58,11 @@ class EvaluationController extends Controller
         }
 
         $existeCodigo = $this->existeCodigo($qr_code);
+
         if (!$existeCodigo) {
             return redirect()->route('home')->with('error', 'Codigo QR Invalido');
         }
+        
         $user = Auth::user();
         $criterios = Criterio::all();
         $this->middleware('role:Visitante');
@@ -74,7 +76,7 @@ class EvaluationController extends Controller
             DB::beginTransaction();
             
             $userInauthenticated = $this->userInauthenticated();
-            if ($userInauthenticated !== null) return $userInauthenticated;
+            if ($userInauthenticated !== null) return null;
 
             $existeCodigo = $this->existeCodigo($qr_code);
             if (!$existeCodigo) {

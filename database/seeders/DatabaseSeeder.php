@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(VideoSeeder::class);
         $this->call(StandSeeder::class);
         $this->call(CriterioSeeder::class);
+        $this->call(PlaceSeeder::class);
+        //$this->call(StandSeeder::class);
 
     }
 }

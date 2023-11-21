@@ -102,7 +102,7 @@ class EvaluationController extends Controller
 
             DB::commit();
             // DEBE RETORNAR KA VISTA DE LOS STANDS SELLADOS
-            return $eval;
+            return redirect()->route('passport.store', compact('stand->id'));
         } catch (\Throwable $th) {
 
             DB::rollback();

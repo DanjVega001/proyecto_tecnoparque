@@ -42,10 +42,6 @@
         <input type="text" name="web" value="{{ $stand->web }}">
         <br>
 
-        <label for="calification">Calificación:</label>
-        <input type="number" name="calification" step="0.1" value="{{ $stand->calification }}" required>
-        <br>
-
         <!-- Botón de envío -->
         <button type="submit">Actualizar</button>
     </form>

@@ -151,10 +151,10 @@ class StandController extends Controller
     {
         $this->userInauthenticated();
         $stand = Stand::find($id);
-        Storage::delete("public/{$stand->logo}");
+        Storage::delete("public/images/{$stand->logo}");
         $logo = $request->file('logo');
-        $nombreLogo = time() . '.' . $logo->extension();
-        $logo->storeAs('public', $nombreLogo);
+        $nombreLogo = $stand->name. '-logo.' . $logo->extension();
+        $logo->storeAs('public/images', $nombreLogo);
         $stand->update([
             'logo' => 'storage/images/{$nombreLogo}'
         ]);
@@ -167,8 +167,8 @@ class StandController extends Controller
         $stand = Stand::find($id);
         Storage::delete("public/{$stand->banner}");
         $banner = $request->file('banner');
-        $nombreBanner = time() . '.' . $banner->extension();
-        $banner->storeAs('public', $nombreBanner);
+        $nombreBanner = $stand->name . '-baner.' . $banner->extension();
+        $banner->storeAs('public/images', $nombreBanner);
         $stand->update([
             'banner' => 'storage/images/{$nombreBanner}'
         ]);

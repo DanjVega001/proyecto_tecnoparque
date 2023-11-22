@@ -9,6 +9,8 @@ use Illuminate\Support\Carbon;
 use App\Models\User;
 use App\Models\Stand;
 use App\Models\Passport;
+use App\Models\Places;
+use App\Models\Schedule;
 
 class PassportController extends Controller
 {
@@ -65,9 +67,9 @@ class PassportController extends Controller
         $this->userInauthenticated();
         $passport= new Passport();
         $passport->date = Carbon::now();
-        $passport->user_id = $user->id;
+        $passport->user_id = $this->user->id;
         $passport->stand_id = $stand_id;
-        $place->save();
+        $passport->save();
         return redirect()->route('passport.create');
     }
 

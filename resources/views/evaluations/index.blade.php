@@ -13,7 +13,7 @@
             <form action="{{ route('evaluation.store', ['qr_code' => $qr_code]) }}" method="POST">
                 @csrf
                 @foreach($criterios as $criterio)
-                <label>De acuerdo a la exhibición que acaba de visitar, por favor califique el impacto visual que le generó donde cinco es muy bueno, cuatro es está bien, tres es me gusta, dos es debe mejorar y uno es no generó ningún impacto. {{ $criterio->name }}</label>
+                <label>Pregunta {{ $criterio->description }}</label>
                 <input type="hidden" name="criterio_id[]" value="{{$criterio->id}}">
                 <input type="number" name="puntuacion[]" required>
                 <br>

@@ -50,6 +50,14 @@ class EvaluationController extends Controller
     {   
         $userInauthenticated = $this->userInauthenticated();
         if ($userInauthenticated !== null) return $userInauthenticated;
+        
+        $stand = Stand::where('qr_code', $qr_code)->first();
+
+        $evalCompletada = $this->evalCompletada($stand);
+        if ($evalCompletada) {
+            return view('home', ['message' => 'Evaluacion ya completada']);
+        }
+
         $existeCodigo = $this->existeCodigo($qr_code);
 
         if (!$existeCodigo) {
@@ -63,7 +71,8 @@ class EvaluationController extends Controller
         return view('evaluations/index', compact('criterios', 'qr_code','user'));
     }
 
-    public function store(Request $request, $qr_code)        
+    public function store(Request $request, $qr_code)     
+    {   
         try {
             DB::beginTransaction();
             
@@ -103,7 +112,7 @@ class EvaluationController extends Controller
 
             DB::commit();
             // DEBE RETORNAR KA VISTA DE LOS STANDS SELLADOS
-            return redirect()->route('passport.store', compact('stand->id'));
+            return view('paginas-sello/index');
         } catch (\Throwable $th) {
 
             DB::rollback();

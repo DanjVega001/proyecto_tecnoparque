@@ -35,6 +35,8 @@ class User extends Authenticatable
         "birthday",
         "genere",
         'rol_id',
+        'auth_id',
+        'auth_name'
     ];
 
     /**

@@ -1,4 +1,6 @@
-     <?php
+<?php
+
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -9,7 +11,8 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PassportController;
 use App\Http\Controllers\EvaluationController;
-
+use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 
 
 /*
@@ -46,6 +49,11 @@ Route::middleware(['auth', 'role:Visitante'])->group(function () {
     Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
     'store'])->name('evaluation.store');
 
+    // Stand individual
+    Route::get('/stands/{idStand}', [StandController::class, 'show'])->name('stand.show');
+
+    // Stands visitados
+    Route::get('/stands-visitados', [StandController::class, 'standsVisitados'])->name('stand.visitados');
     Route::resource('passport',PassportController::class);
     Route::resource('user',UserController::class);  
     
@@ -66,11 +74,6 @@ Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::resource('agenda', AgendaController::class);
 });
 
-    // Guarda el resultado de la evaluacion
-    Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
-    'store'])->name('evaluation.store');
-    
-});
 
 //CRUD de visitante
 Route::resource('user',UserController::class);
@@ -79,3 +82,33 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('places',PlacesController::class);
 
+
+
+// IMPLEMENTACION AUTH GOOGLE
+
+
+ 
+Route::get('/login-google', function () {
+    return Socialite::driver('google')->redirect();
+});
+ 
+Route::get('/google-callback', function () {
+    $user = Socialite::driver('google')->user();
+    $userExiste = User::where('auth_id', $user->id)->where('auth_name', 'google')->first();
+
+    if ($userExiste) {
+        Auth::login($userExiste);
+    } else {
+        $user = User::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'auth_id' => $user->id,
+            'auth_name' => 'google',
+            'rol_id' => 2
+        ]);
+
+        $user->assignRole('Visitante');
+        Auth::login($user);
+    }
+    return redirect()->route('home');
+});

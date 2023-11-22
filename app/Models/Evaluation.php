@@ -15,7 +15,8 @@ class Evaluation extends Model
         'rank',
         'feedback',
         'criterio_id',
-        'stand_id'
+        'stand_id',
+        'user_id'
     ];
 
     public function criterio(){

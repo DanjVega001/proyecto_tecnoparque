@@ -8,8 +8,8 @@ use Illuminate\Support\Carbon;
 
 use App\Models\User;
 use App\Models\Stand;
-use App\Models\Passport;
 use App\Models\Places;
+use App\Models\Passport;
 use App\Models\Schedule;
 
 class PassportController extends Controller
@@ -41,7 +41,7 @@ class PassportController extends Controller
     {
         $this->userInauthenticated();
         $passports= Passport::where('user_id',  $this->user->id)->with('stand')->get();
-        //dd($passport);
+        //dd($passports);
         return view('passport.index', compact('passports'));
     }
 
@@ -63,14 +63,14 @@ class PassportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store($stand_id)
-    {
+    {   
         $this->userInauthenticated();
         $passport= new Passport();
         $passport->date = Carbon::now();
         $passport->user_id = $this->user->id;
         $passport->stand_id = $stand_id;
         $passport->save();
-        return redirect()->route('passport.create');
+        return view('paginas-sello/index');
     }
 
     /**

@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\Stand;
 use App\Models\Passport;
 use App\Models\Places;
-
+use App\Models\Schedule;
 
 class PassportController extends Controller
 {

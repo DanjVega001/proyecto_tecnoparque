@@ -71,7 +71,8 @@ class EvaluationController extends Controller
         return view('evaluations/index', compact('criterios', 'qr_code','user'));
     }
 
-    public function store(Request $request, $qr_code)        
+    public function store(Request $request, $qr_code)     
+    {   
         try {
             DB::beginTransaction();
             

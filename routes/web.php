@@ -11,7 +11,8 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PassportController;
 use App\Http\Controllers\EvaluationController;
-
+use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 
 
 /*
@@ -81,3 +82,33 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('places',PlacesController::class);
 
+
+
+// IMPLEMENTACION AUTH GOOGLE
+
+
+ 
+Route::get('/login-google', function () {
+    return Socialite::driver('google')->redirect();
+});
+ 
+Route::get('/google-callback', function () {
+    $user = Socialite::driver('google')->user();
+    $userExiste = User::where('auth_id', $user->id)->where('auth_name', 'google')->first();
+
+    if ($userExiste) {
+        Auth::login($userExiste);
+    } else {
+        $user = User::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'auth_id' => $user->id,
+            'auth_name' => 'google',
+            'rol_id' => 2
+        ]);
+
+        $user->assignRole('Visitante');
+        Auth::login($user);
+    }
+    return redirect()->route('home');
+});

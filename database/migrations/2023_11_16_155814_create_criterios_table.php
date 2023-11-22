@@ -16,6 +16,7 @@ class CreateCriteriosTable extends Migration
         Schema::create('criterios', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('description');
         });
     }
 

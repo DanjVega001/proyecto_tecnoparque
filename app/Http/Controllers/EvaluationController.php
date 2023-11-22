@@ -46,14 +46,23 @@ class EvaluationController extends Controller
     }
 
     public function index($qr_code)
-    {
+    {   
         $userInauthenticated = $this->userInauthenticated();
         if ($userInauthenticated !== null) return $userInauthenticated;
         
+        $stand = Stand::where('qr_code', $qr_code)->first();
+
+        $evalCompletada = $this->evalCompletada($stand);
+        if ($evalCompletada) {
+            return view('home', ['message' => 'Evaluacion ya completada']);
+        }
+
         $existeCodigo = $this->existeCodigo($qr_code);
+
         if (!$existeCodigo) {
             return redirect()->route('home')->with('error', 'Codigo QR Invalido');
         }
+        
         $user = Auth::user();
         $criterios = Criterio::all();
         $this->middleware('role:Visitante');
@@ -67,7 +76,7 @@ class EvaluationController extends Controller
             DB::beginTransaction();
             
             $userInauthenticated = $this->userInauthenticated();
-            if ($userInauthenticated !== null) return $userInauthenticated;
+            if ($userInauthenticated !== null) return null;
 
             $existeCodigo = $this->existeCodigo($qr_code);
             if (!$existeCodigo) {
@@ -102,7 +111,7 @@ class EvaluationController extends Controller
 
             DB::commit();
             // DEBE RETORNAR KA VISTA DE LOS STANDS SELLADOS
-            return $eval;
+            return view('paginas-sello/index');
         } catch (\Throwable $th) {
 
             DB::rollback();

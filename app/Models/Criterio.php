@@ -12,7 +12,7 @@ class Criterio extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name'
+        'name', 'description'
     ];
 
     public function evaluations(){

@@ -1,10 +1,11 @@
-     <?php
+<?php
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StandController;
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ScheduleController;
@@ -43,28 +44,34 @@ Route::middleware(['auth', 'role:Visitante'])->group(function () {
     // Guarda el resultado de la evaluacion
     Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
     'store'])->name('evaluation.store');
+
+    // Stand individual
+    Route::get('/stands/{idStand}', [StandController::class, 'show'])->name('stand.show');
+
+    // Stands visitados
+    Route::get('/stands-visitados', [StandController::class, 'standsVisitados'])->name('stand.visitados');
+    Route::resource('passport',PassportController::class);
+    Route::resource('user',UserController::class);  
     
 });
 
 // RUTAS PROTEGIDAS PARA EL ADMIN
 Route::middleware(['auth', 'role:Administrador'])->group(function () {
+
     Route::resource('empresa', EmpresaController::class);
+    Route::resource('places',PlacesController::class);
+    Route::resource('schedule',ScheduleController::class);
+
 });
 
 
 // RUTAS PROTEGIDAS PARA LA EMPRESA
 Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::resource('stand', StandController::class);
+    Route::resource('agenda', AgendaController::class);
 });
 
 //CRUD de visitante
-Route::resource('user',UserController::class);
-
-Route::resource('places',PlacesController::class);
-Route::resource('passport',PassportController::class);
-
-
-
-Auth::routes();
+//Route::resource('user',UserController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

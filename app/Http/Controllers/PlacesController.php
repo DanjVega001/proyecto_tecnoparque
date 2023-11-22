@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Service\AuthService;
 
+use App\Service\AuthService;
 use App\Models\Places;
 use App\Models\Schedule;
 
@@ -35,7 +35,6 @@ class PlacesController extends Controller
     public function index()
     {   
         $this->userInauthenticated();
-        
         $places= Places::with('schedule')->get();
         //dd($places);
         return view('places.index', compact('places'));
@@ -47,10 +46,10 @@ class PlacesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()    
     {   
         $this->userInauthenticated();
-
         $schedules= Schedule::all();
         return view('places.create', compact('schedules'));
     }
@@ -64,7 +63,6 @@ class PlacesController extends Controller
     public function store(Request $request)
     {   
         $this->userInauthenticated();
-
         $validate = $request->validate([
             'name'=>'required',
             'email'=>'required',
@@ -105,7 +103,6 @@ class PlacesController extends Controller
     public function edit($id)
     {   
         $this->userInauthenticated();
-
         $place = Places::find($id);
         $schedules= Schedule::all();
         return view('places.edit', compact('place','schedules'));

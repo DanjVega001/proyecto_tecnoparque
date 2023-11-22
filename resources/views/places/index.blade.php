@@ -1,5 +1,5 @@
-@extends('layouts.app')
 
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <div class="card">
@@ -19,8 +19,6 @@
                             <th scope="col">Dirección</th>
                             <th scope="col">Latitud</th>
                             <th scope="col">Longitud</th>
-                            <th scope="col">Horario</th>
-
                             <th scope="col">Accion</th>
                         </tr>
                     </thead>
@@ -47,6 +45,6 @@
                 </table>
             </div>
         </div>
-        
     </div>
 @endsection
+

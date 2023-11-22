@@ -65,6 +65,7 @@ class AgendaController extends Controller
         $dateFormat= $weekday . ', ';
         return $dateFormat;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -101,6 +102,7 @@ class AgendaController extends Controller
      */
     public function create()
     {
+
         $this->userInauthenticated();
 
         $stands= Stand::all();
@@ -115,6 +117,7 @@ class AgendaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+
     {   
         $this->userInauthenticated();
 
@@ -155,7 +158,7 @@ class AgendaController extends Controller
      */
     public function show($agenda)
     {
-        
+       
     }
 
     /**
@@ -210,6 +213,7 @@ class AgendaController extends Controller
      * @param  \App\Models\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         $this->userInauthenticated();

@@ -15,12 +15,12 @@ class ClassificationSeeder extends Seeder
     public function run()
     {
         Classification::create(['name' => 'Moda Sostenible']);
-        Classification::create(['name' => 'Proyecto ITO']);
-        Classification::create(['name' => 'Gastronomia']);
+        Classification::create(['name' => 'Proyectos ITO']);
+        Classification::create(['name' => 'Gastronomía']);
         Classification::create(['name' => 'Construcción']);
-        Classification::create(['name' => 'Biotecnlogía - Bioeconomía']);
-        Classification::create(['name' => 'Agroinudstria']);
-        Classification::create(['name' => 'Economía Popular']);
+        Classification::create(['name' => 'Biotecnología - Bioeconomía']);
+        Classification::create(['name' => 'Agroindustria']);
         Classification::create(['name' => 'Otras']);
+        Classification::create(['name' => 'Economía Popular']);
     }
 }

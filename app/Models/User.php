@@ -35,6 +35,8 @@ class User extends Authenticatable
         "birthday",
         "genere",
         'rol_id',
+        'auth_id',
+        'auth_name'
     ];
 
     /**
@@ -59,7 +61,6 @@ class User extends Authenticatable
 
     public function passports(){
         return $this->hasMany(Passport::class, 'id', 'id');
-
     }
 
     public function rol(){

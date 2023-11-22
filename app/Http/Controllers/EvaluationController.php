@@ -26,6 +26,7 @@ class EvaluationController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
+
         if ($this->user === null || $this->user->rol->name != 'Visitante') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);   
         }  
@@ -46,7 +47,7 @@ class EvaluationController extends Controller
     }
 
     public function index($qr_code)
-    {
+    {   
         $userInauthenticated = $this->userInauthenticated();
         if ($userInauthenticated !== null) return $userInauthenticated;
         
@@ -58,23 +59,25 @@ class EvaluationController extends Controller
         }
 
         $existeCodigo = $this->existeCodigo($qr_code);
+
         if (!$existeCodigo) {
             return redirect()->route('home')->with('error', 'Codigo QR Invalido');
         }
+        
         $user = Auth::user();
         $criterios = Criterio::all();
-        $this->middleware('role:Visitante');
-        return view('evaluations/index', compact('criterios','user', 'qr_code'));
+        //$this->middleware('role:Visitante');
+        $user = Auth::user();
+        return view('evaluations/index', compact('criterios', 'qr_code','user'));
     }
 
-    public function store(Request $request, $qr_code)
-    {
-        
+    public function store(Request $request, $qr_code)     
+    {   
         try {
             DB::beginTransaction();
             
             $userInauthenticated = $this->userInauthenticated();
-            if ($userInauthenticated !== null) return $userInauthenticated;
+            if ($userInauthenticated !== null) return null;
 
             $existeCodigo = $this->existeCodigo($qr_code);
             if (!$existeCodigo) {

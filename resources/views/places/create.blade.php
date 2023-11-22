@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Visitantes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -50,13 +44,15 @@
                     <span class="input-group-text">Seleccione un Horario</span>
                     <select class="form-select"  name="schedule_id" required placeholder="Seleccione un Horario">
                         @foreach($schedules as $schedule)
-                            <option value='{{$schedule -> id}}'>{{$schedule->hour_start}} - {{$schedule->hour_end}}</option>
+                            <option value='{{$schedule -> id}}'>{{$schedule->day}}, {{$schedule->hour_start}}  -  {{$schedule->hour_end}}</option>
                         @endforeach    
                     </select>
-                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <a href="{{route('places.index')}}" class="btn btn-danger">Volver</a>
                 </form>
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection
+

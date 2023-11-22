@@ -41,7 +41,7 @@
                         <td>{{$user->address}}</td>
                         <td>{{$user->birthday}}</td>
                         <td>{{$user->genere}}</td>
-                        <td>{{$user->rol->nombre}}</td>
+                        <td>{{$user->rol->name}}</td>
                         <td><a href="{{route('user.edit',$user->id)}}" class="btn btn-primary">Editar</a></td>
                         <form method="post" action="{{route('user.destroy',$user->id)}}">
                             @method('DELETE')

@@ -63,7 +63,6 @@ class EvaluationController extends Controller
         if ($userInauthenticated !== null) return $userInauthenticated;
         
         $stand = Stand::where('qr_code', $qr_code)->first();
-
         $evalCompletada = $this->evalCompletada($stand);
         if ($evalCompletada) {
             return view('home', ['message' => 'Evaluacion ya completada']);
@@ -108,7 +107,7 @@ class EvaluationController extends Controller
             $eval = Evaluation::create([
                 'rank' => $rank,
                 'feedback' => $request->get('feedback'),
-                'criterio_id'=>1,//TODO: REVISAR RELACION CON CRITERIOS
+                //'criterio_id'=>1,//TODO: REVISAR RELACION CON CRITERIOS
                 'stand_id' => $stand->id,
                 'user_id' => $this->user->id
             ]);

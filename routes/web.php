@@ -72,6 +72,10 @@ Route::middleware(['auth', 'role:Administrador'])->group(function () {
 Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::resource('stand', StandController::class);
     Route::resource('agenda', AgendaController::class);
+
+    // RUTA PARA ACTULIZAR LOGO STAND
+    Route::post('/update-logo/{id}', [StandController::class, 'updateLogo'])->name('updateLogo');
+    Route::post('/update-banner/{id}', [StandController::class, 'updateBanner'])->name('updateBanner');
 });
 
 

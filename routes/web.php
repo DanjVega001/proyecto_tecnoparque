@@ -24,7 +24,7 @@ Route::post('/guardar-evaluacion', [EvaluacionController::class, 'guardar'])->na
 Route::view('/registro-stand', 'components.forms.registroStands');
 Route::view('/landing_page', 'components.landingPage.landing');
 
-Route::get('/user', function () {
+Route::get('/stand', function () {
     // Simulando la obtención de datos desde la base de datos
     $stands = [
         (object) [
@@ -38,5 +38,5 @@ Route::get('/user', function () {
         ],
     ];
 
-    return view('components.usuarios.homeUser', compact('stands'));
+    return view('components.usuarios.standsIbfo', compact('stands'));
 });

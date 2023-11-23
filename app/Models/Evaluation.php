@@ -14,8 +14,9 @@ class Evaluation extends Model
     protected $fillable = [
         'rank',
         'feedback',
-        'criterio_id',
-        'stand_id'
+        //'criterio_id',
+        'stand_id',
+        'user_id'
     ];
 
     public function criterio(){

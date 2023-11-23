@@ -24,7 +24,7 @@ class EmpresaController extends Controller
         $this->user = $this->service->getUserAuthenticated();
         if (!$this->user || $this->user->rol->nombre != 'Administrador') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
-        }
+        } return null;
     }
 
     /**
@@ -34,7 +34,9 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $empresas = User::where('rol_id', 3)->get();
         return view('empresas/index', compact('empresas'));
     }
@@ -46,7 +48,9 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         return view('empresas/create');
     }
 

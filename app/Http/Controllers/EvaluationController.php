@@ -87,7 +87,7 @@ class EvaluationController extends Controller
             //DB::beginTransaction();
             
             $userInauthenticated = $this->userInauthenticated();
-            if ($userInauthenticated !== null) return null;
+            if ($userInauthenticated !== null) return $userInauthenticated;
 
             $existeCodigo = $this->existeCodigo($qr_code);
             if (!$existeCodigo) {

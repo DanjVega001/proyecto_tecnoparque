@@ -26,7 +26,7 @@ class AgendaController extends Controller
         $this->user = $this->service->getUserAuthenticated();
         if (!$this->user || $this->user->rol->nombre != 'Empresa') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
-        }
+        } return null;
     }
     private function translateDate($date) {
         $timestamp = strtotime($date);
@@ -73,7 +73,8 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
         
         $agendas= Agenda::with('place', 'stand')->get();
         
@@ -103,7 +104,8 @@ class AgendaController extends Controller
     public function create()
     {
 
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
 
         $stands= Stand::all();
         $places= Places::all();
@@ -119,7 +121,8 @@ class AgendaController extends Controller
     public function store(Request $request)
 
     {   
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
 
         $validate = $request->validate([
             'date_start'=>'required',
@@ -169,7 +172,8 @@ class AgendaController extends Controller
      */
     public function edit($id)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
 
         $agenda = Agenda::find($id);
         $stands= Stand::all();
@@ -216,7 +220,9 @@ class AgendaController extends Controller
 
     public function destroy($id)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $agenda = Agenda::find($id);   
         if ($agenda) {
             $agenda->delete();

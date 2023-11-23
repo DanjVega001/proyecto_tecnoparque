@@ -25,7 +25,7 @@ class PlacesController extends Controller
         $this->user = $this->service->getUserAuthenticated();
         if (!$this->user || $this->user->rol->nombre != 'Administrador') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
-        }
+        } return null;
     }
     /**
      * Display a listing of the resource.
@@ -34,7 +34,9 @@ class PlacesController extends Controller
      */
     public function index()
     {   
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $places= Places::with('schedule')->get();
         //dd($places);
         return view('places.index', compact('places'));
@@ -49,7 +51,9 @@ class PlacesController extends Controller
 
     public function create()    
     {   
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $schedules= Schedule::all();
         return view('places.create', compact('schedules'));
     }
@@ -62,7 +66,9 @@ class PlacesController extends Controller
      */
     public function store(Request $request)
     {   
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $validate = $request->validate([
             'name'=>'required',
             'email'=>'required',
@@ -102,7 +108,9 @@ class PlacesController extends Controller
      */
     public function edit($id)
     {   
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $place = Places::find($id);
         $schedules= Schedule::all();
         return view('places.edit', compact('place','schedules'));
@@ -117,7 +125,9 @@ class PlacesController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $validate = $request->validate([
             'name'=>'required',
             'email'=>'required',
@@ -147,7 +157,9 @@ class PlacesController extends Controller
      */
     public function destroy($id)
     {   
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $place = Places::find($id);   
         if ($place) {
             $place->delete();

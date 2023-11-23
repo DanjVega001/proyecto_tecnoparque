@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StandController;
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ScheduleController;
@@ -72,6 +73,10 @@ Route::middleware(['auth', 'role:Administrador'])->group(function () {
 Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::resource('stand', StandController::class);
     Route::resource('agenda', AgendaController::class);
+
+    // RUTA PARA ACTULIZAR LOGO STAND
+    Route::post('/update-logo/{id}', [StandController::class, 'updateLogo'])->name('updateLogo');
+    Route::post('/update-banner/{id}', [StandController::class, 'updateBanner'])->name('updateBanner');
 });
 
 

@@ -23,7 +23,9 @@
                             <th scope="row">{{$passport->id}}</th>
                             <th>{{$passport->stand->name}}</th>
                             <td>{{$passport->date}}</td>
-                            <td>{{$passport->stand->logo}}</td>                     
+                            <td scope="col">
+                                <img src="{{ asset('storage/videos/Animación_sello_gif.gif')}}" alt="GIF PASAPORTE"  width="200" height="150">
+                            </td>                     
                         </tr>
                         @endforeach
                     </tbody>

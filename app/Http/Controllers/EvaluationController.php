@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Criterio;
-use App\Models\Evaluation;
-use App\Models\EvaluationHasCriterio;
-use App\Models\Stand;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use App\Service\AuthService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Stand;
+use App\Models\Criterio;
+use App\Models\Passport;
+use App\Models\Evaluation;
+use App\Models\EvaluationHasCriterio;
 
 class EvaluationController extends Controller
 {
@@ -46,13 +48,21 @@ class EvaluationController extends Controller
         return $evalCompletada;
     }
 
+    private function createPassport($stand_id)
+    {   
+        $passport= new Passport();
+        $passport->date = Carbon::now();
+        $passport->user_id = $this->user->id;
+        $passport->stand_id = $stand_id;
+        $passport->save();
+    }
+
     public function index($qr_code)
     {   
         $userInauthenticated = $this->userInauthenticated();
         if ($userInauthenticated !== null) return $userInauthenticated;
         
         $stand = Stand::where('qr_code', $qr_code)->first();
-
         $evalCompletada = $this->evalCompletada($stand);
         if ($evalCompletada) {
             return view('home', ['message' => 'Evaluacion ya completada']);
@@ -74,7 +84,7 @@ class EvaluationController extends Controller
     public function store(Request $request, $qr_code)     
     {   
         try {
-            DB::beginTransaction();
+            //DB::beginTransaction();
             
             $userInauthenticated = $this->userInauthenticated();
             if ($userInauthenticated !== null) return null;
@@ -87,7 +97,7 @@ class EvaluationController extends Controller
             
             $valorCriterios = $request->input('puntuacion');
             $rank =  array_sum($valorCriterios) / count($valorCriterios);
-
+            
             $stand = Stand::where('qr_code', $qr_code)->lockForUpdate()->first();
             $evalCompletada = $this->evalCompletada($stand);
             if ($evalCompletada) {
@@ -97,23 +107,28 @@ class EvaluationController extends Controller
             $eval = Evaluation::create([
                 'rank' => $rank,
                 'feedback' => $request->get('feedback'),
+                //'criterio_id'=>1,//TODO: REVISAR RELACION CON CRITERIOS
                 'stand_id' => $stand->id,
                 'user_id' => $this->user->id
             ]);
-         
+            //TODO: Comprobado hasta aca
+
             foreach ($request->criterio_id as $id) {
                 EvaluationHasCriterio::create([
                     'criterio_id' => $id,
                     'evaluation_id' => $eval->id
                 ]);
             }
-
+            
             $this->addRankToClalificationStand($rank, $stand);
 
             DB::commit();
-            // DEBE RETORNAR KA VISTA DE LOS STANDS SELLADOS
+            $this->createPassport($stand->id);
+
+            // DEBE RETORNAR LA VISTA DE LOS STANDS SELLADOS
             return view('paginas-sello/index');
-        } catch (\Throwable $th) {
+
+         } catch (\Throwable $th) {
 
             DB::rollback();
             return redirect()->back()->with('error', 'Error al procesar la evaluación');

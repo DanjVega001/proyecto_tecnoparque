@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StandController;
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ScheduleController;

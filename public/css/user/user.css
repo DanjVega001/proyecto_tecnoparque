@@ -7,67 +7,107 @@
     padding: 20px 0; /* Agregar espacio interno superior e inferior */
 }
 
-
 .lineaOsucra {
     background-color: #5e1325;
     height: 10px;
     margin-bottom: 20px; /* Añadir margen inferior para separar de la sección siguiente */
 }
-.row_1{
-    margin-top: 80px;
-}
-.card {
-    background-color: #acc0d0;
-    border-radius: 50px;
-    overflow: hidden; /* Asegurar que el fondo siga el borde redondeado */
-}
-
-.card li {
-    background-color: #acc0d0;
+.contenidoCard{
+    background-color: #d4e0e9;
+    /* border: 1px solid #90a0ad; */
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    padding-bottom: 500px;
 }
 
-.logoStand {
+.col-6 {
+    padding: 15px; /* Agrega algún espacio alrededor de las imágenes */
+}
+
+.logoEmpresa {
     display: block;
     margin: 0 auto; /* Centrar horizontalmente */
-    margin-top: -70px;
+    margin-top: 10px; /* Ajustar la posición hacia arriba */
     border-radius: 50%;
     overflow: hidden;
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     border: 10px solid transparent;
-    background-image: linear-gradient(to bottom, #d2d7db 50%, #bdc7d0 50%);
+    background-image: linear-gradient(to bottom, #942339 50%, #942339 50%);
 }
+.watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Para que la marca de agua no interfiera con los eventos del mouse */
+}
+
+.watermark img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 
 /* Media Query para dispositivos con un ancho máximo de 767px (puedes ajustar este valor según tu diseño) */
 @media only screen and (max-width: 767px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     .headerUp {
-        font-size: 24px; /* Reducir el tamaño del texto para dispositivos móviles */
-        padding: 15px 0; /* Ajustar el espacio interno superior e inferior */
+        font-size: 11px; /* Tamaño más pequeño para dispositivos móviles */
+        padding-bottom: 10px;
+    }
+    
+    .headerUp i{
+        padding-top: 10px;
     }
 
-    .bx-chevron-left,
-    .bx-dots-vertical-rounded {
-        padding: 0 10px; /* Reducir el espacio entre los iconos */
+    .headerUp p{
+        padding-top: 15px;
     }
 
-    .lineaOsucra {
-        height: 5px; /* Reducir la altura de la línea */
+    .headerUp i{
+        font-size: 30px;
     }
 
-    .contenidoForm {
-        margin-top: 20px;
-        
-    }
-    .card{
-        margin-top: 10px;
-        overflow-y: scroll; /* Agrega barra de desplazamiento vertical */
-        max-height: 550px; /* Altura máxima de la sección */
+    .bx-chevron-left{
+        padding-right: 70px;
     }
 
-    .logoStand {
-        margin-top: -60px; /* Ajustar la posición de la imagen en dispositivos móviles */
+    .bx-dots-vertical-rounded{
+        padding-left: 70px;
+    }
+
+    .lineaOsucra{
+        height: 10px;
+        color: #fff;
+    }
+    .logoEmpresa {
         width: 120px;
         height: 120px;
         border: 5px solid transparent;
     }
+    
+    .watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none; /* Para que la marca de agua no interfiera con los eventos del mouse */
+        width: 170px; /* Igualar al ancho del logo */
+        height: 170px; /* Igualar a la altura del logo */
+    }
+    
+    .watermark img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Para asegurarse de que la imagen cubra completamente el contenedor manteniendo la relación de aspecto */
+        display: block;
+    }
+    
+
 }

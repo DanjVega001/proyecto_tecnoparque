@@ -27,9 +27,13 @@ class PassportController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
-        if (!$this->user || $this->user->rol->nombre != 'Visitante') {
-            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
-        }
+        if (!$this->user) {
+            return view('auth/login', ['message' => 'No se ha logueado']);
+        } else if ($this->user->rol->name != 'Administrador') {
+            return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
+        } 
+        
+        return null;
     }
 
     /**
@@ -39,7 +43,9 @@ class PassportController extends Controller
      */
     public function index()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $passports= Passport::where('user_id',  $this->user->id)->with('stand')->get();
         //dd($passports);
         return view('passport.index', compact('passports'));
@@ -52,7 +58,9 @@ class PassportController extends Controller
      */
     public function create()
     {   
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         return view('passport.create');
     }
 
@@ -64,7 +72,10 @@ class PassportController extends Controller
      */
     public function store($stand_id)
     {   
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
+
         $passport= new Passport();
         $passport->date = Carbon::now();
         $passport->user_id = $this->user->id;

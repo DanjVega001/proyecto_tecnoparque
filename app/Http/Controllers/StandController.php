@@ -27,9 +27,13 @@ class StandController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
-        if (!$this->user || $this->user->rol->nombre != 'Empresa') {
-            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
-        }
+        if (!$this->user) {
+            return view('auth/login', ['message' => 'No se ha logueado']);
+        } else if ($this->user->rol->name != 'Administrador') {
+            return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
+        } 
+        
+        return null;
     }
     /**
      * Display a listing of the resource.
@@ -38,7 +42,9 @@ class StandController extends Controller
      */
     public function index()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $stands = Stand::where('user_id', $this->user->id)->get();
         return view('stands/index', compact('stands'));
     }
@@ -50,7 +56,9 @@ class StandController extends Controller
      */
     public function create()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $classifications = Classification::all();
         return view('stands/create', compact('classifications'));
     }
@@ -63,7 +71,9 @@ class StandController extends Controller
      */
     public function store(Request $request)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $logo = $request->file('logo');
         $nombreImagen = $request->name . '-logo.' . $logo->extension();
         $logo->storeAs('public/images', $nombreImagen);
@@ -121,7 +131,9 @@ class StandController extends Controller
      */
     public function edit($id)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $stand = Stand::find($id);
         return view('stands/edit', compact('stand'));
     }
@@ -135,7 +147,9 @@ class StandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         Stand::find($id)->update([
             'name' => $request->name,
             'description' => $request->description,
@@ -149,7 +163,9 @@ class StandController extends Controller
 
     public function updateLogo(Request $request, $id)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $stand = Stand::find($id);
         Storage::delete("public/images/{$stand->logo}");
         $logo = $request->file('logo');
@@ -163,7 +179,9 @@ class StandController extends Controller
 
     public function updateBanner(Request $request, $id)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $stand = Stand::find($id);
         Storage::delete("public/{$stand->banner}");
         $banner = $request->file('banner');
@@ -203,7 +221,9 @@ class StandController extends Controller
 
     public function standsVisitados()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $stands = array();
         $evals = Evaluation::where('user_id', $this->user->id)->get();
         foreach ($evals as $eval) {

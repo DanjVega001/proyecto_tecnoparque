@@ -22,9 +22,13 @@ class ScheduleController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
-        if (!$this->user || $this->user->rol->nombre != 'Administrador') {
-            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
-        }
+        if (!$this->user) {
+            return view('auth/login', ['message' => 'No se ha logueado']);
+        } else if ($this->user->rol->name != 'Administrador') {
+            return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
+        } 
+        
+        return null;
     }
     /**
      * Display a listing of the resource.
@@ -33,7 +37,8 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
         
         $schedules= Schedule::all();
         //dd($places);
@@ -47,7 +52,8 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
 
         return view('schedule.create');
     }
@@ -60,7 +66,8 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {   
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
 
         $validate = $request->validate([
             'day'=>'required',
@@ -96,7 +103,8 @@ class ScheduleController extends Controller
      */
     public function edit($id)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
 
         $schedule = Schedule::find($id);
 
@@ -112,7 +120,9 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $validate = $request->validate([
             'day'=>'required',
             'hour_start'=>'required',
@@ -137,7 +147,9 @@ class ScheduleController extends Controller
      */
     public function destroy($id)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $schedule = Schedule::find($id);   
         if ($schedule) {
             $schedule->delete();

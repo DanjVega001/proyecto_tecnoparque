@@ -29,9 +29,12 @@ class EvaluationController extends Controller
     {
         $this->user = $this->service->getUserAuthenticated();
 
-        if ($this->user === null || $this->user->rol->name != 'Visitante') {
-            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);   
-        }  
+        if (!$this->user) {
+            return view('auth/login', ['message' => 'No se ha logueado']);
+        } else if ($this->user->rol->name != 'Administrador') {
+            return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
+        } 
+        
         return null;
     }
 

@@ -27,9 +27,13 @@ class PassportController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
-        if (!$this->user || $this->user->rol->nombre != 'Visitante') {
-            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
-        } return null;
+        if (!$this->user) {
+            return view('auth/login', ['message' => 'No se ha logueado']);
+        } else if ($this->user->rol->name != 'Administrador') {
+            return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
+        } 
+        
+        return null;
     }
 
     /**

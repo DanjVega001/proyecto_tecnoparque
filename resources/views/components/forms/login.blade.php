@@ -34,7 +34,7 @@
   <div class="container">
     <div class="login-box">
       <div class="text-center">
-        <img src="LOGO.png" alt="Logo" class="mb-3">
+        <img src="{{ asset('img/stands/LOGO.jpg') }}" class="mb-3" >
         <h2>Inicio de Sesión</h2>
       </div>
       <form>

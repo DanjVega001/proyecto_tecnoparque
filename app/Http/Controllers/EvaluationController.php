@@ -31,7 +31,7 @@ class EvaluationController extends Controller
 
         if (!$this->user) {
             return view('auth/login', ['message' => 'No se ha logueado']);
-        } else if ($this->user->rol->name != 'Administrador') {
+        } else if ($this->user->rol->name != 'Visitante') {
             return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
         } 
         

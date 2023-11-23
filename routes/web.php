@@ -56,7 +56,7 @@ Route::middleware(['auth', 'role:Visitante'])->group(function () {
     // Stands visitados
     Route::get('/stands-visitados', [StandController::class, 'standsVisitados'])->name('stand.visitados');
     Route::resource('passport',PassportController::class);
-    Route::resource('user',UserController::class);  
+    
     
 });
 
@@ -66,7 +66,7 @@ Route::middleware(['auth', 'role:Administrador'])->group(function () {
     Route::resource('empresa', EmpresaController::class);
     Route::resource('places',PlacesController::class);
     Route::resource('schedule',ScheduleController::class);
-
+    Route::resource('user',UserController::class);  
 });
 
 // RUTAS PROTEGIDAS PARA LA EMPRESA
@@ -78,15 +78,6 @@ Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::post('/update-logo/{id}', [StandController::class, 'updateLogo'])->name('updateLogo');
     Route::post('/update-banner/{id}', [StandController::class, 'updateBanner'])->name('updateBanner');
 });
-
-
-//CRUD de visitante
-Route::resource('user',UserController::class);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::resource('places',PlacesController::class);
-
 
 
 // IMPLEMENTACION AUTH GOOGLE

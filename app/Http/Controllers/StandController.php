@@ -11,6 +11,8 @@ use App\Models\Stand;
 use App\Models\Classification;
 use App\Models\Stand_has_classification;
 use App\Models\Evaluation;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class StandController extends Controller
@@ -119,6 +121,8 @@ class StandController extends Controller
     public function show($id)
     {
         $stand = Stand::find($id);
+        $agenda = DB::table('agendas')->whereBetween();
+        return $stand;
         // DEBE RETORNAR A LA INTERFAZ EL STAND CON SUS DATOS
         //return view('stands/index', compact('stand'));
     }
@@ -221,8 +225,12 @@ class StandController extends Controller
 
     public function standsVisitados()
     {
-        $userInauthenticated = $this->userInauthenticated();
-        if ($userInauthenticated !== null) return $userInauthenticated;
+        $this->user = $this->service->getUserAuthenticated();
+        if (!$this->user) {
+            return view('auth/login', ['message' => 'No se ha logueado']);
+        } else if ($this->user->rol->name != 'Visitante') {
+            return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
+        } 
 
         $stands = array();
         $evals = Evaluation::where('user_id', $this->user->id)->get();

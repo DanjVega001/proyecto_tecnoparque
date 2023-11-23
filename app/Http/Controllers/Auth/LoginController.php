@@ -43,18 +43,18 @@ class LoginController extends Controller
 
 
     public function logout(Request $request)
-{
-    $isUserGoogle = Auth::user()->auth_name==='google';
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-    if ($isUserGoogle) {
-        // eb lugar de la url de google.com deberiamos tenr la url del servicio al que se va amontar la app.
-        return redirect()->away('https://accounts.google.com/Logout?continue=https://www.google.com');
+    {
+        $isUserGoogle = Auth::user()->auth_name==='google';
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        if ($isUserGoogle) {
+            // eb lugar de la url de google.com deberiamos tenr la url del servicio al que se va amontar la app.
+            return redirect()->away('https://accounts.google.com/Logout?continue=https://www.google.com');
+        }
+        return $this->loggedOut($request) ?: redirect('/');
+        
     }
-    return $this->loggedOut($request) ?: redirect('/');
-    
-}
 
 
     /*public function logout(Request $request)

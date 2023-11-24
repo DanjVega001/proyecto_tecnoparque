@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('components.landingPage.landing');
 });
 
 
@@ -21,7 +21,7 @@ Route::view('/login', 'components.forms.login');
 Route::view('/calificacion', 'components.forms.calificaionStands');
 Route::post('/guardar-evaluacion', [EvaluacionController::class, 'guardar'])->name('guardar_evaluacion');
 Route::view('/registro-stand', 'components.forms.registroStands');
-Route::view('/landing_page', 'components.landingPage.landing');
+
 
 Route::get('/stand', function () {
     // Simulando la obtención de datos desde la base de datos

@@ -56,7 +56,9 @@ Route::middleware(['auth', 'role:Visitante'])->group(function () {
     Route::get('/stands-visitados', [StandController::class, 'standsVisitados'])->name('stand.visitados');
     Route::resource('passport',PassportController::class);
     Route::resource('user',UserController::class);  
-    
+    //-----------------------------------------------
+    Route::resource('stand', StandController::class);
+    //-----------------------------------------------
 });
 
 // RUTAS PROTEGIDAS PARA EL ADMIN
@@ -112,3 +114,7 @@ Route::get('/google-callback', function () {
     }
     return redirect()->route('home');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

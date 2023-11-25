@@ -1,5 +1,5 @@
 <!-- resources/views/components/landing.blade.php -->
-@extends('layouts.app')
+@extends('layouts.perfil')
 
 @section('content')
    

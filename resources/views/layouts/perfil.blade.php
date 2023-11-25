@@ -54,12 +54,10 @@
     <div id="app">
         
     {{-- Header de Perfil de Usuario --}}
-        @include('components.HeaderPerfil')
+    @include('components.landingPage.Header')
 
         <!-- Contenido principal -->
-        <main class="py-4">
             @yield('content')
-        </main>
 
         <!-- Footer -->
         @include('components.landingPage.Footer')

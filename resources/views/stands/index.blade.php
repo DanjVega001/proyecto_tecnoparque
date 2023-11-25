@@ -66,15 +66,15 @@
                                     <input type="radio" id="estrella{{ $stand->id }}1" name="calificacion{{ $stand->id }}" value="1">
                                     <label for="estrella{{ $stand->id }}1">&#9733;</label>
                                 </div>
-                                <img class="card-img-top logoStand" src="{{ $stand->photo_url }}" alt="{{ $stand->company_name }}">
+                                <img class="card-img-top logoStand" src="{{$stand->logo}}" alt="{{$stand->user->name}}">
                                 <div class="card ">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $stand->company_name }}</h5>
+                                        <h4 class="card-title">{{$stand->user->name}}</h4>
                                         <ul class="list-group list-group-flush">
-                                            <li class="list-group-item"><i class="bx bx-map"></i> <strong>Dirección:</strong> {{ $stand->address }}</li>
-                                            <li class="list-group-item"><i class="bx bx-phone"></i> <strong>Teléfono:</strong> {{ $stand->phone_number }}</li>
+                                            <li class="list-group-item"><i class="bx bx-map"></i> <strong>Dirección:</strong> {{$stand->user->address}}</li>
+                                            <li class="list-group-item"><i class="bx bx-phone"></i> <strong>Teléfono:</strong> {{$stand->user->phone_number}}</li>
                                             <p class="card-text"><i class="bx bx-info-circle"></i> {{ $stand->description }}</p>
-                                            <li class="list-group-item"><i class="bx bx-link-external"></i> <strong>Sitio web:</strong> <a href="{{ $stand->website_url }}" target="_blank">{{ $stand->website_url }}</a></li>
+                                            <li class="list-group-item"><i class="bx bx-link-external"></i> <strong>Sitio web:</strong> <a href="{{$stand->web}}" target="_blank">{{$stand->web}}</a></li>
                                         </ul>
 
                                         <div class="redes">          

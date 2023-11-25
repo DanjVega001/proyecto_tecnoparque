@@ -15,14 +15,19 @@ class Evaluation extends Model
         'rank',
         'feedback',
         'criterio_id',
-        'stand_id'
+        'stand_id',
+        'user_id'
     ];
 
     public function criterio(){
         return $this->belongsTo(Criterio::class, 'criterios_id', 'id');
     }
 
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
     public function stand(){
-        return $this->belongsTo(Stand::class, 'stands_id', 'id');
+        return $this->belongsTo(Stand::class, 'stand_id', 'id');
     }
 }

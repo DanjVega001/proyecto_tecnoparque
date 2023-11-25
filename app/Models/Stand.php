@@ -21,6 +21,7 @@ class Stand extends Model
         'tiktok',
         'web',
         'calification',
+        'qr_code',
         'user_id'
     ];
 

@@ -8,7 +8,13 @@
  */
 
 $uri = urldecode(
+<<<<<<< HEAD
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? ''
+=======
+
+    parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
+
+>>>>>>> 615de0753acdfa1f984386bf395f576f059138d2
 );
 
 // This file allows us to emulate Apache's "mod_rewrite" functionality from the
@@ -18,4 +24,10 @@ if ($uri !== '/' && file_exists(__DIR__.'/public'.$uri)) {
     return false;
 }
 
+<<<<<<< HEAD
 require_once __DIR__.'/public/index.php';
+=======
+
+require_once __DIR__.'/public/index.php';
+
+>>>>>>> 615de0753acdfa1f984386bf395f576f059138d2

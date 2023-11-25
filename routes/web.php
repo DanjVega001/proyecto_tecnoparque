@@ -1,7 +1,18 @@
 <?php
 
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StandController;
+use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\PlacesController;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\PassportController;
+use App\Http\Controllers\EvaluationController;
+use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     return view('components.landingPage.landing');
@@ -10,74 +21,87 @@ Route::get('/', function () {
 
 
 
-Auth::routes();
+
+Route::get('/stands/home', [App\Http\Controllers\StandController::class, 'getAllStands'])->name('stands.home');
+
+
+// RUTAS PROTEGIDAS PARA EL VISITANTE
+Route::middleware(['auth', 'role:Visitante'])->group(function () {
+    
+    // Muestra la evaluacion 
+    Route::get('/evaluation/index/{qr_code}', [EvaluationController::class, 
+    'index'])->name('evaluation.index');
+
+    // Guarda el resultado de la evaluacion
+    Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
+    'store'])->name('evaluation.store');
+
+    // Stand individual
+    Route::get('/stands/{idStand}', [StandController::class, 'show'])->name('stand.show');
+
+    // Stands visitados
+    Route::get('/stands-visitados', [StandController::class, 'standsVisitados'])->name('stand.visitados');
+    Route::resource('passport',PassportController::class);
+    Route::resource('user',UserController::class);  
+    //-----------------------------------------------
+    Route::resource('stand', StandController::class);
+    //-----------------------------------------------
+});
+
+// RUTAS PROTEGIDAS PARA EL ADMIN
+Route::middleware(['auth', 'role:Administrador'])->group(function () {
+
+    Route::resource('empresa', EmpresaController::class);
+    Route::resource('places',PlacesController::class);
+    Route::resource('schedule',ScheduleController::class);
+
+});
+
+// RUTAS PROTEGIDAS PARA LA EMPRESA
+Route::middleware(['auth', 'role:Empresa'])->group(function () {
+    Route::resource('stand', StandController::class);
+    Route::resource('agenda', AgendaController::class);
+});
+
+
+//CRUD de visitante
+Route::resource('user',UserController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('user', UserController::class);
-Route::view('/admin', 'components.admin.panel');
-Route::view('/registro-visitante', 'components.forms.registroUser');
-Route::view('/login', 'components.forms.login');
-Route::view('/calificacion', 'components.forms.calificaionStands');
-Route::post('/guardar-evaluacion', [EvaluacionController::class, 'guardar'])->name('guardar_evaluacion');
-Route::view('/registro-stand', 'components.forms.registroStands');
+Route::resource('places',PlacesController::class);
 
 
-Route::get('/stand', function () {
-    // Simulando la obtención de datos desde la base de datos
-    $stands = [
-        (object) [
-            'photo_url' => 'https://placekitten.com/300/200',
-            'company_name' => 'Empresa 1',
-            'address' => 'Dirección Empresa 1',
-            'phone_number' => '123-456-789',
-            'description' => 'Discurso oral o escrito en el que se explica cómo es una cosa, una persona o un lugar para ofrecer una imagen o una idea completa de ellos.
-            "en la primera versión de la novela aparecen dilatadas descripciones acerca de la mala vida de la ciudad"1',
-            'website_url' => 'https://www.empresa1.com',
-        ],
-    ];
 
-    return view('components.usuarios.standsIbfo', compact('stands'));
+// IMPLEMENTACION AUTH GOOGLE
+
+
+ 
+Route::get('/login-google', function () {
+    return Socialite::driver('google')->redirect();
+});
+ 
+Route::get('/google-callback', function () {
+    $user = Socialite::driver('google')->user();
+    $userExiste = User::where('auth_id', $user->id)->where('auth_name', 'google')->first();
+
+    if ($userExiste) {
+        Auth::login($userExiste);
+    } else {
+        $user = User::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'auth_id' => $user->id,
+            'auth_name' => 'google',
+            'rol_id' => 2
+        ]);
+
+        $user->assignRole('Visitante');
+        Auth::login($user);
+    }
+    return redirect()->route('home');
 });
 
-Route::get('/user', function () {
-    // Simulando la obtención de datos desde la base de datos
-    $stands = [
-        (object) [
-            'photo_url' => 'https://placekitten.com/300/200',
-            'company_name' => 'Empresa 1',
-            'address' => 'Dirección Empresa 1',
-            'phone_number' => '123-456-789',
-            'description' => 'Discurso oral o escrito en el que se explica cómo es una cosa, una persona o un lugar para ofrecer una imagen o una idea completa de ellos. "en la primera versión de la novela aparecen dilatadas descripciones acerca de la mala vida de la ciudad"1',
-            'website_url' => 'https://www.empresa1.com',
-            'visited' => true, 
+Auth::routes();
 
-        ],
-        (object) [
-            'photo_url' => 'https://placekitten.com/300/205',
-            'company_name' => 'Empresa 2',
-            'address' => 'Dirección Empresa 2',
-            'phone_number' => '987-654-321',
-            'description' => 'Otra descripción interesante.',
-            'website_url' => 'https://www.empresa2.com',
-        ],
-        (object) [
-            'photo_url' => 'https://placekitten.com/300/202',
-            'company_name' => 'Empresa 1',
-            'address' => 'Dirección Empresa 1',
-            'phone_number' => '123-456-789',
-            'description' => 'Discurso oral o escrito en el que se explica cómo es una cosa, una persona o un lugar para ofrecer una imagen o una idea completa de ellos. "en la primera versión de la novela aparecen dilatadas descripciones acerca de la mala vida de la ciudad"1',
-            'website_url' => 'https://www.empresa1.com',
-        ],
-        (object) [
-            'photo_url' => 'https://placekitten.com/300/201',
-            'company_name' => 'Empresa 2',
-            'address' => 'Dirección Empresa 2',
-            'phone_number' => '987-654-321',
-            'description' => 'Otra descripción interesante.',
-            'website_url' => 'https://www.empresa2.com',
-        ],
-    ];
-
-    return view('components.usuarios.homeUser', compact('stands'));
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

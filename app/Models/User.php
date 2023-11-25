@@ -14,11 +14,11 @@ use App\Models\visitante;
 use App\Models\Passport;
 
 
-
-
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
+
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -35,6 +35,8 @@ class User extends Authenticatable
         "birthday",
         "genere",
         'rol_id',
+        'auth_id',
+        'auth_name'
     ];
 
     /**
@@ -56,7 +58,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-      public function passports(){
+
+    public function passports(){
         return $this->hasMany(Passport::class, 'id', 'id');
     }
 

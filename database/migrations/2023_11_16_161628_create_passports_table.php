@@ -16,9 +16,11 @@ class CreatePassportsTable extends Migration
     {
         Schema::create('passports', function (Blueprint $table) {
             $table->id();
-            $table->double('date');
+            $table->date('date');
+
             $table->unsignedBigInteger('stand_id');
             $table->foreign('stand_id')->references('id')->on('stands');
+            
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });

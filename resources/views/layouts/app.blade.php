@@ -55,7 +55,7 @@
 
     <div id="app">
         <!-- Barra de navegación --> 
-        @include('components.landingPage.Header')
+        {{-- @include('components.landingPage.Header') --}}
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->

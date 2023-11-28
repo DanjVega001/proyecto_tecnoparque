@@ -21,6 +21,13 @@
     height: auto;
 }
 
+    #carouselBasicExample img {
+        height: 400px; /* Establece la altura deseada para todas las imágenes */
+        object-fit: cover; /* Ajusta la imagen manteniendo las proporciones y recortando según sea necesario */
+    }
+
+
+
 @media (max-width: 767px) {
     .custom-col {
         flex: 0 0 100%;

@@ -29,7 +29,7 @@
 
         <!-- Single item -->
         <div class="carousel-item">
-            <img src="{{ asset('img/carrusel/stands_de_tecnologia.jpg') }}" class="d-block w-100"
+            <img src="{{ asset('img/carrusel/img01.png') }}" class="d-block w-100"
                 alt="Canyon at Nigh" />
             <div class="carousel-caption text-center" style="position: absolute; top: 50%; transform: translateY(-50%);">
                 <h2 style="font-size: 3em;">Stands</h2>
@@ -39,7 +39,7 @@
 
         <!-- Single item -->
         <div class="carousel-item">
-            <img src="{{ asset('img/carrusel/stands_de_tecnologia.jpg') }}" class="d-block w-100"
+            <img src="{{ asset('img/carrusel/img02.jpg') }}" class="d-block w-100"
                 alt="Cliff Above a Stormy Sea" />
             <div class="carousel-caption text-center" style="position: absolute; top: 50%; transform: translateY(-50%);">
                 <h2 style="font-size: 3em;">Stands</h2>

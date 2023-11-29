@@ -1,5 +1,3 @@
-/* Estilos personalizados */
-
 .custom-row {
     display: flex;
     flex-wrap: wrap;
@@ -31,7 +29,7 @@
 @media (max-width: 767px) {
     .custom-col {
         flex: 0 0 100%;
-        max-width: 100%;
+        max-width: 50%;
     }
 
     /* Centrar el carrusel en vista móvil */
@@ -39,4 +37,3 @@
         margin: 0 auto;
     }
 }
-

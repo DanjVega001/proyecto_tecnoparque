@@ -15,7 +15,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- ICONOS -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="user.css">
     <link href="{{ asset('css/user/stand.css') }}" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -30,7 +29,7 @@
                         <i class='bx bx-chevron-left'></i>
                     </div>
                     <div class="col-4 text-center d-flex justify-content-between align-items-center ">
-                        <button type="button" class="btn btn-link text-white" onclick="window.location.href='/user'">INICIO</button>
+                        <button type="button" class="btn btn-link text-white" onclick="window.location.href='/home'">HOME</button>
                         <button type="button" class="btn btn-link text-white" onclick="window.location.href='/#'">VISITADOS</button>
                     </div>
                     
@@ -52,8 +51,9 @@
                 <div class="container-fluid contenidoCard">
                     <div class="row">
                         @foreach ($stands as $stand)
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-4 principal">
                                 <!-- Mostrar calificación para cada stand -->
+                                <img class="card-img-top logoStand" src="{{$stand->logo}}" alt="{{$stand->user->name}}">
                                 <div class="calificacion">
                                     <input type="radio" id="estrella{{ $stand->id }}5" name="calificacion{{ $stand->id }}" value="5">
                                     <label for="estrella{{ $stand->id }}5">&#9733;</label>
@@ -66,7 +66,6 @@
                                     <input type="radio" id="estrella{{ $stand->id }}1" name="calificacion{{ $stand->id }}" value="1">
                                     <label for="estrella{{ $stand->id }}1">&#9733;</label>
                                 </div>
-                                <img class="card-img-top logoStand" src="{{$stand->logo}}" alt="{{$stand->user->name}}">
                                 <div class="card ">
                                     <div class="card-body">
                                         <h4 class="card-title">{{$stand->user->name}}</h4>

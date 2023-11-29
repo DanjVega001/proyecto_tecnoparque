@@ -42,30 +42,30 @@
         </div>
 
         {{-- resources/views/components/usuarios/homeUser.blade.php --}}
+<div class="row">
+    <div class="container-fluid contenidoCard">
         <div class="row">
-            <div class="container-fluid contenidoCard">
-                <div class="row">
-                    @foreach($stands as $index => $stand)
-                        <div class="col-6">
-                            <div class="position-relative">
-                                <a href="/stand"><img class="logoEmpresa" src="{{ $stand->photo_url }}" alt="{{ $stand->company_name }} Image">
-                                </a>
-                                @if(isset($stand->visited) && $stand->visited)
-                                    <div class="watermark"><img src="{{ asset('img/stands/visitado.png') }}"alt="sello de Visitado"></div>
-                                @endif
+            @foreach($stands as $index => $stand)
+                <div class="col-6">
+                    <div class="position-relative">
+                        <a href="/stand">
+                            <img class="logoEmpresa" src="{{$stand->logo}}" alt="{{ $stand->company_name }}Image">
+                        </a>
+                        @if(isset($stand->visited) && $stand->visited)
+                            <div class="watermark">
+                                <img src="{{ asset('img/stands/visitado.png') }}" alt="sello de Visitado">
                             </div>
-                        </div>
-                        @if(($index + 1) % 2 === 0)
-                            </div><div class="row">
                         @endif
-                    @endforeach
+                    </div>
                 </div>
-            </div>
+                @if(($index + 1) % 2 === 0)
+                    </div><div class="row">
+                @endif
+            @endforeach
         </div>
-        
-        
+    </div>
+</div>
 
-        
         
     </div>
 </body>

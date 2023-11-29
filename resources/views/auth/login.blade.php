@@ -50,7 +50,7 @@
       </form>
       <a href="{{ route('register') }}" class="btn btn-primary btn-block mt-2">Registrar</a>
       <hr>
-      <button type="button" class="btn btn-primary btn-block">Ingreso con Google</button>
+      <button type="button" class="btn btn-primary btn-block" onclick="window.location.href='{{ url('/login-google') }}'">Ingreso con Google</button>
     </div>
   </div>
 </body>

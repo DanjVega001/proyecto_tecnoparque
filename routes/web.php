@@ -88,8 +88,6 @@ Route::resource('places',PlacesController::class);
 
 // IMPLEMENTACION AUTH GOOGLE
 
-
- 
 Route::get('/login-google', function () {
     return Socialite::driver('google')->redirect();
 });

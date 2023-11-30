@@ -24,7 +24,7 @@
             font-family: 'Lato', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #90a0ad; /* Fondo azul claro */
+            background-color: #fff; /* Fondo azul claro */
         }
 
         .container {

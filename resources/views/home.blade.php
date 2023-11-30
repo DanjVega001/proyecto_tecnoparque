@@ -81,6 +81,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    @include('components.landingPage.footer')
+
                 </div>
             </div>
         </div>

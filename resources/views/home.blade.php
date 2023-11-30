@@ -71,7 +71,7 @@
                         @include('components.home.admin')
                     @else
                         {{-- Panel para Visitante --}}
-                        {{-- @include('components.home.user') --}}
+                      @include('components.home.user')
                     @endif
 
                     @if (session('status'))
@@ -81,6 +81,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    @include('components.landingPage.footer')
+
                 </div>
             </div>
         </div>

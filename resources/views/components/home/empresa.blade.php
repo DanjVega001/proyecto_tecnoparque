@@ -1,4 +1,4 @@
-<div>
+<div class="">
     <h4>Bienvenido, {{ Auth::user()->name }}!</h4>
     <p>Aquí encontrarás opciones para gestionar stands y eventos.</p>
 

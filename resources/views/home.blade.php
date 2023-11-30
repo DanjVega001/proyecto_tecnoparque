@@ -71,7 +71,7 @@
                         @include('components.home.admin')
                     @else
                         {{-- Panel para Visitante --}}
-                        @include('components.home.user')
+                        {{-- @include('components.home.user') --}}
                     @endif
 
                     @if (session('status'))

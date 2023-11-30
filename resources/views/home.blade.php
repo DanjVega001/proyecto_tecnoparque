@@ -63,6 +63,17 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
+                    @if (Auth::user()->hasRole('Empresa'))
+                        {{-- Panel para Empresa --}}
+                        @include('components.home.empresa')
+                    @elseif (Auth::user()->hasRole('Administrador'))
+                        {{-- Panel para Administrador --}}
+                        @include('components.home.admin')
+                    @else
+                        {{-- Panel para Visitante --}}
+                        @include('components.home.user')
+                    @endif
+
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}

@@ -15,6 +15,7 @@
                             <th scope="col">Empresa</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Logo</th>
+                            <th scope="col">Informacion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,6 +24,8 @@
                             <th scope="row">{{$passport->id}}</th>
                             <th>{{$passport->stand->name}}</th>
                             <td>{{$passport->date}}</td>
+                            <td>{{$passport->date}}</td>
+                            <td>{{$passport->stand->user_id}}</td>
                             <td scope="col">
                                 <img src="{{ asset('storage/videos/Animación_sello_gif.gif')}}" alt="GIF PASAPORTE"  width="200" height="150">
                             </td>                     

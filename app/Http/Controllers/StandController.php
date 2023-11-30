@@ -27,9 +27,9 @@ class StandController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
-        if (!$this->user || $this->user->rol->nombre != 'Empresa') {
+        /*if (!$this->user || $this->user->rol->nombre != 'Empresa') {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
-        }
+        }*/
     }
     /**
      * Display a listing of the resource.
@@ -41,6 +41,8 @@ class StandController extends Controller
         $this->userInauthenticated();
         $stands = Stand::where('user_id', $this->user->id)->get();
         return view('stands/index', compact('stands'));
+        //Esto Trae todo
+        $stands2=Stand::all();
     }
 
     /**

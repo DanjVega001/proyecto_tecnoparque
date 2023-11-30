@@ -1,9 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
+    <style>
+        /* Agrega un fondo rojo a la parte superior de la página */
+        nav {
+            background-color: red;
+            border-bottom: 5px solid #ff0000; /* Ajusta el grosor de la línea roja */
+            padding: 10px; /* Añade un relleno para mayor visibilidad */
+        }
+    </style>
+    
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
+        <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
@@ -56,13 +65,12 @@
         </div>
     </nav>
 
-    
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <div class="card-body">
+                <div class="">
                     @if (Auth::user()->hasRole('Empresa'))
                         {{-- Panel para Empresa --}}
                         @include('components.home.empresa')
@@ -81,6 +89,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    @include('components.landingPage.footer')
+
                 </div>
             </div>
         </div>

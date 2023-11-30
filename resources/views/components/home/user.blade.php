@@ -19,14 +19,19 @@
     
     <h4>Bienvenido, {{ Auth::user()->name }}!</h4>
     <p>Gracias por usar nuestra aplicación. Aquí encontrarás información sobre eventos y más.</p>
-
     <div class="card scan-card">
+        <video autoplay muted loop id="background-video">
+            <source src="{{ asset('multimedia/videos/istockphoto-1314370116-640_adpp_is.mp4') }}" type="video/mp4">
+            Tu navegador no soporta la etiqueta de video.
+        </video>
         <div class="card-body">
             <h5 class="card-title">Ver Evaluación</h5>
             <p class="card-text">Accede para ver y completar la evaluación.</p>
             <button class="btn btn-primary" id="scanQR">Abrir Cámara</button>
         </div>
     </div>
+    
+    
     
 
     <div class="card mt-3">

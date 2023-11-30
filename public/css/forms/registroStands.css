@@ -5,6 +5,10 @@
     font-size: 40px;
 }
 
+.bx-chevron-left{
+    color: #fff;
+}
+
 .lineaOsucra{
     background-color: #5e1325;
     color: #5e1325;
@@ -37,8 +41,8 @@ label{
 }
 
 .txtForm{
-    color: #838c90;
-    font-weight: bold;
+    
+    
     border-top: none;
     border-left: none;
     border-right: none;
@@ -70,6 +74,7 @@ hr {
     padding: 10px 20px; /* Ajuste del tamaño del área del botón */
     display: block;
     margin: 0 auto;
+    margin-top: 50px;
 }
 
 
@@ -127,6 +132,7 @@ hr {
     }
 
     .contenidoForm{
-        padding-bottom: 400px;
+        padding-bottom: 600px;
+        padding-left: 20px;
     }
 }

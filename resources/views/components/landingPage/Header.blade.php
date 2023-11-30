@@ -1,21 +1,26 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container-fluid">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nombre de tu Página</title>
+    <!-- ICONOS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Agregando las rutas de scripts de Bootstrap y jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-dzvlFJgu1AXLh16iDRdL3ew5CF5F3dfUcqzp7Jif9d1r6LrUZlW0S2RFIvoUH6DR"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyCYeFvAVP1PKGiQPhh6Uow=="
+        crossorigin="anonymous"></script>
+
     <style>
-        /* Estilo para la línea ROJA */
-        .navbar-line {
-            background-color: #942339;
-            border-bottom: 5px solid #ff0000; /* Ajusta el grosor y color de la línea roja */
-            padding: 10px; /* Añade un relleno para mayor visibilidad */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #fff; /* Ajusta el color del texto a blanco */
-        }
-
-        /* Estilo para el botón de flecha */
         .btn-back {
+            /* Ajusta el tamaño del botón de la flecha según sea necesario */
             width: 30px;
             height: 30px;
             display: flex;
@@ -48,8 +53,18 @@
             box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.6);
         }
 
-        /* Estilo para los botones en la barra de navegación */
+        /* Estilos para la línea ROJA */
+        .navbar-line {
+            background-color: #942339;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Estilo para los botones en la línea ROJA*/
         .navbar-line button {
+            /* Elimina el color de fondo y establece el color del texto a blanco */
             background: none;
             border: none;
             color: #fff;
@@ -66,81 +81,70 @@
             white-space: nowrap;
             margin-right: 20px;
             min-width: 120px;
-            text-decoration: none;
+            text-decoration: none; /* Quitar la línea debajo del texto */
         }
 
         .navbar-line button span {
             position: absolute;
             display: block;
         }
+
+        .navbar-line button span:nth-child(1),
+        .navbar-line button span:nth-child(2),
+        .navbar-line button span:nth-child(3),
+        .navbar-line button span:nth-child(4) {
+
+        }
+
+        /* Estilo para el ícono en la parte superior derecha */
+        .icon-container {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .icon-container box-icon {
+            color: #fff !important; /* Forzar el color blanco */
+            font-size: 24px;
+        }
     </style>
+</head>
 
-    <nav class="navbar navbar-expand-md navbar-light navbar-line">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<body>
+    <div class="icon-container">
+        <box-icon name='dots-vertical-rounded' color="#fff"></box-icon>
+    </div>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav me-auto">
-
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ms-auto">
-                    <!-- Authentication Links -->
-                    @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
-
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name}}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
+    <div class="navbar-line container-fluid">
+        <div class="row">
+            <div class="col-6 col-md-4">
+                <button class="btn-back"><i class='bx bx-chevron-left'></i></button>
             </div>
         </div>
-    </nav>
 
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+        <div class="col-6 col-md-8 text-md-right">
+            <div class="btn-container">
+                <!-- Botones de Iniciar Sesión y Registrarse -->
+                @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('/home') }}" class="btn-custom" style="color: #fff;">HOME<span></span><span></span><span></span><span></span></a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn-custom" style="color: #fff;">INICIAR SESION<span></span><span></span><span></span><span></span></a>
 
-                <div class="">
-                    <!-- Contenido del resto de tu página -->
-                    {{ __('You are logged in!') }}
-                    @include('components.landingPage.footer')
-                </div>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="btn-custom" style="color: #fff;">REGISTRARSE<span></span><span></span><span></span><span></span></a>
+                        @endif
+                    @endauth
+                @endif
             </div>
         </div>
     </div>
-</div>
-@endsection
+
+    <!-- Contenido del resto de tu página -->
+    <div><!--... Tu contenido ...--></div>
+</body>
+
+</html>

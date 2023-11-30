@@ -5,8 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Nombre de tu Página</title>
-    <!-- ICONOS -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   <!-- ICONOS -->
+   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   <!-- Agregando las rutas de scripts de Bootstrap y jQuery -->
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-dzvlFJgu1AXLh16iDRdL3ew5CF5F3dfUcqzp7Jif9d1r6LrUZlW0S2RFIvoUH6DR"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyCYeFvAVP1PKGiQPhh6Uow=="
+        crossorigin="anonymous"></script>
 
     <style>
         .btn-back {
@@ -80,6 +89,13 @@
             display: block;
         }
 
+        .navbar-line button span:nth-child(1),
+        .navbar-line button span:nth-child(2),
+        .navbar-line button span:nth-child(3),
+        .navbar-line button span:nth-child(4) {
+
+        }
+
         .icon-container {
             position: fixed;
             top: 10px;
@@ -93,46 +109,42 @@
             color: #fff !important;
             font-size: 24px;
         }
-
-        /* Aquí puedes agregar más estilos según sea necesario para el resto de tu página */
     </style>
 </head>
 
 <body>
-    <!-- Ícono en la parte superior derecha -->
     <div class="icon-container">
         <box-icon name='dots-vertical-rounded' color="#fff"></box-icon>
     </div>
 
-    <!-- Línea roja de navegación -->
     <div class="navbar-line container-fluid">
-        <!-- Contenedor izquierdo con el logo y el botón de regresar -->
         <div class="row">
             <div class="col-6 col-md-4">
-                <!-- Botón de la flecha más pequeño -->
                 <button class="btn-back"><i class='bx bx-chevron-left'></i></button>
             </div>
         </div>
 
-        <!-- Contenedor derecho con los botones -->
         <div class="col-6 col-md-8 text-md-right">
-            <!-- Contenedor para los botones -->
             <div class="btn-container">
-                <!-- Botones de Iniciar Sesión y Registrarse -->
-                @if (Route::has('login'))
-                    @auth
-                        <a href="{{ url('/home') }}" class="btn-custom">Home<span></span><span></span><span></span><span></span></a>
-                    @else
-                        <a href="{{ route('login') }}" class="btn-custom">Iniciar Sesión<span></span><span></span><span></span><span></span></a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="btn-custom">Registrarse<span></span><span></span><span></span><span></span></a>
-                        @endif
-                    @endauth
-                @endif
+                <!-- Agregando nuevos botones con las rutas del primer código -->
+                <button type="button" class="btn-custom" onclick="window.location.href='/register'">Registrarse
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <button type="button" class="btn-custom" onclick="window.location.href='/login'">Iniciar Sesión
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </div>
 
     <!-- Contenido del resto de tu página -->
-    <div
+    <div><!--... Tu contenido ...--></div>
+</body>
+
+</html>

@@ -11,6 +11,7 @@ use App\Models\Stand;
 use App\Models\Classification;
 use App\Models\Stand_has_classification;
 use App\Models\Evaluation;
+use App\Models\User;
 
 
 class StandController extends Controller
@@ -47,9 +48,9 @@ class StandController extends Controller
             public function index2()
             {
                 $this->userInauthenticated();
-                //$users = User::where('rol_id',2)->get();
+                // $users = User::where('rol_id',2)->get();
                 
-                $stands = Stand::all();  // Cambiado de $stands2 a $stands
+                 $stands = Stand::where('user_id',3)->get(); 
                 return view('stands/list', compact('stands'));
             }
             

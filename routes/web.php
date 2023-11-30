@@ -41,28 +41,28 @@ Route::get('/stands/home', [App\Http\Controllers\StandController::class, 'getAll
 // RUTAS PROTEGIDAS PARA EL VISITANTE
 Route::middleware(['auth', 'role:Visitante'])->group(function () {
     
-    // Muestra la evaluacion 
-    Route::get('/evaluation/index/{qr_code}', [EvaluationController::class, 
-    'index'])->name('evaluation.index');
+    // Muestra la evaluación 
+    Route::get('/evaluation/index/{qr_code}', [EvaluationController::class, 'index'])->name('evaluation.index');
 
-    // Guarda el resultado de la evaluacion
-    Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
-    'store'])->name('evaluation.store');
+    // Guarda el resultado de la evaluación
+    Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 'store'])->name('evaluation.store');
 
     // Stand individual
     Route::get('/stands/{idStand}', [StandController::class, 'show'])->name('stand.show');
 
     // Stands visitados
     Route::get('/stands-visitados', [StandController::class, 'standsVisitados'])->name('stand.visitados');
-    Route::resource('passport',PassportController::class);
-    Route::resource('user',UserController::class);  
-    //-----------------------------------------------
-    Route::resource('stand', StandController::class);
-    //-----------------------------------------------
+
+    // Ruta para el método index2 redirigiendo a /list
+    Route::get('/stands', [StandController::class, 'index2'])->name('stands.list');
+
+    Route::resource('passport', PassportController::class);
+    Route::resource('user', UserController::class);  
 });
 
+
 // RUTAS PROTEGIDAS PARA EL ADMIN
-Route::middleware(['auth', 'role:Administrador'])->group(function () {
+    Route::middleware(['auth', 'role:Administrador'])->group(function () {
 
     Route::resource('empresa', EmpresaController::class);
     Route::resource('places',PlacesController::class);
@@ -72,7 +72,7 @@ Route::middleware(['auth', 'role:Administrador'])->group(function () {
 
 // RUTAS PROTEGIDAS PARA LA EMPRESA
 Route::middleware(['auth', 'role:Empresa'])->group(function () {
-    //Route::resource('stand', StandController::class);
+     Route::resource('stand', StandController::class);
     Route::resource('agenda', AgendaController::class);
 });
 

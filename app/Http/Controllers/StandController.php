@@ -41,10 +41,19 @@ class StandController extends Controller
         $this->userInauthenticated();
         $stands = Stand::where('user_id', $this->user->id)->get();
         return view('stands/index', compact('stands'));
-        //Esto Trae todo
-        $stands2=Stand::all();
+       
     }
-
+            //Esto Trae todo
+            public function index2()
+            {
+                $this->userInauthenticated();
+                //$users = User::where('rol_id',2)->get();
+                
+                $stands = Stand::all();  // Cambiado de $stands2 a $stands
+                return view('stands/list', compact('stands'));
+            }
+            
+    
     /**
      * Show the form for creating a new resource.
      *

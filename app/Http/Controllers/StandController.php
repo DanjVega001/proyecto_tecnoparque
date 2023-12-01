@@ -11,8 +11,8 @@ use App\Models\Stand;
 use App\Models\Classification;
 use App\Models\Stand_has_classification;
 use App\Models\Evaluation;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use App\Models\Rol;
+use App\Models\User;
 
 
 class StandController extends Controller
@@ -31,11 +31,14 @@ class StandController extends Controller
         $this->user = $this->service->getUserAuthenticated();
         if (!$this->user) {
             return view('auth/login', ['message' => 'No se ha logueado']);
-        } else if ($this->user->rol->name != 'Administrador') {
+        } else if ($this->user->rol->name != 'Empresa') {
             return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
         } 
         
         return null;
+        /*if (!$this->user || $this->user->rol->nombre != 'Empresa') {
+            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
+        }*/
     }
     /**
      * Display a listing of the resource.
@@ -46,11 +49,23 @@ class StandController extends Controller
     {
         $userInauthenticated = $this->userInauthenticated();
         if ($userInauthenticated !== null) return $userInauthenticated;
-
         $stands = Stand::where('user_id', $this->user->id)->get();
         return view('stands/index', compact('stands'));
+       
     }
+            //Esto Trae todo
+            public function index2()
 
+            {
+                $this->userInauthenticated();
+                // $users = User::where('rol_id',2)->get();
+                
+                 $stands = Stand::all(); 
+
+                return view('stands/list', compact('stands'));
+            }
+            
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -120,12 +135,16 @@ class StandController extends Controller
      */
     public function show($id)
     {
-        $stand = Stand::find($id);
-        $agenda = DB::table('agendas')->whereBetween();
-        return $stand;
-        // DEBE RETORNAR A LA INTERFAZ EL STAND CON SUS DATOS
-        //return view('stands/index', compact('stand'));
+        $stand = Stand::where('id', $id)->first();
+        
+        // Asegúrate de manejar el caso en el que el stand no se encuentre
+        if (!$stand) {
+            abort(404); // Esto devolverá un error 404 si el stand no se encuentra
+        }
+    
+        return view('stands/stand', compact('stand'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -154,7 +173,8 @@ class StandController extends Controller
         $userInauthenticated = $this->userInauthenticated();
         if ($userInauthenticated !== null) return $userInauthenticated;
 
-        Stand::find($id)->update([
+        $stand = Stand::find($id);
+        $stand->update([
             'name' => $request->name,
             'description' => $request->description,
             'facebook' => $request->facebook,
@@ -162,17 +182,20 @@ class StandController extends Controller
             'tiktok' => $request->tiktok,
             'web' => $request->web  
         ]);
+        $logoNuevo = $request->file('logo');
+        if ($logoNuevo) {
+            $this->updateLogo($logoNuevo, $stand);
+        }
+        $bannerNuevo = $request->file('banner');
+        if ($bannerNuevo) {
+            $this->updateBanner($bannerNuevo, $stand);
+        }
         return $this->index();
     }
 
-    public function updateLogo(Request $request, $id)
+    public function updateLogo($logo, $stand)
     {
-        $userInauthenticated = $this->userInauthenticated();
-        if ($userInauthenticated !== null) return $userInauthenticated;
-
-        $stand = Stand::find($id);
         Storage::delete("public/images/{$stand->logo}");
-        $logo = $request->file('logo');
         $nombreLogo = $stand->name. '-logo.' . $logo->extension();
         $logo->storeAs('public/images', $nombreLogo);
         $stand->update([
@@ -181,14 +204,9 @@ class StandController extends Controller
         return $this->index();
     }
 
-    public function updateBanner(Request $request, $id)
+    public function updateBanner($banner, $stand)
     {
-        $userInauthenticated = $this->userInauthenticated();
-        if ($userInauthenticated !== null) return $userInauthenticated;
-
-        $stand = Stand::find($id);
         Storage::delete("public/{$stand->banner}");
-        $banner = $request->file('banner');
         $nombreBanner = $stand->name . '-baner.' . $banner->extension();
         $banner->storeAs('public/images', $nombreBanner);
         $stand->update([
@@ -231,7 +249,7 @@ class StandController extends Controller
         } else if ($this->user->rol->name != 'Visitante') {
             return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
         } 
-
+        
         $stands = array();
         $evals = Evaluation::where('user_id', $this->user->id)->get();
         foreach ($evals as $eval) {

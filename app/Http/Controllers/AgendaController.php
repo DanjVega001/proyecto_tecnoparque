@@ -26,7 +26,7 @@ class AgendaController extends Controller
         $this->user = $this->service->getUserAuthenticated();
         if (!$this->user) {
             return view('auth/login', ['message' => 'No se ha logueado']);
-        } else if ($this->user->rol->name != 'Administrador') {
+        } else if ($this->user->rol->name != 'Empresa') {
             return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
         } 
         
@@ -112,7 +112,7 @@ class AgendaController extends Controller
         $userInauthenticated = $this->userInauthenticated();
         if ($userInauthenticated !== null) return $userInauthenticated;
 
-        $stands= Stand::all();
+        $stands= Stand::where('user_id', $this->user->id)->get();
         $places= Places::all();
         return view('agenda.create', compact('stands', 'places'));
     }

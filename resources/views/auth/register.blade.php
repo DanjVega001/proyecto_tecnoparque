@@ -19,7 +19,7 @@
             <div class="container-fluid ">
                 <div class="row headerUp pt-2">
                     <div class="col-4 text-center">
-                        <i class='bx bx-chevron-left'></i>
+                        <a href="/home"><i class='bx bx-chevron-left'></i></a>
                     </div>
                     <div class="col-4 text-center">
                         <p>REGISTRO USUARIOS</p>

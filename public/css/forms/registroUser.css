@@ -19,6 +19,10 @@
     margin-top: 150px;
 }
 
+.bx-chevron-left{
+    color: #fff;
+}
+
 .logoStand {
     display: block;
     margin: 0 auto; /* Centrar horizontalmente */

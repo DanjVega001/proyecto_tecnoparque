@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Nombre de tu Página</title>
@@ -24,7 +23,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        
         /* Estilos para la línea ROJA */
         .navbar-line {
             background-color: #942339;
@@ -71,13 +69,14 @@
 
         @media (max-width: 767px) {
             .navbar-line {
-                flex-direction: row; /* Cambia la dirección del eje principal a fila en dispositivos pequeños */
+                flex-direction: column; /* Cambia la dirección del eje principal a columna en dispositivos pequeños */
                 align-items: center; /* Alinea los elementos al centro en dispositivos pequeños */
             }
 
             .navbar-line .btn-custom {
                 margin-right: 0; /* Elimina el margen derecho en dispositivos pequeños */
                 margin-bottom: 10px; /* Agrega margen inferior entre los botones en dispositivos pequeños */
+                text-align: center; /* Centra los botones en dispositivos pequeños */
             }
         }
     </style>
@@ -88,29 +87,27 @@
         <box-icon name='dots-vertical-rounded' color="#fff"></box-icon>
     </div>
 
-    <div class="container">
-        <div class="navbar-line">
-            <div class="row">
-                <div class="col-6 col-md-2">
-                    <!-- Contenido actual del primer bloque -->
-                </div>
+    <div class="navbar-line">
+        <div class="row">
+            <div class="col-6 col-md-2">
+                <!-- Contenido actual del primer bloque -->
             </div>
+        </div>
 
-            <div class="col-12 col-md-10 text-md-right d-flex">
-                <div class="btn-container">
-                    <!-- Botones de Iniciar Sesión y Registrarse -->
-                    @if (Route::has('login'))
-                        @auth
-                            <a href="{{ url('/home') }}" class="btn-custom" style="color: #fff;">HOME<span></span><span></span><span></span><span></span></a>
-                        @else
-                            <a href="{{ route('login') }}" class="btn-custom" style="color: #fff;">INICIAR SESION<span></span><span></span><span></span><span></span></a>
+        <div class="col-12 col-md-10 text-md-right d-flex">
+            <div class="btn-container">
+                <!-- Botones de Iniciar Sesión y Registrarse -->
+                @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('/home') }}" class="btn-custom" style="color: #fff;">HOME<span></span><span></span><span></span><span></span></a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn-custom" style="color: #fff;">INICIAR SESION<span></span><span></span><span></span><span></span></a>
 
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="btn-custom" style="color: #fff;">REGISTRARSE<span></span><span></span><span></span><span></span></a>
-                            @endif
-                        @endauth
-                    @endif
-                </div>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="btn-custom" style="color: #fff;">REGISTRARSE<span></span><span></span><span></span><span></span></a>
+                        @endif
+                    @endauth
+                @endif
             </div>
         </div>
     </div>

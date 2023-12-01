@@ -32,7 +32,7 @@
         
         <div class="row">
             <!-- HEADER -->
-            <div class="container-fluid  ">
+            <div class="container-fluid" style="margin: 0; padding: 0;">
                 <div class="row headerUp pt-2">
                     <div class="col-4 text-center">
                         <i class='bx bx-chevron-left'></i>

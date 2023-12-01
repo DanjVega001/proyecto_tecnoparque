@@ -3,6 +3,7 @@
 
 @section('content')
     <div class="container">
+    @include('components.header')
         <div class="card">
             <div class="card-header">
                 <h1>Registro de Lugares</h1>

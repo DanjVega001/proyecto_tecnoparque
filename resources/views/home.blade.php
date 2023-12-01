@@ -81,9 +81,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
+            <div class="mt-3">
                 <div class="">
                     @if (Auth::user()->hasRole('Empresa'))
                         {{-- Panel para Empresa --}}
@@ -102,7 +100,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                
                     @include('components.landingPage.footer')
 
                 </div>

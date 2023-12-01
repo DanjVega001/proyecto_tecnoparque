@@ -55,17 +55,18 @@
                                 <!-- Mostrar calificación para cada stand -->
                                 <img class="card-img-top logoStand" src="{{$stand->logo}}" alt="{{$stand->user->name}}">
                                 <div class="calificacion">
-                                    <h1>{{$stand->calification}}</h1>
-                                    <input type="radio" id="estrella{{ $stand->id }}5" name="calificacion{{ $stand->id }}" value="5">
-                                    <label for="estrella{{ $stand->id }}5">&#9733;</label>
-                                    <input type="radio" id="estrella{{ $stand->id }}4" name="calificacion{{ $stand->id }}" value="4">
-                                    <label for="estrella{{ $stand->id }}4">&#9733;</label>
-                                    <input type="radio" id="estrella{{ $stand->id }}3" name="calificacion{{ $stand->id }}" value="3">
-                                    <label for="estrella{{ $stand->id }}3">&#9733;</label>
-                                    <input type="radio" id="estrella{{ $stand->id }}2" name="calificacion{{ $stand->id }}" value="2">
-                                    <label for="estrella{{ $stand->id }}2">&#9733;</label>
-                                    <input type="radio" id="estrella{{ $stand->id }}1" name="calificacion{{ $stand->id }}" value="1">
-                                    <label for="estrella{{ $stand->id }}1">&#9733;</label>
+                                    @php
+                                    $calification = $stand->calification; // Obtener la calificación del stand
+                                    @endphp
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $calification)
+                                            <!-- Rellenar la estrella si $i es menor o igual a $calification -->
+                                            <label for="estrella{{$stand->id}}{{$i}}">&#9733;</label>
+                                        @else
+                                            <!-- Mostrar una estrella vacía si $i es mayor que $calification -->
+                                            <label for="estrella{{$stand->id}}{{$i}}">&#9734;</label>
+                                        @endif
+                                    @endfor
                                 </div>
                                 <div class="card ">
                                     <div class="card-body">

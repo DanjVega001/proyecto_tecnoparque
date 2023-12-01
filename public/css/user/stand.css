@@ -55,23 +55,19 @@
 }
 
 
-.calificacion input[type="radio"] {
-    display: none;
+/* Estilo para estrellas rellenas */
+.calificacion .estrella-rellena {
+    color: #fdd835; /* Color para las estrellas rellenas */
 }
 
-.calificacion label {
-    color: #838c90;
-    cursor: pointer;
+/* Estilo para estrellas vacías */
+.calificacion .estrella-vacia {
+    color: #999; /* Color gris para las estrellas vacías */
 }
 
-.calificacion label:hover,
-.calificacion label:hover ~ label {
-    color: #fdd835;
-}
 
-.calificacion input[type="radio"]:checked ~ label {
-    color: #fdd835;
-}
+
+
 
 /* Media Query para dispositivos con un ancho máximo de 767px (puedes ajustar este valor según tu diseño) */
 @media only screen and (max-width: 767px) {

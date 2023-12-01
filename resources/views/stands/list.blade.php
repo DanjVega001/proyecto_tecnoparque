@@ -55,19 +55,19 @@
                                 <!-- Mostrar calificación para cada stand -->
                                 <img class="card-img-top logoStand" src="{{$stand->logo}}" alt="{{$stand->user->name}}">
                                 <div class="calificacion">
-                                    @php
-                                    $calification = $stand->calification; // Obtener la calificación del stand
-                                    @endphp
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @if ($i <= $calification)
-                                            <!-- Rellenar la estrella si $i es menor o igual a $calification -->
-                                            <label for="estrella{{$stand->id}}{{$i}}">&#9733;</label>
-                                        @else
-                                            <!-- Mostrar una estrella vacía si $i es mayor que $calification -->
-                                            <label for="estrella{{$stand->id}}{{$i}}">&#9734;</label>
-                                        @endif
-                                    @endfor
-                                </div>
+    @php
+    $calification = $stand->calification; // Obtener la calificación del stand
+    @endphp
+    @for ($i = 1; $i <= 5; $i++)
+        @if ($i <= $calification)
+            <!-- Rellenar la estrella si $i es menor o igual a $calification -->
+            <label class="estrella-rellena" for="estrella{{$stand->id}}{{$i}}">&#9733;</label>
+        @else
+            <!-- Mostrar una estrella vacía si $i es mayor que $calification -->
+            <label class="estrella-vacia" for="estrella{{$stand->id}}{{$i}}">&#9734;</label>
+        @endif
+    @endfor
+</div>
                                 <div class="card ">
                                     <div class="card-body">
                                         <h4 class="card-title">{{$stand->user->name}}</h4>

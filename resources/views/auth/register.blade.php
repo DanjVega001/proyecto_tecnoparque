@@ -25,7 +25,6 @@
                         <p>REGISTRO USUARIOS</p>
                     </div>
                     <div class="col-4 text-center">
-                        <i class='bx bx-dots-vertical-rounded'></i>
                     </div>
                 </div>
                 <div class="row">

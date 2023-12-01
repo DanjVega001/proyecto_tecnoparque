@@ -110,6 +110,18 @@
             color: #fff !important; /* Forzar el color blanco */
             font-size: 24px;
         }
+
+        .btn-custom{
+            text-decoration: none;
+        }
+
+        @media only screen and (max-width: 767px) {
+            .btn-custom {
+                font-size: 11px; /* Tamaño más pequeño para dispositivos móviles */
+            }
+
+        }
+        
     </style>
 </head>
 
@@ -120,12 +132,12 @@
 
     <div class="navbar-line container-fluid">
         <div class="row">
-            <div class="col-6 col-md-4">
+            <div class="col-6 col-md-2">
                 <button class="btn-back"><i class='bx bx-chevron-left'></i></button>
             </div>
         </div>
 
-        <div class="col-6 col-md-8 text-md-right">
+        <div class="col-6 col-md-10 text-md-right">
             <div class="btn-container">
                 <!-- Botones de Iniciar Sesión y Registrarse -->
                 @if (Route::has('login'))
@@ -143,8 +155,6 @@
         </div>
     </div>
 
-    <!-- Contenido del resto de tu página -->
-    <div><!--... Tu contenido ...--></div>
 </body>
 
 </html>

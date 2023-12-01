@@ -54,7 +54,6 @@ footer {
     height: 50px;
     width: 50px;
     border-radius: 50px;
-    border: 1px solid #f2f2f2;
     background-position: center;
     background-size: 40%;
     background-repeat: no-repeat;
@@ -64,8 +63,8 @@ footer {
 }
 
 .social-icon:hover{
-    background-color: #121212;
-    filter: invert(1);
+
+    filter: invert(5);
 }
 
 .social-icon.bxl-facebook-circle,

@@ -5,6 +5,8 @@
   <title>Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Agregamos Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
       background-color: #942339;
@@ -26,13 +28,34 @@
       background-color: #5e1325;
       border-color: #5e1325;
     }
+    /* Estilos para el footer */
+    footer {
+      background-color: white; /* Color del footer blanco */
+      border-radius: 20px; /* Esquinas redondeadas */
+      padding: 40px; /* Aumentamos el padding para hacerlo más grande */
+      margin-top: 50px;
+      box-shadow: 0px -5px 15px 0px rgba(0,0,0,0.75); /* Sombra respecto al fondo */
+    }
+    footer .btn-google {
+      margin-top: 20px; /* Espacio entre el botón y el borde superior del footer */
+      background-color: white; /* Color blanco para el botón */
+      color: #5e1325; /* Color gris oscuro para el texto dentro del botón */
+      border-color: white; /* Mismo color que el fondo para el borde */
+    }
+    /* Estilos para ajustar el logo en dispositivos móviles */
+    @media (max-width: 576px) {
+      .login-box img {
+        max-width: 80%;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="login-box">
       <div class="text-center">
-        <img src="{{ asset('img/stands/LOGO.jpg') }}" class="mb-3" >
+        <!-- Reducimos el tamaño del logo -->
+        <img src="{{ asset('img/stands/LOGO.jpg') }}" class="mb-3" style="max-width: 100%;">
         <h2>Inicio de Sesión</h2>
       </div>
       <form method="POST" action="{{ route('login') }}">
@@ -48,10 +71,17 @@
         <h6 style="color: #5e1325;">¿Haz olvidado la contraseña?</h6>
         <button type="submit" class="btn btn-primary btn-block mt-3">Ingresar</button>
       </form>
-      <a href="{{ route('register') }}" class="btn btn-primary btn-block mt-2">Registrar</a>
-      <hr>
-      <button type="button" class="btn btn-primary btn-block" onclick="window.location.href='{{ url('/login-google') }}'">Ingreso con Google</button>
     </div>
+    <!-- Footer -->
+    <footer class="text-center">
+      <!-- Agregamos el icono de Google de Font Awesome -->
+      <i class="fab fa-google fa-2x mb-3"></i>
+      <!-- Estilos actualizados para el botón de Google -->
+      <button type="button" class="btn btn-primary btn-block btn-google" onclick="window.location.href='{{ url('/login-google') }}'">Iniciar sesión con Google</button>
+    </footer>
   </div>
+
+  <!-- Agregamos el script de Font Awesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 </body>
 </html>

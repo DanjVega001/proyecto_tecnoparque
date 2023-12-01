@@ -77,7 +77,7 @@
                                         </ul>
 
                                         <div class="redes">          
-                                            <div class="social-icons mt-4  ">                                
+                                            <div class="container social-icons mt-4  ">                                
                                                 <!-- Enlaces a redes sociales -->
                                                 <a href="{{ $stand->facebook }}" target="_blank" class="social-icon"><i class="bx bxl-facebook-circle bx-lg"></i></a>
                                                 <a href="{{ $stand->instagram }}" target="_blank" class="social-icon"><i class="bx bxl-instagram-alt bx-lg"></i></a>

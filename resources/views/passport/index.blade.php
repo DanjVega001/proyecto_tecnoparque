@@ -50,7 +50,7 @@
                     @foreach ($passports as $passport)
                         <div class="col-6">
                             <div class="position-relative">
-                                <a href="/stand/{{ $passport->stand->id }}">
+                                <a href="/stands/{{ $passport->stand->id }}">
                                     <img class="logoEmpresa" src="{{ $passport->stand->logo }}" alt="{{ $passport->stand->logo }} Image">
                                 </a>
                                 <div class="watermark">

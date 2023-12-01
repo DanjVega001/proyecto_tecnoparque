@@ -64,6 +64,7 @@ class EmpresaController extends Controller
             'password' => 'required|string',
             'document' => 'required|integer',
             'phone_number' => 'required|integer',
+            'address' => 'required|string'
         ]);
         $data['password'] = Hash::make($data['password']);
         $data['rol_id'] = 3;

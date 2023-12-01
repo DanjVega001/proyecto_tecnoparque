@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid " style="margin: 0; padding: 0;">
     <style>
         .navbar-line {
             background-color: #942339;

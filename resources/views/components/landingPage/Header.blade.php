@@ -2,11 +2,13 @@
 <html lang="en">
 
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Nombre de tu Página</title>
     <!-- ICONOS -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <!-- Agregando las rutas de scripts de Bootstrap y jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -18,41 +20,11 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyCYeFvAVP1PKGiQPhh6Uow=="
         crossorigin="anonymous"></script>
 
+    <!-- Agregar enlace a la fuente de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        .btn-back {
-            /* Ajusta el tamaño del botón de la flecha según sea necesario */
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #942339;
-            border: none;
-            color: #fff;
-            font-size: 13px;
-            letter-spacing: 2px;
-            font-family: 'Lato';
-            font-weight: 600;
-            outline: none;
-            cursor: pointer;
-            position: relative;
-            padding: 0;
-            overflow: hidden;
-            transition: all .5s;
-        }
-
-        .btn-back i {
-            font-size: 18px;
-            color: #fff;
-            margin-right: 5px;
-        }
-
-        .btn-back:hover {
-            transition: all .5s;
-            transform: rotate(-3deg) scale(1.1);
-            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.6);
-        }
-
+        
         /* Estilos para la línea ROJA */
         .navbar-line {
             background-color: #942339;
@@ -60,18 +32,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap; /* Para que los elementos se envuelvan en dispositivos pequeños */
         }
 
         /* Estilo para los botones en la línea ROJA*/
-        .navbar-line button {
-            /* Elimina el color de fondo y establece el color del texto a blanco */
-            background: none;
-            border: none;
+        .navbar-line .btn-custom {
             color: #fff;
             font-size: 13px;
             letter-spacing: 2px;
-            font-family: 'Lato';
+            font-family: 'Roboto', sans-serif; /* Cambiar a la fuente de Google Fonts */
             font-weight: 600;
+            border: none;
             outline: none;
             cursor: pointer;
             position: relative;
@@ -79,9 +50,12 @@
             overflow: hidden;
             transition: all .5s;
             white-space: nowrap;
-            margin-right: 20px;
-            min-width: 120px;
             text-decoration: none; /* Quitar la línea debajo del texto */
+        }
+
+        .navbar-line .btn-custom:hover {
+            transition: all .5s;
+            transform: rotate(-3deg) scale(1.1);
         }
 
         .navbar-line button span {
@@ -93,35 +67,19 @@
         .navbar-line button span:nth-child(2),
         .navbar-line button span:nth-child(3),
         .navbar-line button span:nth-child(4) {
-
         }
 
-        /* Estilo para el ícono en la parte superior derecha */
-        .icon-container {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .icon-container box-icon {
-            color: #fff !important; /* Forzar el color blanco */
-            font-size: 24px;
-        }
-
-        .btn-custom{
-            text-decoration: none;
-        }
-
-        @media only screen and (max-width: 767px) {
-            .btn-custom {
-                font-size: 11px; /* Tamaño más pequeño para dispositivos móviles */
+        @media (max-width: 767px) {
+            .navbar-line {
+                flex-direction: row; /* Cambia la dirección del eje principal a fila en dispositivos pequeños */
+                align-items: center; /* Alinea los elementos al centro en dispositivos pequeños */
             }
 
+            .navbar-line .btn-custom {
+                margin-right: 0; /* Elimina el margen derecho en dispositivos pequeños */
+                margin-bottom: 10px; /* Agrega margen inferior entre los botones en dispositivos pequeños */
+            }
         }
-        
     </style>
 </head>
 
@@ -130,31 +88,32 @@
         <box-icon name='dots-vertical-rounded' color="#fff"></box-icon>
     </div>
 
-    <div class="navbar-line container-fluid">
-        <div class="row">
-            <div class="col-6 col-md-2">
-                <button class="btn-back"><i class='bx bx-chevron-left'></i></button>
+    <div class="container">
+        <div class="navbar-line">
+            <div class="row">
+                <div class="col-6 col-md-2">
+                    <!-- Contenido actual del primer bloque -->
+                </div>
             </div>
-        </div>
 
-        <div class="col-6 col-md-10 text-md-right">
-            <div class="btn-container">
-                <!-- Botones de Iniciar Sesión y Registrarse -->
-                @if (Route::has('login'))
-                    @auth
-                        <a href="{{ url('/home') }}" class="btn-custom" style="color: #fff;">HOME<span></span><span></span><span></span><span></span></a>
-                    @else
-                        <a href="{{ route('login') }}" class="btn-custom" style="color: #fff;">INICIAR SESION<span></span><span></span><span></span><span></span></a>
+            <div class="col-12 col-md-10 text-md-right d-flex">
+                <div class="btn-container">
+                    <!-- Botones de Iniciar Sesión y Registrarse -->
+                    @if (Route::has('login'))
+                        @auth
+                            <a href="{{ url('/home') }}" class="btn-custom" style="color: #fff;">HOME<span></span><span></span><span></span><span></span></a>
+                        @else
+                            <a href="{{ route('login') }}" class="btn-custom" style="color: #fff;">INICIAR SESION<span></span><span></span><span></span><span></span></a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="btn-custom" style="color: #fff;">REGISTRARSE<span></span><span></span><span></span><span></span></a>
-                        @endif
-                    @endauth
-                @endif
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="btn-custom" style="color: #fff;">REGISTRARSE<span></span><span></span><span></span><span></span></a>
+                            @endif
+                        @endauth
+                    @endif
+                </div>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

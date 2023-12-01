@@ -18,12 +18,16 @@
 
     <style>
         .content-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin-bottom: -100px;
-}
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin-bottom: -100px;
+        }
+
+        .bx-chevron-left{
+            color: #fff;
+        }
 
     </style>
 
@@ -36,7 +40,7 @@
             <div class="container-fluid" style="margin: 0; padding: 0;">
                 <div class="row headerUp pt-2">
                     <div class="col-4 text-center">
-                        <i class='bx bx-chevron-left'></i>
+                    <a href="/passport"><i class='bx bx-chevron-left'></i></a>
                     </div>
                     <div class="col-4 text-center d-flex justify-content-between align-items-center ">
                         <button type="button" class="btn btn-link text-white" onclick="window.location.href='/home'">HOME</button>

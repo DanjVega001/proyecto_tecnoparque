@@ -21,6 +21,7 @@
     border-top-right-radius: 50px;
     padding-bottom: 40px;
     margin-top: 150px;
+    margin-left: 15px;
 }
 
 .logoStand {
@@ -33,6 +34,8 @@
     height: 200px; /* Altura de la imagen */
     border: 10px solid #a2afbd; /* Establecer un borde transparente para permitir el gradiente */
     /*background-image: linear-gradient(to bottom, #d2d7db 50%, #bdc7d0 50%);  Aplicar gradiente lineal */
+    padding-right: calc(var(--bs-gutter-x) * -.5);
+    padding-left: calc(var(--bs-gutter-x) * -.5);
 }
 
 label{
@@ -41,8 +44,6 @@ label{
 }
 
 .txtForm{
-    
-    
     border-top: none;
     border-left: none;
     border-right: none;
@@ -76,6 +77,18 @@ hr {
     margin: 0 auto;
     margin-top: 50px;
 }
+
+.centrarContenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    max-width: 600px; /* ajusta el ancho máximo según tus preferencias */
+    /* Puedes agregar más estilos según tus necesidades */
+}
+
 
 
 
@@ -134,9 +147,19 @@ hr {
     .contenidoForm{
         padding-bottom: 600px;
         padding-left: 20px;
+        margin-left: 15px;
     }
 
     .pregunta{
         margin-top: 50px;
     }
+
+    /* Ajusta el ancho y centra horizontalmente el elemento select */
+    select.form-select {
+        width: 300px; /* Cambia este valor al ancho deseado */
+        margin-left: auto;
+        margin-right: auto;
+        display: block; /* Asegura que sea un elemento de bloque para aplicar márgenes automáticos */
+    }
+
 }

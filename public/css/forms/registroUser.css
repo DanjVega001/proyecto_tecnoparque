@@ -236,3 +236,28 @@
     border-color: #5e1325; /* Cambiar color del borde al pasar el cursor */
     color: #fff; /* Cambiar color del texto al pasar el cursor */
 }
+
+/* Estilos para los campos de formulario con sombras */
+.registration-form input,
+.registration-form select {
+    width: 100%;
+    margin-bottom: 15px; /* Aumentar el espacio entre campos */
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agregar sombra para resaltar */
+}
+
+/* Estilos para el último campo (evita la sombra en la parte inferior) */
+.registration-form input:last-child,
+.registration-form select:last-child {
+    box-shadow: none; /* Eliminar la sombra en el último campo */
+}
+
+/* Reducir el espacio en gris después del formulario */
+.container-fluid .contenidoForm {
+    box-shadow: 0 0 5px rgba(148, 35, 57, 0.5); /* Agregar sombra al enfocar */
+}
+

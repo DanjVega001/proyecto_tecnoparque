@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    @include('components.header')
         <title>Registro Stand</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,27 +22,7 @@
     <body>
     <div class="container-fluid">
             <div class="row">
-                <!-- HEADER -->
-                <div class="container-fluid ">
-                    <div class="row headerUp pt-2">
-                        <div class="col-4 text-center">
-                            <a href="/home"><i class='bx bx-chevron-left'></i></a>
-                        </div>
-                        <div class="col-4 text-center">
-                            <p>REGISTRO STAND</p>
-                        </div>
-                        <div class="col-4 text-center">
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm lineaOsucra">
-                            .
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+               
             <div class="row">
                 <div class="container-fluid contenidoForm">
                     <div class="row ">

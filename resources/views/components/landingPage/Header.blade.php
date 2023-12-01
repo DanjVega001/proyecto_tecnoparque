@@ -119,13 +119,9 @@
     </div>
 
     <div class="navbar-line">
-        <div class="row">
-            <div class="col-6 col-md-2">
-                <!-- Contenido actual del primer bloque -->
-            </div>
-        </div>
+        
 
-        <div class="col-12 col-md-10 text-md-right d-flex align-items-center justify-content-end">
+        <div class="col-6 col-md-6 text-md-right d-flex align-items-center justify-content-end">
             <div class="btn-container">
                 <!-- Botones específicos para cada tipo de usuario -->
                 @auth
@@ -139,8 +135,27 @@
                         <a href="{{ url('/home') }}" class="btn-custom">HOME<span></span><span></span><span></span><span></span></a>
                         <a href="{{ url('/empresa') }}" class="btn-custom">CREAR EMPRESA<span></span><span></span><span></span><span></span></a>                     
                     @endif
-             
-   
+                
+                    <div class="col-6 text-center pl-2">
+                        <!-- <i class='bx bx-dots-vertical-rounded'></i> -->
+                        <li class="">
+                            <a id="navbarDropdown" class="bx bx-dots-vertical-rounded" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <!-- {{ Auth::user()->name}} -->
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item logout-link" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                    {{ __('CERRAR SESION') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    </div>
                 @else
                     <!-- Botones de Iniciar Sesión y Registrarse -->
                     <a href="{{ route('login') }}" class="btn-custom">INICIAR SESION<span></span><span></span><span></span><span></span></a>
@@ -150,6 +165,8 @@
                 @endauth
             </div>
         </div>
+        
+        
     </div>
 </body>
 

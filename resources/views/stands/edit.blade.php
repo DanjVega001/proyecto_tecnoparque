@@ -29,7 +29,7 @@
                         <img class="logoStand" src="{{ asset('img/stands/logoStand.png') }}" alt="logoStand">
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col centrarContenido mt-5">
                             <form action="{{ route('stand.update', ['stand' => $stand->id] ) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

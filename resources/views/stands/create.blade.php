@@ -17,6 +17,7 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <!-- STYLES -->
         <link href="{{ asset('css/forms/registroStands.css') }}" rel="stylesheet">
+        
 
     </head>
     <body>
@@ -30,7 +31,7 @@
                         <img class="logoStand" src="{{ asset('img/stands/logoStand.png') }}" alt="logoStand">
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col centrarContenido mt-5">
                             <form action="{{ route('stand.store') }}" method="POST" enctype="multipart/form-data" >
                             @csrf
                                 <label for="name">Nombre Empresa</label><br>

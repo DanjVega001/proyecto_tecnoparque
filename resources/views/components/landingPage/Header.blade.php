@@ -69,6 +69,32 @@
             position: absolute;
             display: block;
         }
+        .navbar-line {
+            background-color: #942339;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white; /* Establece el color del texto a blanco */
+            padding-left: 50px;
+        }
+
+        .navbar-line a {
+            color: white !important; /* Establece el color del enlace a blanco */
+        }
+
+        .navbar-line .navbar-toggler-icon {
+            background-color: white; /* Establece el color del ícono del botón de navegación a blanco */
+        }
+
+        .navbar-line .navbar-toggler {
+            border: none; /* Elimina el borde del botón de navegación */
+        }
+
+        /* Estilo específico para el enlace de Logout */
+        .navbar-line .dropdown-item.logout-link {
+            color: black !important; /* Establece el color del enlace Logout a negro */
+        }
 
         @media (max-width: 767px) {
             .navbar-line {
@@ -82,6 +108,7 @@
                 margin-bottom: 10px; /* Agrega margen inferior entre los botones en dispositivos pequeños */
                 text-align: center; /* Centra los botones en dispositivos pequeños */
             }
+
         }
     </style>
 </head>
@@ -100,19 +127,27 @@
 
         <div class="col-12 col-md-10 text-md-right d-flex align-items-center justify-content-end">
             <div class="btn-container">
-                <!-- Botones de Iniciar Sesión y Registrarse -->
-                @if (Route::has('login'))
-                    @auth
-                        <a href="{{ url('/home') }}" class="btn-custom">HOME<span></span><span></span><span></span><span></span></a>
+                <!-- Botones específicos para cada tipo de usuario -->
+                @auth
+                    @if(Auth::user()->hasRole('Visitante'))
+                        <a href="{{ url('/home') }}" class="btn-custom">SCANEAR CÓDIGO QR<span></span><span></span><span></span><span></span></a>
                         <a href="{{ url('/stands') }}" class="btn-custom">STANDS<span></span><span></span><span></span><span></span></a>
-                    @else
-                        <a href="{{ route('login') }}" class="btn-custom" >INICIAR SESION<span></span><span></span><span></span><span></span></a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="btn-custom">REGISTRARSE<span></span><span></span><span></span><span></span></a>
-                        @endif
-                    @endauth
-                @endif
+                    @elseif(Auth::user()->hasRole('Empresa'))
+                        <a href="{{ url('/home') }}" class="btn-custom">HOME<span></span><span></span><span></span><span></span></a>
+                        <a href="{{ url('/stand') }}" class="btn-custom">CREAR STANDS<span></span><span></span><span></span><span></span></a>
+                    @elseif(Auth::user()->hasRole('Administrador'))
+                        <a href="{{ url('/home') }}" class="btn-custom">HOME<span></span><span></span><span></span><span></span></a>
+                        <a href="{{ url('/empresa') }}" class="btn-custom">CREAR EMPRESA<span></span><span></span><span></span><span></span></a>                     
+                    @endif
+             
+   
+                @else
+                    <!-- Botones de Iniciar Sesión y Registrarse -->
+                    <a href="{{ route('login') }}" class="btn-custom">INICIAR SESION<span></span><span></span><span></span><span></span></a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="btn-custom">REGISTRARSE<span></span><span></span><span></span><span></span></a>
+                    @endif
+                @endauth
             </div>
         </div>
     </div>

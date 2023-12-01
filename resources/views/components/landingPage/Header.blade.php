@@ -35,10 +35,9 @@
             background-color: #942339;
             padding: 10px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Centra los elementos horizontalmente */
             align-items: center;
             flex-wrap: wrap; /* Para que los elementos se envuelvan en dispositivos pequeños */
-            height: 100vh; /* Altura del viewport */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega sombra al encabezado */
         }
 
@@ -52,8 +51,6 @@
             outline: none;
             cursor: pointer;
             position: relative;
-            padding: 8px 16px; /* Espaciado interno */
-            overflow: hidden;
             transition: all .3s;
             white-space: nowrap;
             text-decoration: none; /* Quitar la línea debajo del texto */
@@ -68,15 +65,6 @@
         .navbar-line button span {
             position: absolute;
             display: block;
-        }
-        .navbar-line {
-            background-color: #942339;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white; /* Establece el color del texto a blanco */
-            padding-left: 50px;
         }
 
         .navbar-line a {
@@ -100,15 +88,16 @@
             .navbar-line {
                 flex-direction: column; /* Cambia la dirección del eje principal a columna en dispositivos pequeños */
                 height: auto; /* Altura automática en dispositivos pequeños */
-                align-items: center; /* Alinea los elementos al centro en dispositivos pequeños */
             }
 
             .navbar-line .btn-custom {
-                margin-right: 0; /* Elimina el margen derecho en dispositivos pequeños */
                 margin-bottom: 10px; /* Agrega margen inferior entre los botones en dispositivos pequeños */
                 text-align: center; /* Centra los botones en dispositivos pequeños */
             }
 
+            .logout-btn-container {
+                margin-top: 10px; /* Ajusta el espacio entre el botón de logout y otros botones */
+            }
         }
     </style>
 </head>
@@ -119,54 +108,45 @@
     </div>
 
     <div class="navbar-line">
-        
+        <div class="btn-container d-flex">
+            <!-- Botones específicos para cada tipo de usuario -->
+            @auth
+                @if(Auth::user()->hasRole('Visitante'))
+                    <a href="{{ url('/home') }}" class="btn-custom">SCANEAR QR<span></span><span></span><span></span><span></span></a>
+                    <a href="{{ url('/stands') }}" class="btn-custom">STANDS<span></span><span></span><span></span><span></span></a>
+                @elseif(Auth::user()->hasRole('Empresa'))
+                    <a href="{{ url('/home') }}" class="btn-custom">HOME<span></span><span></span><span></span><span></span></a>
+                    <a href="{{ url('/stand') }}" class="btn-custom">CREAR STANDS<span></span><span></span><span></span><span></span></a>
+                @elseif(Auth::user()->hasRole('Administrador'))
+                    <a href="{{ url('/home') }}" class="btn-custom">HOME<span></span><span></span><span></span><span></span></a>
+                    <a href="{{ url('/empresa') }}" class="btn-custom">CREAR EMPRESA<span></span><span></span><span></span><span></span></a>
+                @endif
 
-        <div class="col-6 col-md-6 text-md-right d-flex align-items-center justify-content-end">
-            <div class="btn-container">
-                <!-- Botones específicos para cada tipo de usuario -->
-                @auth
-                    @if(Auth::user()->hasRole('Visitante'))
-                        <a href="{{ url('/home') }}" class="btn-custom">SCANEAR CÓDIGO QR<span></span><span></span><span></span><span></span></a>
-                        <a href="{{ url('/stands') }}" class="btn-custom">STANDS<span></span><span></span><span></span><span></span></a>
-                    @elseif(Auth::user()->hasRole('Empresa'))
-                        <a href="{{ url('/home') }}" class="btn-custom">HOME<span></span><span></span><span></span><span></span></a>
-                        <a href="{{ url('/stand') }}" class="btn-custom">CREAR STANDS<span></span><span></span><span></span><span></span></a>
-                    @elseif(Auth::user()->hasRole('Administrador'))
-                        <a href="{{ url('/home') }}" class="btn-custom">HOME<span></span><span></span><span></span><span></span></a>
-                        <a href="{{ url('/empresa') }}" class="btn-custom">CREAR EMPRESA<span></span><span></span><span></span><span></span></a>                     
-                    @endif
-                
-                    <div class="col-6 text-center pl-2">
-                        <!-- <i class='bx bx-dots-vertical-rounded'></i> -->
-                        <li class="">
-                            <a id="navbarDropdown" class="bx bx-dots-vertical-rounded" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <!-- {{ Auth::user()->name}} -->
-                            </a>
+                <div class="col-6 text-center pl-2 mt-1">
+                    <a id="navbarDropdown" class="bx bx-dots-vertical-rounded" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <!-- {{ Auth::user()->name}} -->
+                    </a>
 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item logout-link" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                    {{ __('CERRAR SESION') }}
-                                </a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item logout-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                            {{ __('CERRAR SESION') }}
+                        </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
-                @else
-                    <!-- Botones de Iniciar Sesión y Registrarse -->
-                    <a href="{{ route('login') }}" class="btn-custom">INICIAR SESION<span></span><span></span><span></span><span></span></a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="btn-custom">REGISTRARSE<span></span><span></span><span></span><span></span></a>
-                    @endif
-                @endauth
-            </div>
+                </div>
+            @else
+                <!-- Botones de Iniciar Sesión y Registrarse -->
+                <a href="{{ route('login') }}" class="btn-custom">INICIAR SESION<span></span><span></span><span></span><span></span></a>
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="btn-custom">REGISTRARSE<span></span><span></span><span></span><span></span></a>
+                @endif
+            @endauth
         </div>
-        
-        
     </div>
 </body>
 

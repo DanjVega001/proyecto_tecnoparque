@@ -1,108 +1,87 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+    <script src="https://cdn.rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <style>
-        .scan-card {
-            background: url('ruta/a/tu/imagen.gif') center center no-repeat;
-            background-size: cover;
-            position: relative;
-            height: 200px; /* Ajusta la altura según sea necesario */
+        .video-container {
+            border: 2px solid #ddd; /* Borde del contenedor */
+            border-radius: 10px; /* Bordes redondeados */
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
         }
 
-        .scan-card .card-body {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white; /* Ajusta el color del texto según sea necesario */
+        #preview {
+            width: 100%;
+        }
+
+        #defaultVideo {
+            width: 100%;
         }
     </style>
 </head>
+
 <body>
-    <h4>Bienvenido, {{ Auth::user()->name }}!</h4>
-    <p>Gracias por usar nuestra aplicación. Aquí encontrarás información sobre eventos y más.</p>
-    <div class="card scan-card">
-        <video autoplay muted loop id="background-video">
-            <source src="{{ asset('multimedia/videos/istockphoto-1314370116-640_adpp_is.mp4') }}" type="video/mp4">
-            Tu navegador no soporta la etiqueta de video.
-        </video>
-        <div class="card-body">
-            <button class="btn btn-primary" id="scanQR" data-toggle="cameraButton">Abrir Cámara</button>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h4 class="text-center mb-4">Lector de Códigos QR</h4>
+                <div id="defaultVideo" class="video-container">
+                    <!-- Video predeterminado que se muestra antes de hacer clic en "Escanear Código QR" -->
+                    <video autoplay muted loop id="background-video" style="width: 100%;">
+                        <source src="{{ asset('multimedia/videos/istockphoto-1314370116-640_adpp_is.mp4') }}" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                </div>
+                <div id="qrVideo" class="video-container" style="display: none;">
+                    <!-- Visualización de la cámara que se muestra después de hacer clic en "Escanear Código QR" -->
+                    <video id="preview"></video>
+                </div>
+                <div id="qrResult" class="mt-3"></div>
+                <button id="scanQR" class="btn btn-primary btn-block mt-3">Escanear Código QR</button>
+            </div>
         </div>
     </div>
 
-    <div class="card mt-3" id="video-container" style="display: none;">
-        <!-- Agregado el elemento con id 'video-container' -->
-    </div>
-
     <script>
-        document.getElementById('scanQR').addEventListener('click', function () {
-            // Ocultar el botón al hacer clic
-            this.style.display = 'none';
+        $(document).ready(function () {
+            var scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
 
-            document.getElementById('video-container').style.display = 'block';
+            $('#scanQR').click(function () {
+                // Ocultar el video predeterminado y mostrar la visualización de la cámara
+                $('#defaultVideo').hide();
+                $('#qrVideo').show();
 
-            // Obtener el elemento de video
-            var video = document.getElementById('background-video');
+                Instascan.Camera.getCameras().then(function (cameras) {
+                    if (cameras.length > 0) {
+                        scanner.start(cameras[0]); // Usa la primera cámara encontrada
 
-            // Intentar acceder a la cámara
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function (stream) {
-                    // Asignar el flujo de la cámara al elemento de video
-                    video.srcObject = stream;
+                        scanner.addListener('scan', function (content) {
+                            // Muestra el resultado del escaneo
+                            $('#qrResult').text('Resultado: ' + content);
 
-                    // Inicializar QuaggaJS para la detección de códigos QR
-                    Quagga.init({
-                        inputStream: {
-                            name: "Live",
-                            type: "LiveStream",
-                            target: video
-                        },
-                        decoder: {
-                            readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader", "2of5_reader", "code_93_reader"]
-                        }
-                    }, function (err) {
-                        if (err) {
-                            console.error('Error al inicializar QuaggaJS: ', err);
-                            return;
-                        }
+                            // Redirige a la URL del código QR (puedes ajustar esto según tu necesidad)
+                            window.location.href = content;
 
-                        // Iniciar la detección de códigos QR
-                        Quagga.start();
-                    });
-
-                    // Manejar el evento de detección de código QR
-                    Quagga.onDetected(function (result) {
-                        // Detener la detección para evitar múltiples redirecciones
-                        Quagga.stop();
-
-                        // Obtener el código QR reconocido
-                        var code = result.codeResult.code;
-
-                        // Verificar si la URL comienza con "http://" o "https://"
-                        if (code.startsWith("http://") || code.startsWith("https://")) {
-                            // Redirigir a la dirección del código QR
-                            window.location.href = code;
-                        } else {
-                            // Si no comienza con "http://" o "https://", puedes manejarlo según tus necesidades
-                            console.error('El código QR no es una URL válida:', code);
-                        }
-
-                        // Mostrar nuevamente el botón al detener la detección
-                        document.getElementById('scanQR').style.display = 'block';
-                    });
-                })
-                .catch(function (error) {
-                    console.error('Error al acceder a la cámara: ', error);
+                            // Detiene el escaneo después de encontrar un código QR
+                            scanner.stop();
+                        });
+                    } else {
+                        console.error('No se encontraron cámaras en el dispositivo.');
+                    }
+                }).catch(function (e) {
+                    console.error('Error al acceder a las cámaras:', e);
                 });
+            });
         });
     </script>
 
+    <!-- Agrega las referencias a las bibliotecas de Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <div class="card mt-3 list-card">
         <div class="card-body">
             <h5 class="card-title">Ver Listado de Stands</h5>
@@ -112,4 +91,5 @@
         </div>
     </div>
 </body>
+
 </html>

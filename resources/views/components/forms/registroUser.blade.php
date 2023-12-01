@@ -41,7 +41,7 @@
         <div class="row">
             <div class="container-fluid">
                 <div class="row contenidoForm">
-                <img src="{{ asset('img/stands/logoStand.png') }}" class="logoStand" >
+                <img src="{{ asset('img/stands/logoUser.png') }}" class="logoUser" >
                     <!-- Campos de Registro -->
                     <form class="registration-form">
                         <input type="text" placeholder="Nombre y Apellido" required>

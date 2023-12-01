@@ -176,3 +176,63 @@
         margin-top: 10px;
     }
 }
+
+/* Estilos mejorados para los campos de formulario */
+.registration-form input,
+.registration-form select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    transition: all 0.3s ease; /* Agregar transición para los cambios */
+}
+
+/* Efecto de resaltado en los campos al recibir el foco */
+.registration-form input:focus,
+.registration-form select:focus {
+    outline: none;
+    border-color: #942339; /* Cambiar el color del borde al enfocar */
+    box-shadow: 0 0 5px rgba(148, 35, 57, 0.5); /* Agregar sombra al enfocar */
+}
+
+/* Estilos para los botones mejorados */
+.registration-form button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Agregar transición para los cambios */
+}
+
+/* Efecto de cambio de color al pasar el cursor sobre los botones */
+.register-button:hover,
+.login-button:hover {
+    opacity: 0.8; /* Reducir la opacidad al pasar el cursor */
+    transform: scale(1.05); /* Aumentar ligeramente el tamaño al pasar el cursor */
+}
+
+/* Estilos mejorados para el botón de Ingresar */
+.login-button {
+    background-color: #90a0ad; /* Color del botón de Ingresar */
+    margin-top: 10px; /* Espaciado superior */
+    padding: 12px; /* Aumentar el espacio interno */
+    border: 1px solid #90a0ad; /* Borde del botón */
+    color: #fff; /* Color del texto */
+    font-weight: bold; /* Añadir negrita al texto */
+    text-decoration: none; /* Eliminar subrayado por defecto */
+    display: inline-block; /* Hacer que el botón sea inline-block */
+    width: 100%; /* Ajustar al ancho completo */
+    border-radius: 5px; /* Esquinas redondeadas */
+    transition: background-color 0.3s, color 0.3s; /* Transición al pasar el cursor */
+}
+
+/* Efecto de cambio de color al pasar el cursor sobre el botón */
+.login-button:hover {
+    background-color: #5e1325; /* Cambiar color de fondo al pasar el cursor */
+    border-color: #5e1325; /* Cambiar color del borde al pasar el cursor */
+    color: #fff; /* Cambiar color del texto al pasar el cursor */
+}

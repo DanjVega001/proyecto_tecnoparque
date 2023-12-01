@@ -1,8 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Aplicación</title>
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
         .scan-card {
             position: relative;
             height: 200px;
+            margin-bottom: 20px;
         }
 
         .scan-card .card-body {
@@ -15,11 +27,9 @@
         }
 
         #video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
             width: 100%;
-            height: 100%;
+            height: 50vh;
             display: none;
         }
 
@@ -28,8 +38,15 @@
             height: 100%;
             object-fit: cover;
         }
+
+        .list-card {
+            margin-top: 20px;
+        }
     </style>
 
+</head>
+
+<body>
     <h4>Bienvenido, {{ Auth::user()->name }}!</h4>
     <p>Gracias por usar nuestra aplicación. Aquí encontrarás información sobre eventos y más.</p>
 
@@ -50,19 +67,28 @@
             <!-- Contenido adicional para la cámara, si es necesario -->
         </div>
     </div>
+
+    <div class="card mt-3 list-card">
+        <div class="card-body">
+            <h5 class="card-title">Ver Listado de Stands</h5>
+            <p class="card-text">Explora el listado completo de stands disponibles.</p>
+            <a href="{{ route('stands.list') }}" class="btn btn-primary">Ir a Listado de Stands</a>
+        </div>
+    </div>
+
     <script>
         document.getElementById('scanQR').addEventListener('click', function () {
             document.getElementById('video-container').style.display = 'block';
-    
+
             // Obtener el elemento de video
             var video = document.getElementById('background-video');
-    
+
             // Intentar acceder a la cámara
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(function (stream) {
                     // Asignar el flujo de la cámara al elemento de video
                     video.srcObject = stream;
-    
+
                     // Inicializar QuaggaJS para la detección de códigos QR
                     Quagga.init({
                         inputStream: {
@@ -78,20 +104,20 @@
                             console.error('Error al inicializar QuaggaJS: ', err);
                             return;
                         }
-    
+
                         // Iniciar la detección de códigos QR
                         Quagga.start();
                     });
-    
+
                     // Manejar el evento de detección de código QR
                     Quagga.onDetected(function (result) {
                         // Detener la detección para evitar múltiples redirecciones
                         Quagga.stop();
-    
+
                         // Obtener el código QR reconocido
                         var code = result.codeResult.code;
-    
-                        // Redirigir a la dirección del código QR (ajusta según tus necesidades)
+
+                        // Redirigir a la dirección del código QR
                         window.location.href = code;
                     });
                 })
@@ -100,12 +126,6 @@
                 });
         });
     </script>
-    
-        <div class="card mt-3">
-            <div class="card-body">
-                <h5 class="card-title">Ver Listado de Stands</h5>
-                <p class="card-text">Explora el listado completo de stands disponibles.</p>
-                <a href="{{ route('stands.list') }}" class="btn btn-primary">Ir a Listado de Stands</a>
-            </div>
-        </div>
+</body>
 
+</html>

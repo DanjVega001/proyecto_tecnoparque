@@ -46,6 +46,11 @@ class StandController extends Controller
     }
             //Esto Trae todo
             public function index2()
+            {
+                $this->userInauthenticated();
+                // $users = User::where('rol_id',2)->get();
+                
+          
             {             
                 $stands = Stand::all(); 
                 return view('stands/list', compact('stands'));

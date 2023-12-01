@@ -26,6 +26,10 @@
                     <input type="number" class="form-control" name="document" required >
                 </div>
                 <div class="input-group mb-3">
+                    <span class="input-group-text">Dirección:</span>
+                    <input type="text" class="form-control" name="address" required >
+                </div>
+                <div class="input-group mb-3">
                     <span class="input-group-text">Número de Teléfono</span>
                     <input type="number" class="form-control" name="phone_number" required >
                 </div>

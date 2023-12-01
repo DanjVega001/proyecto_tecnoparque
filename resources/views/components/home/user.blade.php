@@ -1,38 +1,39 @@
 <div>
     <style>
         .scan-card {
-            background: url('ruta/a/tu/imagen.gif') center center no-repeat;
-            background-size: cover;
             position: relative;
-            height: 200px; /* Ajusta la altura según sea necesario */
+            height: 200px;
         }
-    
+
+        .scan-card video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .scan-card .card-body {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            color: white; /* Ajusta el color del texto según sea necesario */
+            color: white;
         }
     </style>
-    
+
     <h4>Bienvenido, {{ Auth::user()->name }}!</h4>
     <p>Gracias por usar nuestra aplicación. Aquí encontrarás información sobre eventos y más.</p>
     <div class="card scan-card">
-        <video autoplay muted loop id="background-video">
-            <source src="{{ asset('multimedia/videos/istockphoto-1314370116-640_adpp_is.mp4') }}" type="video/mp4">
-            Tu navegador no soporta la etiqueta de video.
-        </video>
+        <video autoplay muted playsinline id="scanner-video"></video>
         <div class="card-body">
             <h5 class="card-title">Ver Evaluación</h5>
             <p class="card-text">Accede para ver y completar la evaluación.</p>
             <button class="btn btn-primary" id="scanQR">Abrir Cámara</button>
         </div>
     </div>
-    
-    
-    
 
     <div class="card mt-3">
         <div class="card-body">
@@ -52,10 +53,11 @@
             inputStream: {
                 name: "Live",
                 type: "LiveStream",
-                target: document.querySelector('#your-scanner-container'), // Reemplaza con el contenedor real
+                target: document.querySelector('#scanner-video'),
                 constraints: {
                     width: 480,
                     height: 320,
+                    facingMode: "environment", // Utiliza la cámara trasera del dispositivo si está disponible
                 },
             },
             decoder: {
@@ -72,7 +74,7 @@
         // Manejar el resultado del escaneo
         Quagga.onDetected(function (result) {
             alert('Código QR escaneado: ' + result.codeResult.code);
-            // Aquí puedes realizar acciones adicionales con el resultado del escaneo
+            // Realiza acciones adicionales con el resultado del escaneo si es necesario
         });
     });
 </script>

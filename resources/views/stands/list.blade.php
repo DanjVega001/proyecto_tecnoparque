@@ -106,9 +106,8 @@
                                             <li class="list-group-item"><i class="bx bx-link-external"></i> <strong>Sitio web:</strong> <a href="{{$stand->web}}" target="_blank">{{$stand->web}}</a></li>
                                         </ul>
 
-                                        <div class="redes">          
-                                            <div class="container social-icons mt-4  ">                                
-                                                <!-- Enlaces a redes sociales -->
+                                        <div class="redes">
+                                            <div class="social-icons">
                                                 <a href="{{ $stand->facebook }}" target="_blank" class="social-icon"><i class="bx bxl-facebook-circle bx-lg"></i></a>
                                                 <a href="{{ $stand->instagram }}" target="_blank" class="social-icon"><i class="bx bxl-instagram-alt bx-lg"></i></a>
                                                 <a href="{{ $stand->tiktok }}" target="_blank" class="social-icon"><i class="bx bxl-tiktok bx-lg"></i></a>

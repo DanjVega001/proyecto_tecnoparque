@@ -77,6 +77,21 @@
     text-decoration: none;
 }
 
+.redes {
+    display: flex;
+    justify-content: center;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%; /* Asegura que los iconos ocupen el ancho disponible */
+}
+
+.social-icon {
+    margin: 0 5px; /* Espacio entre los iconos */
+}
 
 
 

@@ -25,7 +25,6 @@
                         <p>REGISTRO USUARIOS</p>
                     </div>
                     <div class="col-4 text-center">
-                        <i class='bx bx-dots-vertical-rounded'></i>
                     </div>
                 </div>
                 <div class="row">
@@ -48,7 +47,7 @@
                         <input type="email" placeholder="Email" name="email" required>
                         <input type="number" placeholder="Celular" name="phone_number" required>
                         <input type="text" placeholder="Dirección" name="address" required>
-                        <input type="date" placeholder="Fecha de Nacimiento" name="birthdate" required>
+                        <input type="date" placeholder="Fecha de Nacimiento (DD/MM/AAAA)" name="birthdate" required>
                         <select name="gender" required>
                             <option disabled selected>Género</option>
                             <option value="male">Masculino</option>

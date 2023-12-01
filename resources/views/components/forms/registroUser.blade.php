@@ -41,7 +41,7 @@
         <div class="row">
             <div class="container-fluid">
                 <div class="row contenidoForm">
-                <img src="{{ asset('img/stands/logoStand.png') }}" class="logoStand" >
+                <img src="{{ asset('img/stands/logoUser.png') }}" class="logoUser" >
                     <!-- Campos de Registro -->
                     <form class="registration-form">
                         <input type="text" placeholder="Nombre y Apellido" required>
@@ -49,7 +49,7 @@
                         <input type="email" placeholder="Email" required>
                         <input type="tel" placeholder="Celular" required>
                         <input type="text" placeholder="Dirección" required>
-                        <input type="date" placeholder="Fecha de Nacimiento" required>
+                        <input type="date" placeholder="Fecha de Nacimiento (DD/MM/AAAA)" name="birthdate" required>
                         <select required>
                             <option disabled selected>Género</option>
                             <option value="male">Masculino</option>

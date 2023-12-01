@@ -13,14 +13,21 @@
         }
 
         .navbar-line a {
-            color: black !important; /* Establece el color del enlace a blanco */
+            color: white !important; /* Establece el color del enlace a blanco */
+        }
+
+        .navbar-line .navbar-toggler-icon {
+            background-color: white; /* Establece el color del ícono del botón de navegación a blanco */
+        }
+
+        .navbar-line .navbar-toggler {
+            border: none; /* Elimina el borde del botón de navegación */
         }
     </style>
 
     <nav class="navbar-line navbar navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}">
-                
                 <i class="fas fa-arrow-left"></i> Regresar
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -81,7 +88,7 @@
                         @include('components.home.admin')
                     @else
                         {{-- Panel para Visitante --}}
-                      @include('components.home.user')
+                        @include('components.home.user')
                     @endif
 
                     @if (session('status'))

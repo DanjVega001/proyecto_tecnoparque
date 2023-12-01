@@ -42,7 +42,7 @@
                     </div>
                     
                     <div class="col-4 text-center">
-                        <i class='bx bx-user'></i>
+                        {{-- <i class='bx bx-user'></i> --}}
                     </div>
               
                 </div>

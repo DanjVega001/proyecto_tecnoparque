@@ -25,13 +25,13 @@
             <div class="container-fluid">
                 <div class="row headerUp pt-2">
                     <div class="col-4 text-center">
-                        <i class='bx bx-chevron-left'></i>
+                        <a href="/home"><i class='bx bx-chevron-left'></i></a>
                     </div>
                     <div class="col-4 text-center">
                         <p>Evaluación de Stand</p>
                     </div>
                     <div class="col-4 text-center">
-                        <i class='bx bx-dots-vertical-rounded'></i>
+                        {{-- <i class='bx bx-dots-vertical-rounded'></i> --}}
                     </div>
                 </div>
                 <div class="row">

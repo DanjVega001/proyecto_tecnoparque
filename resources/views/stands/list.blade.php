@@ -17,6 +17,14 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="{{ asset('css/user/stand.css') }}" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+
+        .bx-chevron-left{
+            color: #fff;
+        }
+
+    </style>
 </head>
 <body class="">
     <div class="container-fluid">
@@ -26,7 +34,7 @@
             <div class="container-fluid  ">
                 <div class="row headerUp pt-2">
                     <div class="col-4 text-center">
-                        <i class='bx bx-chevron-left'></i>
+                        <a href="/home"><i class='bx bx-chevron-left'></i></a>
                     </div>
                     <div class="col-4 text-center d-flex justify-content-between align-items-center ">
                         <button type="button" class="btn btn-link text-white" onclick="window.location.href='/home'">HOME</button>

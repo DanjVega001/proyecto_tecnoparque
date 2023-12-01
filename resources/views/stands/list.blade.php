@@ -55,6 +55,7 @@
                                 <!-- Mostrar calificación para cada stand -->
                                 <img class="card-img-top logoStand" src="{{$stand->logo}}" alt="{{$stand->user->name}}">
                                 <div class="calificacion">
+                                    <h1>{{$stand->calification}}</h1>
                                     <input type="radio" id="estrella{{ $stand->id }}5" name="calificacion{{ $stand->id }}" value="5">
                                     <label for="estrella{{ $stand->id }}5">&#9733;</label>
                                     <input type="radio" id="estrella{{ $stand->id }}4" name="calificacion{{ $stand->id }}" value="4">

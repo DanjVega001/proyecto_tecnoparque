@@ -23,6 +23,11 @@
         .navbar-line .navbar-toggler {
             border: none; /* Elimina el borde del botón de navegación */
         }
+
+        /* Estilo específico para el enlace de Logout */
+        .navbar-line .dropdown-item.logout-link {
+            color: black !important; /* Establece el color del enlace Logout a negro */
+        }
     </style>
 
     <nav class="navbar-line navbar navbar-light">
@@ -57,7 +62,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item logout-link" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

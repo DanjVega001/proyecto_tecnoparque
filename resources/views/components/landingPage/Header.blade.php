@@ -24,6 +24,13 @@
 
     <style>
         /* Estilos para la línea ROJA */
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif; /* Cambiar a la fuente de Google Fonts */
+        }
+
         .navbar-line {
             background-color: #942339;
             padding: 10px;
@@ -31,6 +38,8 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap; /* Para que los elementos se envuelvan en dispositivos pequeños */
+            height: 100vh; /* Altura del viewport */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega sombra al encabezado */
         }
 
         /* Estilo para los botones en la línea ROJA*/
@@ -38,22 +47,22 @@
             color: #fff;
             font-size: 13px;
             letter-spacing: 2px;
-            font-family: 'Roboto', sans-serif; /* Cambiar a la fuente de Google Fonts */
             font-weight: 600;
-            border: none;
+            border: 2px solid transparent; /* Agrega un borde transparente a los botones */
             outline: none;
             cursor: pointer;
             position: relative;
-            padding: 0;
+            padding: 8px 16px; /* Espaciado interno */
             overflow: hidden;
-            transition: all .5s;
+            transition: all .3s;
             white-space: nowrap;
             text-decoration: none; /* Quitar la línea debajo del texto */
+            margin: 5px; /* Espaciado entre los botones */
         }
 
         .navbar-line .btn-custom:hover {
-            transition: all .5s;
-            transform: rotate(-3deg) scale(1.1);
+            border-color: #fff; /* Cambia el color del borde al pasar el cursor */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Agrega una sombra al pasar el cursor */
         }
 
         .navbar-line button span {
@@ -61,15 +70,10 @@
             display: block;
         }
 
-        .navbar-line button span:nth-child(1),
-        .navbar-line button span:nth-child(2),
-        .navbar-line button span:nth-child(3),
-        .navbar-line button span:nth-child(4) {
-        }
-
         @media (max-width: 767px) {
             .navbar-line {
                 flex-direction: column; /* Cambia la dirección del eje principal a columna en dispositivos pequeños */
+                height: auto; /* Altura automática en dispositivos pequeños */
                 align-items: center; /* Alinea los elementos al centro en dispositivos pequeños */
             }
 
@@ -94,17 +98,17 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-10 text-md-right d-flex">
+        <div class="col-12 col-md-10 text-md-right d-flex align-items-center justify-content-end">
             <div class="btn-container">
                 <!-- Botones de Iniciar Sesión y Registrarse -->
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/home') }}" class="btn-custom" style="color: #fff;">HOME<span></span><span></span><span></span><span></span></a>
+                        <a href="{{ url('/home') }}" class="btn-custom">HOME<span></span><span></span><span></span><span></span></a>
                     @else
-                        <a href="{{ route('login') }}" class="btn-custom" style="color: #fff;">INICIAR SESION<span></span><span></span><span></span><span></span></a>
+                        <a href="{{ route('login') }}" class="btn-custom" >INICIAR SESION<span></span><span></span><span></span><span></span></a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="btn-custom" style="color: #fff;">REGISTRARSE<span></span><span></span><span></span><span></span></a>
+                            <a href="{{ route('register') }}" class="btn-custom">REGISTRARSE<span></span><span></span><span></span><span></span></a>
                         @endif
                     @endauth
                 @endif

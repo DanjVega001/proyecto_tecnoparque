@@ -50,7 +50,7 @@ class StandController extends Controller
                 $this->userInauthenticated();
                 // $users = User::where('rol_id',2)->get();
                 
-                 $stands = Stand::where('user_id',3)->get(); 
+                 $stands = Stand::all(); 
                 return view('stands/list', compact('stands'));
             }
             

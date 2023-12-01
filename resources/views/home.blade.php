@@ -102,12 +102,13 @@
                     @endif
 
                 
-                    @include('components.landingPage.footer')
+                    
 
                 </div>
             </div>
         </div>
     </div>
+    @include('components.landingPage.footer')
 </div>
 
 <!-- Incluye la biblioteca de Font Awesome directamente -->

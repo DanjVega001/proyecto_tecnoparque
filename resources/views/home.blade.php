@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" style="margin: 0; padding: 0;">
     <style>
         .navbar-line {
             background-color: #942339;
@@ -10,6 +10,7 @@
             justify-content: space-between;
             align-items: center;
             color: white; /* Establece el color del texto a blanco */
+            padding-left: 50px;
         }
 
         .navbar-line a {
@@ -64,7 +65,7 @@
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item logout-link" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                                        document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 

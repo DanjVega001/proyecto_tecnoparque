@@ -24,6 +24,10 @@
                 <input type="text" class="form-control" name="document" value="{{$empresa->document}}">
             </div>
             <div class="input-group mb-3">
+                <span class="input-group-text">Dirección:</span>
+                <input type="text" class="form-control" name="address" value="{{$empresa->address}}" >
+            </div>
+            <div class="input-group mb-3">
                 <span class="input-group-text">Número de Teléfono</span>
                 <input type="text" class="form-control" name="phone_number" value="{{$empresa->phone_number}}">
             </div>

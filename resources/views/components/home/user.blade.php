@@ -9,17 +9,17 @@
     <script src="https://cdn.rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <style>
         .video-container {
-            border: 2px solid #ddd; /* Borde del contenedor */
-            border-radius: 10px; /* Bordes redondeados */
+            border: 2px solid #ddd;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         #preview {
             width: 100%;
         }
 
-        #defaultVideo {
+        #defaultVideo, #qrVideo {
             width: 100%;
         }
     </style>
@@ -31,14 +31,12 @@
             <div class="col-md-6 offset-md-3">
                 <h4 class="text-center mb-4">Lector de Códigos QR</h4>
                 <div id="defaultVideo" class="video-container">
-                    <!-- Video predeterminado que se muestra antes de hacer clic en "Escanear Código QR" -->
                     <video autoplay muted loop id="background-video" style="width: 100%;">
                         <source src="{{ asset('multimedia/videos/istockphoto-1314370116-640_adpp_is.mp4') }}" type="video/mp4">
                         Tu navegador no soporta la etiqueta de video.
                     </video>
                 </div>
                 <div id="qrVideo" class="video-container" style="display: none;">
-                    <!-- Visualización de la cámara que se muestra después de hacer clic en "Escanear Código QR" -->
                     <video id="preview"></video>
                 </div>
                 <div id="qrResult" class="mt-3"></div>
@@ -52,22 +50,16 @@
             var scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
 
             $('#scanQR').click(function () {
-                // Ocultar el video predeterminado y mostrar la visualización de la cámara
                 $('#defaultVideo').hide();
                 $('#qrVideo').show();
 
                 Instascan.Camera.getCameras().then(function (cameras) {
                     if (cameras.length > 0) {
-                        scanner.start(cameras[0]); // Usa la primera cámara encontrada
+                        scanner.start(cameras[0]);
 
                         scanner.addListener('scan', function (content) {
-                            // Muestra el resultado del escaneo
                             $('#qrResult').text('Resultado: ' + content);
-
-                            // Redirige a la URL del código QR (puedes ajustar esto según tu necesidad)
                             window.location.href = content;
-
-                            // Detiene el escaneo después de encontrar un código QR
                             scanner.stop();
                         });
                     } else {
@@ -80,9 +72,8 @@
         });
     </script>
 
-    <!-- Agrega las referencias a las bibliotecas de Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <div class="card mt-3 list-card">
+    <div class="card mt-3 list-card text-center">
         <div class="card-body">
             <h5 class="card-title">Ver Listado de Stands</h5>
             <h6 class="card-subtitle mb-2 text-muted">Explora nuestra selección</h6>

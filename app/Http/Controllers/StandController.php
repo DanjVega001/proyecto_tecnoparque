@@ -46,13 +46,13 @@ class StandController extends Controller
     }
             //Esto Trae todo
             public function index2()
+
             {
                 $this->userInauthenticated();
                 // $users = User::where('rol_id',2)->get();
                 
-          
-            {             
-                $stands = Stand::all(); 
+                 $stands = Stand::all(); 
+
                 return view('stands/list', compact('stands'));
             }
             
@@ -122,11 +122,16 @@ class StandController extends Controller
      */
     public function show($id)
     {
-        $stands = Stand::find($id);
-        //dd($stands);
-        // DEBE RETORNAR A LA INTERFAZ EL STAND CON SUS DATOS
-        return view('stands/index', compact('stands')); //----------------------------------> COLOCAR RUTA ACA
+        $stand = Stand::where('id', $id)->first();
+        
+        // Asegúrate de manejar el caso en el que el stand no se encuentre
+        if (!$stand) {
+            abort(404); // Esto devolverá un error 404 si el stand no se encuentra
+        }
+    
+        return view('stands/stand', compact('stand'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.

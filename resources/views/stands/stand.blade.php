@@ -15,13 +15,24 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="{{ asset('css/user/stand.css') }}" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        .content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+    </style>
+
 </head>
-<body class="">
-    <div class="container-fluid">
+<body>
+    <div class="container-fluid ">
         
         <div class="row">
             <!-- HEADER -->
-            <div class="container-fluid  ">
+            <div class="container-fluid" style="margin: 0; padding: 0;">
                 <div class="row headerUp pt-2">
                     <div class="col-4 text-center">
                         <i class='bx bx-chevron-left'></i>
@@ -47,7 +58,7 @@
         <div class="">              
             <div class="row ">
                 <div class="container-fluid contenidoCard">
-                    <div class="row">
+                    <div class="row content-container">
                         <div class="col-md-4 principal">
                             <!-- Mostrar calificación para el stand -->
                             <img class="card-img-top logoStand" src="{{$stand->logo}}" alt="{{$stand->user->name}}">

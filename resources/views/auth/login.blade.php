@@ -31,10 +31,13 @@
     /* Estilos para el footer */
     footer {
       background-color: white; /* Color del footer blanco */
-      border-radius: 20px; /* Esquinas redondeadas */
-      padding: 40px; /* Aumentamos el padding para hacerlo más grande */
+      border-radius: 30px; /* Esquinas redondeadas */
+      padding: 30px; /* Aumentamos el padding para hacerlo más grande */
       margin-top: 50px;
       box-shadow: 0px -5px 15px 0px rgba(0,0,0,0.75); /* Sombra respecto al fondo */
+       bottom: 0; /* Coloca el footer al final de la página */
+       left: 0; /* Alinea el footer al lado izquierdo */
+       right: 0; /* Alinea el footer al lado derecho */
     }
     footer .btn-google {
       margin-top: 20px; /* Espacio entre el botón y el borde superior del footer */
@@ -75,7 +78,7 @@
     <!-- Footer -->
     <footer class="text-center">
       <!-- Agregamos el icono de Google de Font Awesome -->
-      <i class="fab fa-google fa-2x mb-3"></i>
+      <img src="{{ asset('img/stands/LogoGoogle.png') }}" class="mb-3" style="max-width: 10%;">
       <!-- Estilos actualizados para el botón de Google -->
       <button type="button" class="btn btn-primary btn-block btn-google" onclick="window.location.href='{{ url('/login-google') }}'">Iniciar sesión con Google</button>
     </footer>

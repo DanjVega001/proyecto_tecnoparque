@@ -15,7 +15,7 @@
     /* border: 1px solid #90a0ad; */
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
-    padding-bottom: 550px;
+    padding-bottom: 10px;
     margin-top: 150px;
 }
 
@@ -76,7 +76,7 @@
         margin-top: -50px;
         width: 110px; 
         height: 100px;
-        border: 5px solid transparent;
+        border: 10px solid #a2afbd; /* Establecer un borde transparente para permitir el gradiente */
     }
 }
 
@@ -155,7 +155,7 @@
 
     .contenidoForm {
         margin-top: 30px;
-        padding-bottom: 300px;
+        padding-bottom: 0px;
     }
 
     .logoUser {
@@ -236,3 +236,28 @@
     border-color: #5e1325; /* Cambiar color del borde al pasar el cursor */
     color: #fff; /* Cambiar color del texto al pasar el cursor */
 }
+
+/* Estilos para los campos de formulario con sombras */
+.registration-form input,
+.registration-form select {
+    width: 100%;
+    margin-bottom: 15px; /* Aumentar el espacio entre campos */
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agregar sombra para resaltar */
+}
+
+/* Estilos para el último campo (evita la sombra en la parte inferior) */
+.registration-form input:last-child,
+.registration-form select:last-child {
+    box-shadow: none; /* Eliminar la sombra en el último campo */
+}
+
+/* Reducir el espacio en gris después del formulario */
+.container-fluid .contenidoForm {
+    box-shadow: 0 0 5px rgba(148, 35, 57, 0.5); /* Agregar sombra al enfocar */
+}
+

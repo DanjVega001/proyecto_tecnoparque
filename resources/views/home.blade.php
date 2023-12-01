@@ -3,30 +3,32 @@
 @section('content')
 <div class="container-fluid">
     <style>
-        /* Agrega un fondo rojo a la parte superior de la página */
-        nav {
-            background-color: red;
-            border-bottom: 5px solid #ff0000; /* Ajusta el grosor de la línea roja */
-            padding: 10px; /* Añade un relleno para mayor visibilidad */
+        .navbar-line {
+            background-color: #942339;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white; /* Establece el color del texto a blanco */
+        }
+
+        .navbar-line a {
+            color: black !important; /* Establece el color del enlace a blanco */
         }
     </style>
-    
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+
+    <nav class="navbar-line navbar navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                
+                <i class="fas fa-arrow-left"></i> Regresar
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav me-auto">
-
-                </ul>
-
-                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav me-auto"></ul>
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
                     @guest
@@ -96,4 +98,6 @@
         </div>
     </div>
 </div>
-@endsection
+
+<!-- Incluye la biblioteca de Font Awesome directamente -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" integrity="sha384-Ff/HKnA6hBmK2tMN6l0u8vZlYUAfxwBgFA6bPDe2Id/gP8R53bo4p8R73KcE2I6" crossorigin="anonymous"></script>

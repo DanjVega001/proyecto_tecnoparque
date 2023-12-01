@@ -104,6 +104,7 @@
                 @if (Route::has('login'))
                     @auth
                         <a href="{{ url('/home') }}" class="btn-custom">HOME<span></span><span></span><span></span><span></span></a>
+                        <a href="{{ url('/stands') }}" class="btn-custom">STANDS<span></span><span></span><span></span><span></span></a>
                     @else
                         <a href="{{ route('login') }}" class="btn-custom" >INICIAR SESION<span></span><span></span><span></span><span></span></a>
 

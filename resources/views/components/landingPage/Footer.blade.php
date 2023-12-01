@@ -1,6 +1,6 @@
 <!-- resources/views/components/Footer.blade.php -->
 
-<footer>
+<footer >
 
     <div class="social-icons-container">
         <a href="" class="social-icon bx bxl-facebook-circle"></a>

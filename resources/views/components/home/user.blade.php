@@ -43,7 +43,6 @@
             margin-top: 20px;
         }
     </style>
-
 </head>
 
 <body>
@@ -117,7 +116,7 @@
                         // Obtener el código QR reconocido
                         var code = result.codeResult.code;
 
-                        // Redirigir a la dirección del código QR
+                        // Redirigir a la dirección del código QR (ajusta según tus necesidades)
                         window.location.href = code;
                     });
                 })

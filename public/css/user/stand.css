@@ -1,7 +1,7 @@
 
 .headerUp {
     background-color: #942339;
-    color: #fff;
+    color: #942339;
     font-weight: bold;
     font-size: 40px;
 }
@@ -67,6 +67,15 @@
     color: #999; /* Color gris para las estrellas vacías */
 }
 
+.bx-dots-vertical-rounded{
+    color: #fff;
+}
+
+/* Cambiar el color del ícono al pasar el mouse */
+.bx-dots-vertical-rounded:hover {
+    color: #fff;
+    text-decoration: none;
+}
 
 
 
@@ -89,6 +98,12 @@
 
     .headerUp p{
         padding-top: 15px;
+    }
+
+    .bx-dots-vertical-rounded{
+        font-size: 30px;
+        padding-top: -10px;
+        color: #fff;
     }
 
     .headerUp i{

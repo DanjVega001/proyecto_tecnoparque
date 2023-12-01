@@ -32,23 +32,43 @@
         <div class="row">
             <!-- HEADER -->
             <div class="container-fluid  ">
-                <div class="row headerUp pt-2">
-                    <div class="col-4 text-center">
+                <div class="row headerUp ">
+                    <div class="col-3 text-center">
                         <a href="/home"><i class='bx bx-chevron-left'></i></a>
                     </div>
-                    <div class="col-4 text-center d-flex justify-content-between align-items-center ">
+                    <div class="col-3 text-center d-flex justify-content-between align-items-center">
                         <button type="button" class="btn btn-link text-white" onclick="window.location.href='/home'">HOME</button>
+                    </div>
+                    <div class="col-3 text-center d-flex justify-content-between align-items-center ">
+                        
                         <button type="button" class="btn btn-link text-white" onclick="window.location.href='/passport'">VISITADOS</button>
                     </div>
                     
-                    <div class="col-4 text-center">
-                        {{-- <i class='bx bx-user'></i> --}}
+                    <div class="col-3 text-center pl-2">
+                        <!-- <i class='bx bx-dots-vertical-rounded'></i> -->
+                        <li class="">
+                            <a id="navbarDropdown" class="bx bx-dots-vertical-rounded" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <!-- {{ Auth::user()->name}} -->
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item logout-link" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                    {{ __('CERRAR SESION') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                     </div>
               
                 </div>
                 <div class="row">
                     <div class="col-sm lineaOsucra">
-                        
+                        .
                     </div>
                 </div>
             </div>

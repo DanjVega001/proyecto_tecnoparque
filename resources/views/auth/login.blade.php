@@ -26,6 +26,17 @@
       background-color: #5e1325;
       border-color: #5e1325;
     }
+    /* Estilos para el footer */
+    footer {
+      background-color: #5e1325; /* Color del footer */
+      border-radius: 20px; /* Esquinas redondeadas */
+      padding: 20px;
+      margin-top: 50px;
+      box-shadow: 0px -5px 15px 0px rgba(0,0,0,0.75); /* Sombra respecto al fondo */
+    }
+    footer .btn-google {
+      margin-top: 10px; /* Espacio entre el botón y el borde superior del footer */
+    }
   </style>
 </head>
 <body>
@@ -50,8 +61,11 @@
       </form>
       <a href="{{ route('register') }}" class="btn btn-primary btn-block mt-2">Registrar</a>
       <hr>
-      <button type="button" class="btn btn-primary btn-block" onclick="window.location.href='{{ url('/login-google') }}'">Ingreso con Google</button>
     </div>
+    <!-- Footer -->
+    <footer class="text-center">
+      <button type="button" class="btn btn-primary btn-block btn-google" onclick="window.location.href='{{ url('/login-google') }}'">Ingreso con Google</button>
+    </footer>
   </div>
 </body>
 </html>

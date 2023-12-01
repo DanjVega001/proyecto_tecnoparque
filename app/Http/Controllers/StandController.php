@@ -46,11 +46,8 @@ class StandController extends Controller
     }
             //Esto Trae todo
             public function index2()
-            {
-                $this->userInauthenticated();
-                // $users = User::where('rol_id',2)->get();
-                
-                 $stands = Stand::where('user_id',3)->get(); 
+            {             
+                $stands = Stand::all(); 
                 return view('stands/list', compact('stands'));
             }
             
@@ -120,9 +117,10 @@ class StandController extends Controller
      */
     public function show($id)
     {
-        $stand = Stand::find($id);
+        $stands = Stand::find($id);
+        //dd($stands);
         // DEBE RETORNAR A LA INTERFAZ EL STAND CON SUS DATOS
-        //return view('stands/index', compact('stand'));
+        return view('stands/index', compact('stands')); //----------------------------------> COLOCAR RUTA ACA
     }
 
     /**

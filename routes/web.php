@@ -48,7 +48,7 @@ Route::middleware(['auth', 'role:Visitante'])->group(function () {
     Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 'store'])->name('evaluation.store');
 
     // Stand individual
-    Route::get('/stands/{idStand}', [StandController::class, 'show'])->name('stand.show');
+    Route::get('/stands/{id}', [StandController::class, 'show'])->name('stand.show');
 
     // Stands visitados
     Route::get('/stands-visitados', [StandController::class, 'standsVisitados'])->name('stand.visitados');

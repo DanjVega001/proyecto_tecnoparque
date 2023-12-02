@@ -100,6 +100,8 @@
                                     <div class="card-body">
                                         <h4 class="card-title">{{$stand->user->name}}</h4>
                                         <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><i class='bx bx-user'></i> <strong>Stand:</strong> {{$stand->name}}</li>
+
                                             <li class="list-group-item"><i class="bx bx-map"></i> <strong>Dirección:</strong> {{$stand->user->address}}</li>
                                             <li class="list-group-item"><i class="bx bx-phone"></i> <strong>Teléfono:</strong> {{$stand->user->phone_number}}</li>
                                             <p class="card-text"><i class="bx bx-info-circle"></i> {{ $stand->description }}</p>

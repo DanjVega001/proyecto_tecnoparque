@@ -81,7 +81,7 @@ class EvaluationController extends Controller
         // Obtener la ruta del logo del stand
         $logoPath = $stand->logo;
 
-        return view('evaluations/index', compact('criterios', 'qr_code', 'user', 'logoPath'));
+        return view('evaluations/index', compact('criterios', 'qr_code', 'user', 'stand'));
     }
 
     public function store(Request $request, $qr_code)     

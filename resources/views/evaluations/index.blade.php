@@ -25,13 +25,29 @@
             <div class="container-fluid">
                 <div class="row headerUp pt-2">
                     <div class="col-4 text-center">
-                        <i class='bx bx-chevron-left'></i>
+                        <a href="/home"><i class='bx bx-chevron-left'></i></a>
                     </div>
                     <div class="col-4 text-center">
                         <p>Evaluación de Stand</p>
                     </div>
                     <div class="col-4 text-center">
-                        <i class='bx bx-dots-vertical-rounded'></i>
+                        
+                            <a id="navbarDropdown" class="bx bx-dots-vertical-rounded" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <!-- {{ Auth::user()->name}} -->
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item logout-link" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                    {{ __('Cerrar Sesion') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        
                     </div>
                 </div>
                 <div class="row">
@@ -46,7 +62,9 @@
             <div class="container-fluid contenidoForm">
                 <div class="row justify-content-center align-items-center vh-100">
                     <div class="col">
-                    <img class="card-img-top logoStand mb-5" src="{{ asset('img/stands/logoStand.png') }}" alt="logoStand">
+                        <img class="card-img-top logoStand" src="{{ asset($stand->logo) }}" alt="al">
+                        <h1 class="text-center mt-3">{{ $stand->name }}</h1>
+
                         <form action="{{ route('evaluation.store', ['qr_code' => $qr_code]) }}" method="POST">
                             @csrf
                             @foreach($criterios as $criterio)

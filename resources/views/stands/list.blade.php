@@ -37,7 +37,7 @@
                         <a href="/home"><i class='bx bx-chevron-left'></i></a>
                     </div>
                     <div class="col-3 text-center d-flex justify-content-between align-items-center">
-                        <button type="button" class="btn btn-link text-white" onclick="window.location.href='/home'">HOME</button>
+                        <button type="button" class="btn btn-link text-white" onclick="window.location.href='/home'">SCANEAR QR</button>
                     </div>
                     <div class="col-3 text-center d-flex justify-content-between align-items-center ">
                         

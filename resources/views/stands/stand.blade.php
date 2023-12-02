@@ -21,19 +21,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             margin-bottom: -100px;
         }
-   /* Media query para pantallas de celular */
-@media only screen and (max-width: 600px) {
-    .logoStand {
-        margin-top: -50%;
-    }
-}
-        .bx-chevron-left{
-            color: #fff;
-        }
-
     </style>
 
 </head>
@@ -48,7 +37,7 @@
                     <a href="/passport"><i class='bx bx-chevron-left'></i></a>
                     </div>
                     <div class="col-4 text-center d-flex justify-content-between align-items-center ">
-                        <button type="button" class="btn btn-link text-white" onclick="window.location.href='/home'">HOME</button>
+                        <button type="button" class="btn btn-link text-white" onclick="window.location.href='/home'">SCANEAR QR</button>
                         <button type="button" class="btn btn-link text-white" onclick="window.location.href='/passport'">VISITADOS</button>
                     </div>
                     

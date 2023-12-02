@@ -34,7 +34,7 @@
                         </a>
                     </div>
                     <div class="col-3 text-center d-flex justify-content-between align-items-center ">
-                        <a href="/home" class="btn btn-link text-white">HOME</a>
+                        <a href="/home" class="btn btn-link text-white">SCANEAR QR</a>
                     </div>
                     <div class="col-3 text-center d-flex justify-content-between align-items-center ">
                         <a href="/stands" class="btn btn-link text-white">STANDS</a>

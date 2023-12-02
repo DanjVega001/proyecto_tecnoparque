@@ -96,6 +96,8 @@
                         <div class="col-md-4 principal">
                             <!-- Mostrar calificación para el stand -->
                             <img class="card-img-top logoStand" src="{{ asset($stand->logo) }}" alt="{{$stand->name}}">
+                            <img class="card-img-top logoStand" src="{{ asset($stand->banner) }}" alt="{{$stand->name}}">
+
                             <div class="calificacion">
                                 @php
                                 $calification = $stand->calification; // Obtener la calificación del stand

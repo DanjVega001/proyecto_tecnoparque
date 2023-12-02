@@ -25,34 +25,36 @@
 .principal{
     margin-bottom: 100px;
 }
+
 .logoStand {
     display: block;
     margin: 0 auto; /* Centrar horizontalmente */
-    margin-top: -80px; /* Ajustar la posición hacia arriba */
+    margin-top: -60px; /* Ajuste de posición hacia arriba */
     border-radius: 50%;
     overflow: hidden;
-    width: 200px;
-    height: 200px;
-    border: 10px solid transparent;
+    width: 170px; /* Reducción del tamaño del logo */
+    height: 170px; /* Reducción del tamaño del logo */
+    border: 5px solid transparent;
     background-image: linear-gradient(to bottom, #942339 50%, #942339 50%);
-    position: absolute;
-    z-index: 1; /* Asegura que el logo esté encima del banner */
-    margin-left: 25%;
+    position: relative;
+    z-index: 2; /* Asegura que el logo esté en frente del banner */
 }
 
 .bannerStand {
     display: block;
     margin: 0 auto; /* Centrar horizontalmente */
-    margin-left: -80px;
-    margin-top: -100px; /* Ajustar la posición hacia arriba */
-    position: absolute;
-    z-index: 0; /* Coloca el banner detrás del logo */
-    width: 600px;
-    height: 250px;
+    margin-top: -200px; /* Ajuste de posición hacia arriba */
+    width: 100%; /* Ocupa el 100% del ancho disponible */
+    max-width: 800px; /* Establecer un ancho máximo */
+    height: auto; /* Ajuste de altura automática */
     border-radius: 10px;
-    border: 5px solid transparent;
-    background-image: linear-gradient(to bottom, #942339 50%, #942339 50%);
+    border: 3px solid transparent;
+    background-image: linear-gradient(to bottom, #545454 100%, #942339 50%);
+    position: relative;
 }
+
+
+
 .card{
     background-color: #d4e0e9;
 }
@@ -70,7 +72,7 @@
 .calificacion {
     text-align: center;
     font-size: 50px;
-    margin-top: 150px; /* Adjust the margin-top value as needed */
+    margin-top: 50px; /* Adjust the margin-top value as needed */
 }
 
 
@@ -164,7 +166,7 @@
 
     .calificacion{
         margin-bottom: 40px;
-        margin-top: 80px;
+        margin-top: 30px;
 }
     .calificacion input[type="radio"]{
         text-align: center;
@@ -180,14 +182,13 @@
         width: 120px;
         height: 120px;
         border: 5px solid transparent;
-        margin-left: 35%;
+
     }
 
     .bannerStand{
-        width: 400px;
-        height: 150px;
-        margin-top: -65px;
-        margin-left: 20px;
+        width: 90%;
+        margin-top: -150px;
+
     }
 
 }

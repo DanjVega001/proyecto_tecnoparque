@@ -69,6 +69,8 @@
 
 .bx-dots-vertical-rounded{
     color: #fff;
+    font-size: 40px;
+    margin-left: -25px;
 }
 
 /* Cambiar el color del ícono al pasar el mouse */

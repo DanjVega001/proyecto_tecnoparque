@@ -49,6 +49,18 @@
     display: block;
 }
 
+.bx-dots-vertical-rounded{
+    color: #fff;
+    font-size: 40px;
+    margin-left: -25px;
+}
+
+/* Cambiar el color del ícono al pasar el mouse */
+.bx-dots-vertical-rounded:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
 
 /* Media Query para dispositivos con un ancho máximo de 767px (puedes ajustar este valor según tu diseño) */
 @media only screen and (max-width: 767px) {

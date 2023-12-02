@@ -29,7 +29,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <h4 class="text-center mb-4">Lector de Códigos QR</h4>
+                <h2 class="text-center mb-4 ">Lector de Códigos QR</h2>
                 <div id="defaultVideo" class="video-container">
                     <video autoplay muted loop id="background-video" style="width: 100%;">
                         <source src="{{ asset('multimedia/videos/istockphoto-1314370116-640_adpp_is.mp4') }}" type="video/mp4">

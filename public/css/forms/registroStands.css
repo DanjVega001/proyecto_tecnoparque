@@ -106,6 +106,10 @@ hr {
     text-decoration: none;
 }
 
+h1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif /* Cambiar a la fuente de Google Fonts */
+}
+
 
 /* Media Query para dispositivos con un ancho máximo de 767px (puedes ajustar este valor según tu diseño) */
 @media only screen and (max-width: 767px) {
@@ -163,7 +167,7 @@ hr {
     
 
     .pregunta{
-        margin-top: 50px;
+        margin-top: 20px;
     }
 
     /* Ajusta el ancho y centra horizontalmente el elemento select */

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +22,10 @@
         }
 
     </style>
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-GLhlTQ8i1IyZFf7R6Z75B6QQPGZ7I6tMOFYEMB+D5I4E2x4Ij2im/h3K2J5uWrM2" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
 <body>
@@ -39,11 +44,25 @@
                     <div class="col-3 text-center d-flex justify-content-between align-items-center ">
                         <a href="/stands" class="btn btn-link text-white">LISTAR STANDS</a>
                     </div>
+                    <div class="col-3 text-center pl-1 mt-2">
+                        <a id="navbarDropdown" class="bx bx-dots-vertical-rounded" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <!-- {{ Auth::user()->name}} -->
+                        </a>
+    
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item logout-link" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                {{ __('CERRAR SESION') }}
+                            </a>
+    
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
                     
 
-                    <div class="col-3 text-center">
-                        <i class='bx bx-user'></i>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm lineaOsucra">

@@ -58,10 +58,11 @@
             </div>
         </div>
         
-        <div class="row">
+        <div class="row espacioBordes">
             <div class="container-fluid contenidoForm">
                 <div class="row justify-content-center align-items-center vh-100">
                     <div class="col">
+                    <img class="card-img-top logoStand mb-5" src="{{ asset('img/stands/logoStand.png') }}" alt="logoStand">
                         <form action="{{ route('evaluation.store', ['qr_code' => $qr_code]) }}" method="POST">
                             @csrf
                             @foreach($criterios as $criterio)

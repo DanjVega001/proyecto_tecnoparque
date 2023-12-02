@@ -31,7 +31,23 @@
                         <p>Evaluación de Stand</p>
                     </div>
                     <div class="col-4 text-center">
-                        {{-- <i class='bx bx-dots-vertical-rounded'></i> --}}
+                        
+                            <a id="navbarDropdown" class="bx bx-dots-vertical-rounded" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <!-- {{ Auth::user()->name}} -->
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item logout-link" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                    {{ __('Cerrar Sesion') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        
                     </div>
                 </div>
                 <div class="row">

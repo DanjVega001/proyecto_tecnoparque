@@ -50,7 +50,7 @@ class EvaluationController extends Controller
 
     private function createPassport($stand_id)
     {   
-        $passport= new Passport();
+        $passport = new Passport();
         $passport->date = Carbon::now();
         $passport->user_id = $this->user->id;
         $passport->stand_id = $stand_id;
@@ -77,9 +77,11 @@ class EvaluationController extends Controller
         
         $user = Auth::user();
         $criterios = Criterio::all();
-        //$this->middleware('role:Visitante');
-        $user = Auth::user();
-        return view('evaluations/index', compact('criterios', 'qr_code','user'));
+
+        // Obtener la ruta del logo del stand
+        $logoPath = $stand->logo;
+
+        return view('evaluations/index', compact('criterios', 'qr_code', 'user', 'logoPath'));
     }
 
     public function store(Request $request, $qr_code)     
@@ -108,11 +110,10 @@ class EvaluationController extends Controller
             $eval = Evaluation::create([
                 'rank' => $rank,
                 'feedback' => $request->get('feedback'),
-                'criterio_id'=>1,//TODO: REVISAR RELACION CON CRITERIOS
+                'criterio_id' => 1, // TODO: REVISAR RELACION CON CRITERIOS
                 'stand_id' => $stand->id,
                 'user_id' => $this->user->id
             ]);
-            //TODO: Comprobado hasta aca
 
             foreach ($request->criterio_id as $id) {
                 EvaluationHasCriterio::create([
@@ -123,7 +124,7 @@ class EvaluationController extends Controller
             
             $this->addRankToClalificationStand($rank, $stand);
 
-            DB::commit();
+            // DB::commit();
             $this->createPassport($stand->id);
 
             // DEBE RETORNAR LA VISTA DE LOS STANDS SELLADOS
@@ -131,7 +132,7 @@ class EvaluationController extends Controller
 
          } catch (\Throwable $th) {
 
-            DB::rollback();
+            // DB::rollback();
             return redirect()->back()->with('error', 'Error al procesar la evaluación');
         }
     }

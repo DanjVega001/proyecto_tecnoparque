@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Stand;
+use App\Models\User;
 use App\Models\Classification;
 use App\Models\Stand_has_classification;
 use App\Models\Evaluation;
@@ -27,7 +28,7 @@ class StandController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
-        if (!$this->user || $this->user->rol->nombre != 'Empresa') {
+        if (!$this->user || !in_array($this->user->rol->nombre,['Empresa', 'Visitante'])) {
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
         }
     }
@@ -40,6 +41,12 @@ class StandController extends Controller
     {
         $this->userInauthenticated();
         $stands = Stand::where('user_id', $this->user->id)->get();
+        return view('stands/index', compact('stands'));
+    }
+
+    public function indexVisitante(){
+        $this->userInauthenticated();
+        $stands =Stand::all();
         return view('stands/index', compact('stands'));
     }
 

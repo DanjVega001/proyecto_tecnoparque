@@ -3,13 +3,11 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header text-center">
                 <h1>Agendas Registradas</h1>
+                <a href="{{route('agenda.create')}}" class="btn btn-success" id="btn">Crear Nueva Agenda</a>
             </div>
             <div class="card-body">
-                <nav>
-                    <a href="{{route('agenda.create')}}" class="btn btn-success">Crear Nueva Agenda</a>
-                </nav>
                 <table class="table">
                     <thead>
                         <tr>
@@ -32,11 +30,11 @@
                             
                             <td>{{$dateSta_format[$i]}} {{$agendas[$i]->date_start}} a  {{$dateEnd_format[$i]}} {{$agendas[$i]->date_end}}</td>
 
-                            <td><a href="{{route('agenda.edit',$agendas[$i]->id)}}" class="btn btn-primary">Editar</a></td>
+                            <td><a href="{{route('agenda.edit',$agendas[$i]->id)}}" class="btn btn-primary" id="btn-acciones">Editar</a></td>
                             <form method="post" action="{{route('agenda.destroy',$agendas[$i]->id)}}">
                                 @method('DELETE')
                                 @csrf
-                                <td scope="row"><button type="submit" class="btn btn-danger">Eliminar</button></td>
+                                <td scope="row"><button type="submit" class="btn btn-danger" id="btn-acciones">Eliminar</button></td>
                             </form>                         
                         </tr>
                         @endfor

@@ -41,16 +41,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validar = $request->validate([
+
+       $users = $request->validate([
             'name'=>'required',
+            'document'=>'required',
             'email'=>'required',
-            'phone'=>'required',
+            'phone_number'=>'required',
             'address'=>'required',
             'birthday'=>'required',
-            'genere'=>'required',
+            'genere'=>'required|not_in:Seleccione su genero',
             'password'=>'required|min:8|confirmed',
+            'password_confirmation' => 'required|min:8'
         ]);
 
+        
         $users = new User();
         $users->name = $request->name;
         $users->document = $request->document;
@@ -63,7 +67,7 @@ class UserController extends Controller
         $users->rol_id = '2';
         $users->assignRole('Visitante');
         $users->save();
-        return redirect()->route('user.index');
+        return redirect()->route('home');
     }
 
     /**

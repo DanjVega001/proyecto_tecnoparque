@@ -85,7 +85,8 @@
     <img src="{{ asset('img/stands/LogoGoogle.png') }}" class="mb-3" style="max-width: 15%;">
   </a>
   <!-- Estilos actualizados para el botón de Google -->
-  <button type="button" class="btn btn-primary btn-block btn-google" onclick="window.location.href='{{ url('/login-google') }}'">Iniciar sesión con Google</button>
+  <a></a>
+  <button type="button" class="btn btn-primary btn-block btn-google" onclick="window.location.href='{{ route('login.google') }}'">Iniciar sesión con Google</button>
 </footer>
   </div>
 

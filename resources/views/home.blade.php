@@ -95,7 +95,12 @@
                         @include('components.home.user')
                     @endif
 
+<<<<<<< HEAD
                     @if (session('status'))
+=======
+                <div class="card-body">
+                    <!@if (session('status'))
+>>>>>>> 7daa27c6acaa207c69aec2a1cb78ab55c0380abe
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Service\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Image;
 
 use App\Models\User;
 use App\Models\Stand;
@@ -41,7 +42,7 @@ class PassportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+   public function index()
     {
         $userInauthenticated = $this->userInauthenticated();
         if ($userInauthenticated !== null) return $userInauthenticated;

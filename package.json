@@ -21,6 +21,10 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
+<<<<<<< HEAD
         "quagga": "^0.12.1"
+=======
+        "instascan": "^1.0.0"
+>>>>>>> 7daa27c6acaa207c69aec2a1cb78ab55c0380abe
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Stand;
+use App\Models\User;
 use App\Models\Classification;
 use App\Models\Stand_has_classification;
 use App\Models\Evaluation;
@@ -29,6 +30,7 @@ class StandController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
+<<<<<<< HEAD
         if (!$this->user) {
             return view('auth/login', ['message' => 'No se ha logueado']);
         } else if ($this->user->rol->name != 'Empresa') {
@@ -37,6 +39,9 @@ class StandController extends Controller
         
         return null;
         /*if (!$this->user || $this->user->rol->nombre != 'Empresa') {
+=======
+        if (!$this->user || !in_array($this->user->rol->nombre,['Empresa', 'Visitante'])) {
+>>>>>>> 7daa27c6acaa207c69aec2a1cb78ab55c0380abe
             return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
         }*/
     }
@@ -56,6 +61,7 @@ class StandController extends Controller
             //Esto Trae todo
             public function index2()
 
+<<<<<<< HEAD
             {
                 $this->userInauthenticated();
                 // $users = User::where('rol_id',2)->get();
@@ -66,6 +72,14 @@ class StandController extends Controller
             }
             
     
+=======
+    public function indexVisitante(){
+        $this->userInauthenticated();
+        $stands =Stand::all();
+        return view('stands/index', compact('stands'));
+    }
+
+>>>>>>> 7daa27c6acaa207c69aec2a1cb78ab55c0380abe
     /**
      * Show the form for creating a new resource.
      *

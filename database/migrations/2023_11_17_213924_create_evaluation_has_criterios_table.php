@@ -19,6 +19,7 @@ class CreateEvaluationHasCriteriosTable extends Migration
             $table->foreign('evaluation_id')->references('id')->on('evaluations');
             $table->unsignedBigInteger('criterio_id');
             $table->foreign('criterio_id')->references('id')->on('criterios');
+            $table->double('rankCriterio');
             //$table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ class EvaluationHasCriterio extends Model
     protected $fillable = [
         'evaluation_id',
         'criterio_id',
+        'rankCriterio'
     ];
 
     public function evaluation(){

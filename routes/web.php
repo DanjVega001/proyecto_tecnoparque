@@ -98,6 +98,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('places',PlacesController::class);
 
 
+// RUTA PARA OBTENER LA CALIFICACION POR CRITERIO DEL STAND
+// SE PUSO SIN MIDDLWARE PORQUE AUN NO SE HE DEFINIDO COMO SE VA A TRAVBAJAR
+Route::get('/rank-criterio/stand/{idStand}', [EvaluationController::class, 
+    'rankDelCriterioPorStand'])->name('rankCriterio.stand');
 
 // IMPLEMENTACION AUTH GOOGLE
 

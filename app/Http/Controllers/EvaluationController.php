@@ -13,6 +13,7 @@ use App\Models\Criterio;
 use App\Models\Passport;
 use App\Models\Evaluation;
 use App\Models\EvaluationHasCriterio;
+use CreateEvaluationHasCriteriosTable;
 
 class EvaluationController extends Controller
 {
@@ -114,10 +115,13 @@ class EvaluationController extends Controller
             ]);
             //TODO: Comprobado hasta aca
 
+            $i = 0;
             foreach ($request->criterio_id as $id) {
+                $rankCriterio = $valorCriterios[$i++];
                 EvaluationHasCriterio::create([
                     'criterio_id' => $id,
-                    'evaluation_id' => $eval->id
+                    'evaluation_id' => $eval->id,
+                    'rankCriterio' => $rankCriterio
                 ]);
             }
             
@@ -148,5 +152,20 @@ class EvaluationController extends Controller
                 'calification' => ($calification + $rank) / 2
             ]);
         }
+    }
+
+    public function rankDelCriterioPorStand($idStand){
+        $numCriterios = count(Criterio::all());
+        $ranksPorCriterio = array();
+
+        for ($i=1; $i <= $numCriterios ; $i++) {
+            $promedio = EvaluationHasCriterio::join('evaluations', 'evaluation_has_criterios.evaluation_id', '=', 'evaluations.id')
+            ->where('evaluations.stand_id', $idStand)
+            ->where('evaluation_has_criterios.criterio_id', $i)
+            ->avg('evaluation_has_criterios.rankCriterio');
+            array_push($ranksPorCriterio, $promedio);
+        }
+        // DEBE RETORNAR LA VISTA O EL REPORTE NECESARIO
+        return $ranksPorCriterio;
     }
 }

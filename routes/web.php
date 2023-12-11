@@ -87,6 +87,10 @@ Route::middleware(['auth', 'role:Administrador'])->group(function () {
 });
 
 
+// RUTA PARA OBTENER LA CALIFICACION POR CRITERIO DEL STAND
+// SE PUSO SIN MIDDLWARE PORQUE AUN NO SE HE DEFINIDO COMO SE VA A TRAVBAJAR
+Route::get('/rank-criterio/stand/{idStand}', [EvaluationController::class, 
+    'rankDelCriterioPorStand'])->name('rankCriterio.stand');
 
 //CRUD de visitante
 //Route::resource('user',UserController::class);

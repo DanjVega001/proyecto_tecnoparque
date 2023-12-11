@@ -62,21 +62,10 @@ Route::middleware(['auth', 'role:Visitante'])->group(function () {
     // Stand individual
     Route::get('/stands/{id}', [StandController::class, 'show'])->name('stand.show');
 
-<<<<<<< HEAD
-    // Stands visitados
-    Route::get('/stands-visitados', [StandController::class, 'standsVisitados'])->name('stand.visitados');
-
-    // Ruta para el método index2 redirigiendo a /list
-    Route::get('/stands', [StandController::class, 'index2'])->name('stands.list');
-
-    Route::resource('passport', PassportController::class);
-    Route::resource('user', UserController::class);  
-=======
     //Escaneo de qr
     Route::get('/qr-scanner', [QRController::class, 'showScanner'])->name('qr-scanner');
 
     
->>>>>>> 7daa27c6acaa207c69aec2a1cb78ab55c0380abe
 });
 
 
@@ -86,26 +75,13 @@ Route::middleware(['auth', 'role:Visitante'])->group(function () {
     Route::resource('empresa', EmpresaController::class);
     Route::resource('places',PlacesController::class);
     Route::resource('schedule',ScheduleController::class);
-<<<<<<< HEAD
-    Route::resource('user',UserController::class);  
-=======
 
 
->>>>>>> 7daa27c6acaa207c69aec2a1cb78ab55c0380abe
 });
 
 // RUTAS PROTEGIDAS PARA LA EMPRESA
     Route::middleware(['auth', 'role:Empresa'])->group(function () {
     Route::resource('agenda', AgendaController::class);
-<<<<<<< HEAD
-
-    // RUTA PARA ACTULIZAR LOGO STAND
-    //Route::post('/update-logo/{id}', [StandController::class, 'updateLogo'])->name('updateLogo');
-    //Route::post('/update-banner/{id}', [StandController::class, 'updateBanner'])->name('updateBanner');
-});
-
-
-=======
     Route::resource('stand', StandController::class);
 
 });
@@ -123,16 +99,11 @@ Route::resource('places',PlacesController::class);
 
 
 
->>>>>>> 7daa27c6acaa207c69aec2a1cb78ab55c0380abe
 // IMPLEMENTACION AUTH GOOGLE
 
 Route::get('/login-google', function () {
     return Socialite::driver('google')->redirect();
-<<<<<<< HEAD
-})->name('login.google');
-=======
 })->name('login-google');
->>>>>>> 7daa27c6acaa207c69aec2a1cb78ab55c0380abe
  
 Route::get('/google-callback', function () {
     $user = Socialite::driver('google')->user();

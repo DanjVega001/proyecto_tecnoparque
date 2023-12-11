@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Service\AuthService;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Stand;
-use App\Models\User;
 use App\Models\Classification;
 use App\Models\Stand_has_classification;
 use App\Models\Evaluation;
+use App\Models\Rol;
+use App\Models\User;
 
 
 class StandController extends Controller
@@ -39,9 +39,11 @@ class StandController extends Controller
      */
     public function index()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
         $stands = Stand::where('user_id', $this->user->id)->get();
         return view('stands/index', compact('stands'));
+       
     }
 
     public function indexVisitante(){
@@ -57,7 +59,9 @@ class StandController extends Controller
      */
     public function create()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $classifications = Classification::all();
         return view('stands/create', compact('classifications'));
     }
@@ -70,7 +74,9 @@ class StandController extends Controller
      */
     public function store(Request $request)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $logo = $request->file('logo');
         $nombreImagen = $request->name . '-logo.' . $logo->extension();
         $logo->storeAs('public/images', $nombreImagen);
@@ -115,10 +121,16 @@ class StandController extends Controller
      */
     public function show($id)
     {
-        $stand = Stand::find($id);
-        // DEBE RETORNAR A LA INTERFAZ EL STAND CON SUS DATOS
-        //return view('stands/index', compact('stand'));
+        $stand = Stand::where('id', $id)->first();
+        
+        // Asegúrate de manejar el caso en el que el stand no se encuentre
+        if (!$stand) {
+            abort(404); // Esto devolverá un error 404 si el stand no se encuentra
+        }
+    
+        return view('stands/stand', compact('stand'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -128,7 +140,9 @@ class StandController extends Controller
      */
     public function edit($id)
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $stand = Stand::find($id);
         return view('stands/edit', compact('stand'));
     }
@@ -142,8 +156,11 @@ class StandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->userInauthenticated();
-        Stand::find($id)->update([
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
+        $stand = Stand::find($id);
+        $stand->update([
             'name' => $request->name,
             'description' => $request->description,
             'facebook' => $request->facebook,
@@ -151,31 +168,33 @@ class StandController extends Controller
             'tiktok' => $request->tiktok,
             'web' => $request->web  
         ]);
+        $logoNuevo = $request->file('logo');
+        if ($logoNuevo) {
+            $this->updateLogo($logoNuevo, $stand);
+        }
+        $bannerNuevo = $request->file('banner');
+        if ($bannerNuevo) {
+            $this->updateBanner($bannerNuevo, $stand);
+        }
         return $this->index();
     }
 
-    public function updateLogo(Request $request, $id)
+    public function updateLogo($logo, $stand)
     {
-        $this->userInauthenticated();
-        $stand = Stand::find($id);
-        Storage::delete("public/{$stand->logo}");
-        $logo = $request->file('logo');
-        $nombreLogo = time() . '.' . $logo->extension();
-        $logo->storeAs('public', $nombreLogo);
+        Storage::delete("public/images/{$stand->logo}");
+        $nombreLogo = $stand->name. '-logo.' . $logo->extension();
+        $logo->storeAs('public/images', $nombreLogo);
         $stand->update([
             'logo' => 'storage/images/{$nombreLogo}'
         ]);
         return $this->index();
     }
 
-    public function updateBanner(Request $request, $id)
+    public function updateBanner($banner, $stand)
     {
-        $this->userInauthenticated();
-        $stand = Stand::find($id);
         Storage::delete("public/{$stand->banner}");
-        $banner = $request->file('banner');
-        $nombreBanner = time() . '.' . $banner->extension();
-        $banner->storeAs('public', $nombreBanner);
+        $nombreBanner = $stand->name . '-baner.' . $banner->extension();
+        $banner->storeAs('public/images', $nombreBanner);
         $stand->update([
             'banner' => 'storage/images/{$nombreBanner}'
         ]);
@@ -210,7 +229,13 @@ class StandController extends Controller
 
     public function standsVisitados()
     {
-        $this->userInauthenticated();
+        $this->user = $this->service->getUserAuthenticated();
+        if (!$this->user) {
+            return view('auth/login', ['message' => 'No se ha logueado']);
+        } else if ($this->user->rol->name != 'Visitante') {
+            return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
+        } 
+        
         $stands = array();
         $evals = Evaluation::where('user_id', $this->user->id)->get();
         foreach ($evals as $eval) {

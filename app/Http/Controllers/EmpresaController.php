@@ -22,9 +22,13 @@ class EmpresaController extends Controller
     private function userInauthenticated()
     {
         $this->user = $this->service->getUserAuthenticated();
-        if (!$this->user || $this->user->rol->nombre != 'Administrador') {
-            return view('auth/login', ['message' => 'No se ha logueado o no tiene los permisos']);
-        }
+        if (!$this->user) {
+            return view('auth/login', ['message' => 'No se ha logueado']);
+        } else if ($this->user->rol->name != 'Administrador') {
+            return view('home', ['message' => 'No tiene los permisos para ejecutar esta acción']);
+        } 
+        
+        return null;
     }
 
     /**
@@ -34,7 +38,9 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         $empresas = User::where('rol_id', 3)->get();
         return view('empresas/index', compact('empresas'));
     }
@@ -46,7 +52,9 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        $this->userInauthenticated();
+        $userInauthenticated = $this->userInauthenticated();
+        if ($userInauthenticated !== null) return $userInauthenticated;
+
         return view('empresas/create');
     }
 
@@ -64,6 +72,7 @@ class EmpresaController extends Controller
             'password' => 'required|string',
             'document' => 'required|integer',
             'phone_number' => 'required|integer',
+            'address' => 'required|string'
         ]);
         $data['password'] = Hash::make($data['password']);
         $data['rol_id'] = 3;

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StandController;
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ScheduleController;
@@ -44,13 +45,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // RUTAS PROTEGIDAS PARA EL VISITANTE
 Route::middleware(['auth', 'role:Visitante'])->group(function () {
     
-    // Muestra la evaluacion 
-    Route::get('/evaluation/index/{qr_code}', [EvaluationController::class, 
-    'index'])->name('evaluation.index');
+    // Muestra la evaluación 
+    Route::get('/evaluation/index/{qr_code}', [EvaluationController::class, 'index'])->name('evaluation.index');
 
-    // Guarda el resultado de la evaluacion
-    Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 
-    'store'])->name('evaluation.store');
+    // Guarda el resultado de la evaluación
+    Route::post('/evaluation/store/{qr_code}', [EvaluationController::class, 'store'])->name('evaluation.store');
 
     // Stands visitados
     //Route::get('/stands-visitados', [StandController::class, 'standsVisitados'])->name('stand.visitados');
@@ -61,22 +60,32 @@ Route::middleware(['auth', 'role:Visitante'])->group(function () {
     //-----------------------------------------------
 
     // Stand individual
-    Route::get('/stands/{idStand}', [StandController::class, 'show'])->name('stand.show');
+    Route::get('/stands/{id}', [StandController::class, 'show'])->name('stand.show');
 
     //Escaneo de qr
     Route::get('/qr-scanner', [QRController::class, 'showScanner'])->name('qr-scanner');
 
     
+    // Stands visitados
+    Route::get('/stands-visitados', [StandController::class, 'standsVisitados'])->name('stand.visitados');
+
+    // Ruta para el método index2 redirigiendo a /list
+    Route::get('/stands', [StandController::class, 'index2'])->name('stands.list');
+
+    Route::resource('passport', PassportController::class);
+    Route::resource('user', UserController::class);  
 });
 
+
 // RUTAS PROTEGIDAS PARA EL ADMIN
-Route::middleware(['auth', 'role:Administrador'])->group(function () {
+    Route::middleware(['auth', 'role:Administrador'])->group(function () {
 
     Route::resource('empresa', EmpresaController::class);
     Route::resource('places',PlacesController::class);
     Route::resource('schedule',ScheduleController::class);
 
 
+    Route::resource('user',UserController::class);  
 });
 
 // RUTAS PROTEGIDAS PARA LA EMPRESA
@@ -100,6 +109,13 @@ Route::post('registro', [App\Http\Controllers\UserController::class, 'store'])->
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('places',PlacesController::class);
+
+
+
+
+    // RUTA PARA ACTULIZAR LOGO STAND
+    //Route::post('/update-logo/{id}', [StandController::class, 'updateLogo'])->name('updateLogo');
+    //Route::post('/update-banner/{id}', [StandController::class, 'updateBanner'])->name('updateBanner');
 
 
 

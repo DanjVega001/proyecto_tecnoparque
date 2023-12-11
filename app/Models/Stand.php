@@ -30,6 +30,10 @@ class Stand extends Model
     }
 
     public function evaluations(){
-        return $this->hasMany(Evaluation::class, 'stands_id', 'id');
+        return $this->hasMany(Evaluation::class, 'stand_id', 'id');
+    }
+
+    public function agenda(){
+        return $this->hasMany(Agenda::class, 'stand_id', 'id');
     }
 }

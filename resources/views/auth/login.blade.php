@@ -87,6 +87,29 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+          <label for="password" style="color: #5e1325;">Contraseña</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required autocomplete="current-password">
+        </div>
+        <h6 style="color: #5e1325;">¿Haz olvidado la contraseña?</h6>
+        <button type="submit" class="btn btn-primary btn-block mt-3">Ingresar</button>
+        <a href="{{ route('register') }}" class="btn btn-primary btn-block mt-2">Registrar</a>      
+      </form>
     </div>
-</div>
-@endsection
+    <!-- Footer -->
+    <footer class="text-center">
+  <!-- Agregamos el icono de Google de Font Awesome -->
+
+  <a href="{{ url('/login-google') }}">
+    <!-- Imagen de Google con el enlace -->
+    <img src="{{ asset('img/stands/LogoGoogle.png') }}" class="mb-3" style="max-width: 15%;">
+  </a>
+  <!-- Estilos actualizados para el botón de Google -->
+  <button type="button" class="btn btn-primary btn-block btn-google" onclick="window.location.href='{{ url('/login-google') }}'">Iniciar sesión con Google</button>
+</footer>
+  </div>
+
+  <!-- Agregamos el script de Font Awesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>

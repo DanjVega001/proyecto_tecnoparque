@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
     <div class="card">
@@ -48,5 +49,9 @@
 
         </div>
     </div>
+<<<<<<< HEAD
 </div>
 @endsection
+=======
+@endsection
+>>>>>>> 22478ccf54187375a42dc8e8fd9aa2f4cbbc6613

@@ -27,8 +27,17 @@
                     <input type="number" id="input-empresa" name="document" required>
                 </div>
                 <div class="input-group mb-3">
+<<<<<<< HEAD
                     <label for="floatingInput" class="label">Numero Telefonico</label>
                     <input type="number" id="input-empresa" name="phone_number" required>
+=======
+                    <span class="input-group-text">Dirección:</span>
+                    <input type="text" class="form-control" name="address" required >
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Número de Teléfono</span>
+                    <input type="number" class="form-control" name="phone_number" required >
+>>>>>>> 22478ccf54187375a42dc8e8fd9aa2f4cbbc6613
                 </div>
                 <div class="row text-center">
                     <div class="col">

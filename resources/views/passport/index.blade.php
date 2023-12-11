@@ -1,4 +1,5 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
 @section('content')
     <div class="container">
@@ -54,4 +55,6 @@
         </div>-->
         
     </div>
-@endsection
+</body>
+
+</html>
